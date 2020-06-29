@@ -17,13 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pasien', function () {
-    return view('pasien');
-});
+Route::get('/pasien', 'PasienController@index');
 
-Route::get('tambah_pasien', function () {
-    return view('tambah_pasien');
-});
+Route::get('/tambah-pasien', 'PasienController@tambahPasien');
+Route::post('/simpan-pasien', 'PasienController@simpanPasien');
+Route::get('/edit-pasien/{id}', 'PasienController@editPasien');
+Route::post('/update-pasien', 'PasienController@updatePasien');
+Route::get('/hapus-pasien/{id}', 'PasienController@hapusPasien');
+Route::get('/cari-pasien', 'PasienController@cariPasien');
+
+// Route::resource('pasien', 'PasienController');
 
 Route::get('jadwal', function () {
     return view('jadwal');
