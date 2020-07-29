@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +18,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pasien', 'PasienController@index');
+Route::resource('pasien', 'PasienController')->except(['show']);
 
-Route::get('/tambah-pasien', 'PasienController@tambahPasien');
-Route::post('/simpan-pasien', 'PasienController@simpanPasien');
-Route::get('/edit-pasien/{id}', 'PasienController@editPasien');
-Route::post('/update-pasien', 'PasienController@updatePasien');
-Route::get('/hapus-pasien/{id}', 'PasienController@hapusPasien');
-Route::get('/cari-pasien', 'PasienController@cariPasien');
+Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 
-// Route::resource('pasien', 'PasienController');
+Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
+
+Route::get('user/search', 'UserController@search')->name('user.search');
+
+Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user.password');
+Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
+
+Route::get('riwayat-pasien', function () {
+    return view('riwayat_pasien');
+});
 
 Route::get('jadwal', function () {
     return view('jadwal');
@@ -35,3 +40,7 @@ Route::get('jadwal', function () {
 Route::get('tambah_jadwal', function () {
     return view('tambah_jadwal');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
-    <title>FisioApp - Edit Pasien</title>
+    <title>FisioApp - Edit User Role</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
@@ -67,7 +67,7 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title">Menu</li>
-                        <li class="active">
+                        <li>
                             <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
@@ -98,57 +98,53 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Pasien</h4>
+                        <h4 class="page-title">Edit User: {{ $user->name }}</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        @foreach($pasien as $p)
-                        <form action="{{ route('pasien.update', ['pasien' => $p->id]) }}" method="POST">
+
+                        <form action="{{ route('user.update', $user) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="hidden" name="id" value="{{ $p->id }}">
+                                        <input class="form-control" type="hidden" name="id" value="{{ $user->id }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama" value="{{ $p->nama }}" required>
+                                        <label>Username <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="username" value="{{ $user->name }}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" class="form-control" name="alamat" value="{{ $p->alamat }}">
+                                                <label>Email <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Tanggal Lahir</label>
-                                        <div class="cal-icon">
-                                            <input type="date" class="form-control" name="tgl_lahir" value="{{ $p->tgl_lahir }}">
-                                        </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-12">Role</label>
+                                <div class="col-md-12">
+                                    @foreach($roles as $role)
+                                    <div class="radio">
+                                        <input type="radio" name="roles[]" value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
+                                        <label>{{ $role->name }}</label>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text" name="no_telp" value="{{ $p->no_telp }}">
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Simpan</button>
                             </div>
                         </form>
-                        @endforeach
                     </div>
                 </div>
             </div>

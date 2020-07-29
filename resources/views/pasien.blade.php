@@ -25,7 +25,7 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index-2.html" class="logo">
+                <a href="{{ route('pasien.index') }}" class="logo">
                     <img src="{{ asset('assets/img/logo.png') }}" width="35" height="35" alt=""> <span>FisioApp</span>
                 </a>
             </div>
@@ -36,13 +36,20 @@
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/user.jpg') }}" width="40" alt="Admin">
                             <span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="{{ route('user.password') }}">Ganti Password</a>
+                        @can('manage-users')
+                        <a class="dropdown-item" href="{{ route('user.index') }}">User Management</a>
+                        @endcan
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -63,7 +70,7 @@
                         <li class="menu-title">Menu</li>
                         <li>
                         <li class="active">
-                            <a href="/pasien"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
+                            <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
                             <a href="jadwal"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
@@ -96,22 +103,20 @@
                         <h4 class="page-title">List Pasien</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="/tambah-pasien" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Pasien</a>
+                        <a href="{{ route('pasien.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Pasien Baru</a>
                     </div>
                 </div>
                 <div class="row filter-row">
-                    <form action="/cari-pasien" method="GET">
+                    <form action="{{ route('pasien.search') }}" method="GET">
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Cari pasien</label>
-                                <input type="text" class="form-control floating" name="cari">
+                                <input type="text" class="form-control floating" name="keyword">
                                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-1 col-12">
                                     <button class="btn btn-success submit-btn">Cari Pasien</button>
                                 </div>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
                 <div class="row">
@@ -131,7 +136,7 @@
                                 <tbody>
                                     @foreach($pasien as $p)
                                     <tr>
-                                        <td>69420{{ $p->id }}</td>
+                                        <td>{{ sprintf('%04d', $p->id) }}</td>
                                         <td>{{ $p->nama }}</td>
                                         <td>{{ $p->alamat }}</td>
                                         <td>{{ $p->tgl_lahir }}</td>
@@ -140,8 +145,9 @@
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="/edit-pasien/{{ $p->id }}"><i class="fa fa-pencil m-r-5"></i>Edit</a>
-                                                    <a class="dropdown-item" href="/hapus-pasien/{{ $p->id }}" onclick="return confirm('Apakah Anda yakin ingin menghapus pasien?')"><i class="fa fa-trash-o m-r-5"></i>Hapus</a>
+                                                    <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a>
+                                                    <a class="dropdown-item" href="{{ route('pasien.edit', ['pasien' => $p->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $p->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -151,6 +157,24 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="delete_patient" class="modal fade delete-modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="" id="deleteForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-body text-center">
+                            <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
+                            <h3>Apakah Anda yakin ingin menghapus pasien ini?</h3>
+                            <div class="m-t-20">
+                                <button class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -166,6 +190,20 @@
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    <!-- Script modal konfirmasi hapus pasien -->
+    <script type="text/javascript">
+        function deleteData(id) {
+            var id = id;
+            var url = '{{ route("pasien.destroy", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm").attr('action', url);
+        }
+
+        function formSubmit() {
+            $("#deleteForm").submit();
+        }
+    </script>
 </body>
 
 

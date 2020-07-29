@@ -24,7 +24,7 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index-2.html" class="logo">
+                <a href="{{ route('pasien.index') }}" class="logo">
                     <img src="{{ asset('assets/img/logo.png') }}" width="35" height="35" alt=""> <span>FisioApp</span>
                 </a>
             </div>
@@ -35,13 +35,20 @@
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/user.jpg') }}" width="40" alt="Admin">
                             <span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="{{ route('user.password') }}">Ganti Password</a>
+                        @can('manage-users')
+                        <a class="dropdown-item" href="{{ route('user.index') }}">User Management</a>
+                        @endcan
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -62,7 +69,7 @@
                         <li class="menu-title">Menu</li>
                         <li>
                         <li class="active">
-                            <a href="/pasien"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
+                            <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
                             <a href="/jadwal"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
@@ -97,8 +104,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form action="/simpan-pasien" method="POST">
-                            {{ csrf_field() }}
+                        <form action="{{ route('pasien.store') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">

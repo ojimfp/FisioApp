@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
+use App\Pasien;
 
 class PasienController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Menampilkan halaman utama pasien
     public function index()
     {
@@ -17,13 +23,13 @@ class PasienController extends Controller
     }
 
     // Menampilkan view form tambah pasien
-    public function tambahPasien()
+    public function create()
     {
         return view('tambah_pasien');
     }
 
     // Menyimpan data ke dalam table pasien
-    public function simpanPasien(Request $request)
+    public function store(Request $request)
     {
         DB::table('pasien')->insert([
             'nama' => $request->nama,
@@ -32,11 +38,11 @@ class PasienController extends Controller
             'no_telp' => $request->no_telp
         ]);
 
-        return redirect('/pasien');
+        return redirect()->route('pasien.index');
     }
 
     // Meng-edit data pasien
-    public function editPasien($id)
+    public function edit($id)
     {
         $pasien = DB::table('pasien')->where('id', $id)->get();
 
@@ -44,7 +50,7 @@ class PasienController extends Controller
     }
 
     // Update data pasien yg sudah di-edit
-    public function updatePasien(Request $request)
+    public function update(Request $request)
     {
         DB::table('pasien')->where('id', $request->id)->update([
             'nama' => $request->nama,
@@ -53,27 +59,27 @@ class PasienController extends Controller
             'no_telp' => $request->no_telp
         ]);
 
-        return redirect('/pasien');
+        return redirect()->route('pasien.index');
     }
 
     //Menghapus data pasien
-    public function hapusPasien($id)
+    public function destroy($id)
     {
         DB::table('pasien')->where('id', $id)->delete();
 
-        return redirect('/pasien');
+        return redirect()->route('pasien.index');
     }
 
     //Mencari data pasien
-    public function cariPasien(Request $request)
+    public function search(Request $request)
     {
-        $cari = $request->cari;
+        $keyword = $request->keyword;
 
-        if ($request->has('cari')) {
+        if ($request->has('keyword')) {
             $pasien = DB::table('pasien')
-                ->where('id', 'LIKE', "%" . $cari . "%")
-                ->orWhere('nama', 'LIKE', "%" . $cari . "%")
-                ->orWhere('alamat', 'LIKE', "%" . $cari . "%")
+                ->where('id', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('nama', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('alamat', 'LIKE', "%" . $keyword . "%")
                 ->get();
         } else {
             $pasien = DB::table('pasien')->get();
