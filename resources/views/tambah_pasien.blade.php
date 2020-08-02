@@ -72,7 +72,7 @@
                             <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
-                            <a href="/jadwal"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
+                            <a href="{{ route('jadwal.index') }}"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>

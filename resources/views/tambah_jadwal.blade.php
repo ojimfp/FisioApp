@@ -7,13 +7,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
     <title>FisioApp - Tambah Jadwal</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -24,8 +24,8 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index-2.html" class="logo">
-                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>FisioApp</span>
+                <a href="{{ route('jadwal.index') }}" class="logo">
+                    <img src="{{ asset('assets/img/logo.png') }}" width="35" height="35" alt=""> <span>FisioApp</span>
                 </a>
             </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
@@ -33,15 +33,22 @@
             <ul class="nav user-menu float-right">
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/user.jpg') }}" width="40" alt="Admin">
                             <span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="{{ route('user.password') }}">Ganti Password</a>
+                        @can('manage-users')
+                        <a class="dropdown-item" href="{{ route('user.index') }}">User Management</a>
+                        @endcan
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -62,10 +69,10 @@
                         <li class="menu-title">Menu</li>
                         <li>
                         <li>
-                            <a href="pasien"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
+                            <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li class="active">
-                            <a href="jadwal"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
+                            <a href="{{ route('jadwal.index') }}"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>
@@ -97,18 +104,19 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form>
+                        <form action="{{ route('jadwal.store') }}" method="POST">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Appointment ID</label>
+                                        <label>Appointment ID <span class="text-danger">*</span></label>
                                         <input class="form-control" type="text" value="APT-0001" readonly="">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Patient Name</label>
-                                        <select class="select">
+                                        <label>Nama Pasien<span class="text-danger">*</span></label>
+                                        <select class="select" name="nama_pasien" required autocomplete="off">
                                             <option>Select</option>
                                             <option>Jennifer Robinson</option>
                                             <option>Terry Baker</option>
@@ -117,24 +125,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Department</label>
-                                        <select class="select">
-                                            <option>Select</option>
-                                            <option>Dentists</option>
-                                            <option>Neurology</option>
-                                            <option>Opthalmology</option>
-                                            <option>Orthopedics</option>
-                                            <option>Cancer Department</option>
-                                            <option>ENT Department</option>
-                                        </select>
+                                        <label>Umur Pasien<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="umur_pasien" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Doctor</label>
-                                        <select class="select">
+                                        <label>Nama Dokter<span class="text-danger">*</span></label>
+                                        <select class="select" name="nama_dokter" required autocomplete="off">
                                             <option>Select</option>
                                             <option>Cristina Groves</option>
                                             <option>Marie Wells</option>
@@ -146,22 +146,22 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Date</label>
+                                        <label>Tanggal Tindakan<span class="text-danger">*</span></label>
                                         <div class="cal-icon">
-                                            <input type="text" class="form-control datetimepicker">
+                                            <input type="text" name="tgl_tindakan" class="form-control datetimepicker">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Time</label>
+                                        <label>Jam Tindakan<span class="text-danger">*</span></label>
                                         <div class="time-icon">
-                                            <input type="text" class="form-control" id="datetimepicker3">
+                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Patient Email</label>
@@ -178,24 +178,24 @@
                             <div class="form-group">
                                 <label>Message</label>
                                 <textarea cols="30" rows="4" class="form-control"></textarea>
-                            </div>
+                            </div> -->
                             <div class="form-group">
-                                <label class="display-block">Appointment Status</label>
+                                <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="product_active" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
                                     <label class="form-check-label" for="product_active">
                                         Active
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="product_inactive" value="option2">
+                                    <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive">
                                     <label class="form-check-label" for="product_inactive">
                                         Inactive
                                     </label>
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Create Appointment</button>
+                                <button class="btn btn-primary submit-btn">Simpan Jadwal</button>
                             </div>
                         </form>
                     </div>
@@ -414,14 +414,14 @@
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/select2.min.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     <script>
         $(function() {
             $('#datetimepicker3').datetimepicker({
