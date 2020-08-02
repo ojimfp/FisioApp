@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -118,8 +119,9 @@
                                         <label>Nama Pasien<span class="text-danger">*</span></label>
                                         <select class="select" name="nama_pasien" required autocomplete="off">
                                             <option>Select</option>
-                                            <option>Jennifer Robinson</option>
-                                            <option>Terry Baker</option>
+                                            @foreach($pasien as $p)
+                                            <option>{{ $p->nama }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -423,6 +425,23 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script>
+        // $('.datetimepicker').datetimepicker({
+        //     format: 'DD/MM/YYYY',
+        //     showTodayButton: true,
+        //     showClear: true,
+        //     toolbarPlacement: 'bottom',
+        //     sideBySide: true,
+        //     icons: {
+        //         time: "fa fa-clock-o",
+        //         date: "fa fa-calendar",
+        //         up: "fa fa-arrow-up",
+        //         down: "fa fa-arrow-down",
+        //         previous: "fa fa-chevron-left",
+        //         next: "fa fa-chevron-right",
+        //         today: "fa fa-clock-o",
+        //         clear: "fa fa-trash-o"
+        //     }
+        // });
         $(function() {
             $('#datetimepicker3').datetimepicker({
                 format: 'LT'

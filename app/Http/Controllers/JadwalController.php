@@ -24,7 +24,9 @@ class JadwalController extends Controller
     // Menampilkan view form tambah jadwal
     public function create()
     {
-        return view('tambah_jadwal');
+        $pasien = DB::table('pasien')->get();
+        
+        return view('tambah_jadwal', ['pasien' => $pasien]);
     }
 
     // Menyimpan data ke dalam table jadwal
