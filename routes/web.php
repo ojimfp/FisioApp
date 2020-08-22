@@ -22,6 +22,10 @@ Route::resource('pasien', 'PasienController')->except(['show']);
 
 Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 
+Route::resource('tindakan', 'TindakanController')->except(['show']);
+
+Route::get('tindakan/search', 'TindakanController@search')->name('tindakan.search');
+
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 
 Route::get('user/search', 'UserController@search')->name('user.search');
