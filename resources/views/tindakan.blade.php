@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
-    <title>FisioApp - List Pasien</title>
+    <title>FisioApp - List Tindakan</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
@@ -25,7 +25,7 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="{{ route('pasien.index') }}" class="logo">
+                <a href="{{ route('tindakan.index') }}" class="logo">
                     <img src="{{ asset('assets/img/logo.png') }}" width="35" height="35" alt=""> <span>FisioApp</span>
                 </a>
             </div>
@@ -69,7 +69,7 @@
                     <ul>
                         <li class="menu-title">Menu</li>
                         <li>
-                        <li class="active">
+                        <li>
                             <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
@@ -78,7 +78,7 @@
                         <li class="submenu">
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a href="{{ route('tindakan.index') }}">Tindakan</a></li>
+                                <li  class="active"><a href="{{ route('tindakan.index') }}">Tindakan</a></li>
                                 <li><a href="payments.html">Payments</a></li>
                                 <li><a href="expenses.html">Expenses</a></li>
                                 <li><a href="taxes.html">Taxes</a></li>
@@ -100,20 +100,21 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">List Pasien</h4>
+                        <h4 class="page-title">List Tindakan</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{ route('pasien.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Pasien Baru</a>
+                        <a href="{{ route('tindakan.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Tindakan Baru</a>
                     </div>
                 </div>
+                <h9 class="text-danger">cari berdasarkan kode/nama tindakan</h9>
                 <div class="row filter-row">
-                    <form action="{{ route('pasien.search') }}" method="GET">
+                    <form action="{{ route('tindakan.search') }}" method="GET">
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Cari pasien</label>
+                                <label class="focus-label">Cari tindakan</label>
                                 <input type="text" class="form-control floating" name="keyword">
                                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-1 col-12">
-                                    <button class="btn btn-success submit-btn">Cari Pasien</button>
+                                    <button class="btn btn-success submit-btn">Cari Tindakan</button>
                                 </div>
                             </div>
                         </div>
@@ -125,29 +126,30 @@
                             <table class="table table-border table-striped custom-table datatable mb-0">
                                 <thead>
                                     <tr>
-                                        <th>No. Registrasi</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>No. Telepon/HP</th>
+                                        <th>Kode Tindakan</th>
+                                        <th>Nama Tindakan</th>
+                                        <th>Harga Jual</th>
+                                        <th>Kategori</th>
+                                        <th>Member</th>
+                                        <th>Aktif</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($pasien as $p)
+                                    @foreach($tindakan as $t)
                                     <tr>
-                                        <td>{{ sprintf('%04d', $p->id) }}</td>
-                                        <td>{{ $p->nama }}</td>
-                                        <td>{{ $p->alamat }}</td>
-                                        <td>{{ $p->tgl_lahir }}</td>
-                                        <td>{{ $p->no_telp }}</td>
+                                        <td>{{ $t->kode_tindakan }}</td>
+                                        <td>{{ $t->nama_tindakan }}</td>
+                                        <td>{{ $t->harga_jual }}</td>
+                                        <td>{{ $t->kategori_tindakan }}</td>
+                                        <td>{{ $t->status_member }}</td>
+                                        <td>{{ $t->status_aktif }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a>
-                                                    <a class="dropdown-item" href="{{ route('pasien.edit', ['pasien' => $p->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $p->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                    <!-- <a class="dropdown-item" href="{{ route('tindakan.edit', ['tindakan' => $t->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $t->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a> -->
                                                 </div>
                                             </div>
                                         </td>
@@ -168,7 +170,7 @@
                         @method('DELETE')
                         <div class="modal-body text-center">
                             <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
-                            <h3>Apakah Anda yakin ingin menghapus pasien ini?</h3>
+                            <h3>Apakah Anda yakin ingin menghapus tindakan ini?</h3>
                             <div class="m-t-20">
                                 <button class="btn btn-white" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
@@ -183,7 +185,7 @@
     <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -191,11 +193,11 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    <!-- Script modal konfirmasi hapus pasien -->
-    <script type="text/javascript">
+    <!-- Script modal konfirmasi hapus tindakan -->
+    <!-- <script type="text/javascript">
         function deleteData(id) {
             var id = id;
-            var url = '{{ route("pasien.destroy", ":id") }}';
+            var url = '{{ route("tindakan.destroy", ":id") }}';
             url = url.replace(':id', id);
             $("#deleteForm").attr('action', url);
         }
@@ -203,7 +205,7 @@
         function formSubmit() {
             $("#deleteForm").submit();
         }
-    </script>
+    </script> -->
 </body>
 
 
