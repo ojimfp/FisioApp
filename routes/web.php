@@ -33,6 +33,10 @@ Route::get('riwayat-pasien', function () {
     return view('riwayat_pasien');
 });
 
+Route::get('tambah-rekam-medis', function () {
+    return view('tambah_rekam_medis');
+});
+
 Route::resource('jadwal', 'JadwalController')->except(['show']);
 
 Auth::routes();
