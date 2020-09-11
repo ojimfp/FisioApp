@@ -138,9 +138,9 @@
                                         <label>Nama Dokter<span class="text-danger">*</span></label>
                                         <select class="select" name="nama_dokter" required autocomplete="off">
                                             <option>Select</option>
-                                            <option>Cristina Groves</option>
-                                            <option>Marie Wells</option>
-                                            <option>Henry Daniels</option>
+                                            @foreach($dokter as $d)
+                                            <option>{{ $d->nama_dokter }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -181,20 +181,36 @@
                                 <label>Message</label>
                                 <textarea cols="30" rows="4" class="form-control"></textarea>
                             </div> -->
-                            <div class="form-group">
-                                <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
-                                    <label class="form-check-label" for="product_active">
-                                        Active
-                                    </label>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
+                                        <label class="form-check-label" for="product_active">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive">
+                                        <label class="form-check-label" for="product_inactive">
+                                            Inactive
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="product_lainnya" value="Lainnya">
+                                        <label class="form-check-label" for="product_lainnya">
+                                            Lainnya
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive">
-                                    <label class="form-check-label" for="product_inactive">
-                                        Inactive
-                                    </label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Keterangan Status<span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="ket_status" required autocomplete="off">
                                 </div>
+                            </div>
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Simpan Jadwal</button>

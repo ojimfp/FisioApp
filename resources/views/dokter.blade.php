@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
-    <title>FisioApp - List Pasien</title>
+    <title>FisioApp - List Dokter</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
@@ -69,10 +69,10 @@
                     <ul>
                         <li class="menu-title">Menu</li>
                         <li>
-                        <li class="active">
+                        <li>
                             <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="{{ route('dokter.index') }}"><i class="fa fa fa-user-md"></i> <span>List Dokter</span></a>
                         </li>
                         <li>
@@ -103,20 +103,20 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">List Pasien</h4>
+                        <h4 class="page-title">List Dokter</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{ route('pasien.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Pasien Baru</a>
+                        <a href="{{ route('dokter.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Dokter Baru</a>
                     </div>
                 </div>
                 <div class="row filter-row">
-                    <form action="{{ route('pasien.search') }}" method="GET">
+                    <form action="{{ route('dokter.search') }}" method="GET">
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Cari pasien</label>
+                                <label class="focus-label">Cari Dokter</label>
                                 <input type="text" class="form-control floating" name="keyword">
                                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-1 col-12">
-                                    <button class="btn btn-success submit-btn">Cari Pasien</button>
+                                    <button class="btn btn-success submit-btn">Cari Dokter</button>
                                 </div>
                             </div>
                         </div>
@@ -129,28 +129,24 @@
                                 <thead>
                                     <tr>
                                         <th>No. Registrasi</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>No. Telepon/HP</th>
+                                        <th>Nama Dokter</th>
+                                        <th>Spesialisasi</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($pasien as $p)
+                                    @foreach($dokter as $d)
                                     <tr>
-                                        <td>{{ sprintf('%04d', $p->id) }}</td>
-                                        <td>{{ $p->nama }}</td>
-                                        <td>{{ $p->alamat }}</td>
-                                        <td>{{ $p->tgl_lahir }}</td>
-                                        <td>{{ $p->no_telp }}</td>
+                                        <td>{{ $d->id }}</td>
+                                        <td>{{ $d->nama_dokter }}</td>
+                                        <td>{{ $d->spesialisasi }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a>
-                                                    <a class="dropdown-item" href="{{ route('pasien.edit', ['pasien' => $p->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $p->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                    <!-- <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a> -->
+                                                    <a class="dropdown-item" href="{{ route('dokter.edit', ['dokter' => $d->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $d->id }}')" data-target="#delete_dokter"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -163,7 +159,7 @@
                 </div>
             </div>
         </div>
-        <div id="delete_patient" class="modal fade delete-modal" role="dialog">
+        <div id="delete_dokter" class="modal fade delete-modal" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <form action="" id="deleteForm" method="POST">
@@ -180,7 +176,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
@@ -198,7 +194,7 @@
     <script type="text/javascript">
         function deleteData(id) {
             var id = id;
-            var url = '{{ route("pasien.destroy", ":id") }}';
+            var url = '{{ route("dokter.destroy", ":id") }}';
             url = url.replace(':id', id);
             $("#deleteForm").attr('action', url);
         }

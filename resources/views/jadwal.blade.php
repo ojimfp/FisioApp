@@ -134,7 +134,7 @@
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $j->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a> -->
+                                                    <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $j->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $j->id }}')" data-target="#delete_jadwal"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
                                             </div>

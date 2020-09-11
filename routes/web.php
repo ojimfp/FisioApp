@@ -22,6 +22,10 @@ Route::resource('pasien', 'PasienController')->except(['show']);
 
 Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 
+Route::resource('dokter', 'DokterController')->except(['show']);
+
+Route::get('dokter/search', 'DokterController@search')->name('dokter.search');
+
 Route::resource('tindakan', 'TindakanController')->except(['show']);
 
 Route::get('tindakan/search', 'TindakanController@search')->name('tindakan.search');
