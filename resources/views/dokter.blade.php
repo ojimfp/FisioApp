@@ -128,7 +128,7 @@
                             <table class="table table-border table-striped custom-table datatable mb-0">
                                 <thead>
                                     <tr>
-                                        <th>No. Registrasi</th>
+                                        <th>ID</th>
                                         <th>Nama Dokter</th>
                                         <th>Spesialisasi</th>
                                         <th class="text-right">Opsi</th>
