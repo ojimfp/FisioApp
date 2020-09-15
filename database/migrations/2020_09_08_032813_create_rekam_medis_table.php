@@ -16,10 +16,10 @@ class CreateRekamMedisTable extends Migration
         Schema::create('rekam_medis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_pasien');
+            $table->string('nama_terapis');
             $table->string('anamnesa');
             $table->string('pemeriksaan');
             $table->string('diagnosa');
-            $table->unsignedBigInteger('id_tindakan');
             $table->timestamps();
         });
     }

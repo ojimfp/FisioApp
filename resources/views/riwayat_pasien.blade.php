@@ -36,13 +36,20 @@
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/user.jpg') }}" width="40" alt="Admin">
                             <span class="status online"></span></span>
-                        <span>Admin</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="{{ route('user.password') }}">Ganti Password</a>
+                        @can('manage-users')
+                        <a class="dropdown-item" href="{{ route('user.index') }}">User Management</a>
+                        @endcan
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -96,7 +103,7 @@
                         <h4 class="page-title">Riwayat Pasien</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="tambah-rekam-medis" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Rekam Medis</a>
+                        <a href="{{ route('rekam-medis.create', $pasien->id) }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Rekam Medis</a>
                     </div>
                 </div>
                 <div class="card-box profile-header">
@@ -107,18 +114,18 @@
                                     <div class="row">
                                         <div class="col-md-7">
                                             <ul class="personal-info">
-                                                <h3 class="user-name m-t-0 mb-0">Nama Pasien</h3></br>
+                                                <h3 class="user-name m-t-0 mb-0">{{ $pasien->nama }}</h3></br>
                                                 <li>
                                                     <span class="title">No. Registrasi:</span>
-                                                    <span class="text">69420</a></span>
+                                                    <span class="text">{{ sprintf('%04d', $pasien->id) }}</a></span>
                                                 </li>
                                                 <li>
                                                     <span class="title">Alamat:</span>
-                                                    <span class="text">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    <span class="text">{{ $pasien->alamat }}</span>
                                                 </li>
                                                 <li>
                                                     <span class="title">No. Telepon:</span>
-                                                    <span class="text">081234567890</span>
+                                                    <span class="text">{{ $pasien->no_telp }}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -151,15 +158,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($rekam_medis as $rm)
                                                 <tr>
+                                                    <td>{{ $rm->created_at }}</td>
+                                                    <td>{{ $rm->nama_terapis }}</td>
+                                                    <td>{{ $rm->anamnesa }}</td>
+                                                    <td>{{ $rm->pemeriksaan }}</td>
+                                                    <td>{{ $rm->diagnosa }}</td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td class="text-right">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="" data-target="#delete_user"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

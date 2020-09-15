@@ -108,11 +108,6 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" type="hidden" name="id" value="{{ $p->id }}">
-                                    </div>
-                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap <span class="text-danger">*</span></label>

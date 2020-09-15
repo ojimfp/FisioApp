@@ -19,27 +19,20 @@ Route::get('/', function () {
 });
 
 Route::resource('pasien', 'PasienController')->except(['show']);
-
 Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 
-Route::resource('tindakan', 'TindakanController')->except(['show']);
+Route::resource('rekam-medis', 'RekamMedisController')->except(['index', 'show', 'create']);
+Route::get('rekam-medis/{id}', 'RekamMedisController@index')->name('rekam-medis.index');
+Route::get('rekam-medis/{id}/create', 'RekamMedisController@create')->name('rekam-medis.create');
 
+Route::resource('tindakan', 'TindakanController')->except(['show']);
 Route::get('tindakan/search', 'TindakanController@search')->name('tindakan.search');
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
-
 Route::get('user/search', 'UserController@search')->name('user.search');
 
 Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user.password');
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
-
-Route::get('riwayat-pasien', function () {
-    return view('riwayat_pasien');
-});
-
-Route::get('tambah-rekam-medis', function () {
-    return view('tambah_rekam_medis');
-});
 
 Route::resource('jadwal', 'JadwalController')->except(['show']);
 

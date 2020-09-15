@@ -17,7 +17,8 @@ class PasienController extends Controller
     // Menampilkan halaman utama pasien
     public function index()
     {
-        $pasien = DB::table('pasien')->get();
+        // $pasien = DB::table('pasien')->get();
+        $pasien = Pasien::all();
 
         return view('pasien', ['pasien' => $pasien]);
     }
@@ -41,7 +42,7 @@ class PasienController extends Controller
         return redirect()->route('pasien.index');
     }
 
-    // Meng-edit data pasien
+    // Masuk ke form edit pasien
     public function edit($id)
     {
         $pasien = DB::table('pasien')->where('id', $id)->get();

@@ -99,14 +99,25 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Tambah Rekam Medis a.n. (nama pasien)</h4>
+                        <h4 class="page-title">Tambah Rekam Medis a.n. {{ $pasien->nama }}</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form action="#" method="POST">
+                        <form action="{{ route('rekam-medis.store') }}" method="POST">
                             @csrf
                             <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" name="id_pasien" value="{{ $pasien->id }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Nama Terapis <span class="text-danger">*</label>
+                                        <input class="form-control" type="text" name="nama_terapis" autocomplete="off">
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Anamnesa <span class="text-danger">*</span></label></br>
@@ -116,24 +127,24 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Pemeriksaan <span class="text-danger">*</span></label></br>
-                                        <textarea name="anamnesa" id="" cols="88" rows="4"></textarea>
+                                        <textarea name="pemeriksaan" id="" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Diagnosa <span class="text-danger">*</span></label></br>
-                                        <textarea name="anamnesa" id="" cols="88" rows="4"></textarea>
+                                        <textarea name="diagnosa" id="" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label for="checkbox">Tindakan</label>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="tindakan" value="">
-                                        <label>Pijet</label>
-                                        <input type="checkbox" name="tindakan" value="">
-                                        <label>Pijet</label>
-                                        <input type="checkbox" name="tindakan" value="">
-                                        <label>Pijet</label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Tindakan</label>
+                                        @foreach($tindakan as $t)
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="tindakan[]" value="{{ $t->id }}">
+                                            <label>{{ $t->nama_tindakan }}</label>
+                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

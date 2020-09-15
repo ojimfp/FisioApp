@@ -145,7 +145,7 @@
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a>
+                                                    <a class="dropdown-item" href="{{ route('rekam-medis.index', $p->id) }}"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a>
                                                     <a class="dropdown-item" href="{{ route('pasien.edit', ['pasien' => $p->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $p->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
