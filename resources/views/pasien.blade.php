@@ -82,7 +82,7 @@
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="{{ route('tindakan.index') }}">Tindakan</a></li>
-                                <li><a href="payments.html">Payments</a></li>
+                                <li><a href="{{ route('kasir.index') }}">Pembayaran</a></li>
                                 <li><a href="expenses.html">Expenses</a></li>
                                 <li><a href="taxes.html">Taxes</a></li>
                                 <li><a href="provident-fund.html">Provident Fund</a></li>
