@@ -61,12 +61,13 @@ class RekamMedisController extends Controller
         $rekam_medis = new RekamMedis;
 
         $rekam_medis->pasien()->associate($request->id_pasien);
-        $rekam_medis->tindakan()->sync($request->tindakan);
         $rekam_medis->nama_terapis = $request->nama_terapis;
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
         $rekam_medis->diagnosa = $request->diagnosa;
         $rekam_medis->save();
+
+        $rekam_medis->tindakan()->sync($request->tindakan);
 
         return redirect()->route('rekam-medis.index');
     }

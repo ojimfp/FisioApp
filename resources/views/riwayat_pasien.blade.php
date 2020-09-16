@@ -165,7 +165,7 @@
                                                     <td>{{ $rm->anamnesa }}</td>
                                                     <td>{{ $rm->pemeriksaan }}</td>
                                                     <td>{{ $rm->diagnosa }}</td>
-                                                    <td></td>
+                                                    <td>{{ implode(', ', $rm->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
