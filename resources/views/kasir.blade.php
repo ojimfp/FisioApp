@@ -82,7 +82,7 @@
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="{{ route('tindakan.index') }}">Tindakan</a></li>
-                                <li class="active"><a href="{{ route('kasir.index') }}">Pembayaran</a></li>
+                                <li class="active"><a href="{{ route('kasir.index') }}">Riwayat Pembayaran</a></li>
                                 <li><a href="expenses.html">Expenses</a></li>
                                 <li><a href="taxes.html">Taxes</a></li>
                                 <li><a href="provident-fund.html">Provident Fund</a></li>
@@ -103,11 +103,11 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-5 col-4">
-                        <h4 class="page-title">Pembayaran</h4>
+                        <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
-                    <div class="col-sm-7 col-8 text-right m-b-30">
+                    <!-- <div class="col-sm-7 col-8 text-right m-b-30">
                         <a href="create-invoice.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i>Tambah Pembayaran</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row filter-row">
                     <div class="col-sm-6 col-md-3">
@@ -148,10 +148,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>No. Pembayaran</th>
+                                        <th>No. Tagihan</th>
                                         <th>Nama Pasien</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
+                                        <th>Tanggal Tagihan</th>
+                                        <th>Tanggal Pembayaran</th>
+                                        <th>Tipe Pembayaran </th>
                                         <th>Total Biaya</th>
                                         <th>Status</th>
                                         <th class="text-right">Opsi</th>
@@ -164,13 +165,14 @@
                                         <td>Charles Ortega</td>
                                         <td>1 Aug 2018</td>
                                         <td>7 Aug 2018</td>
+                                        <td>Tunai</td>
                                         <td>$20</td>
                                         <td><span class="custom-badge status-green">Paid</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="edit-invoice.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('kasir.index') }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="invoice-view.html"><i class="fa fa-eye m-r-5"></i> View</a>
                                                     <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
 													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_invoice"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
@@ -184,6 +186,7 @@
                                         <td>Denise Stevens</td>
                                         <td>24 Aug 2018</td>
                                         <td>24 Aug 2018</td>
+                                        <td>Kartu</td>
                                         <td>$6</td>
                                         <td><span class="custom-badge status-blue">Sent</span></td>
                                         <td class="text-right">
@@ -204,6 +207,7 @@
                                         <td>Dennis Salazar</td>
                                         <td>1 Sep 2018</td>
                                         <td>7 Sep 2018</td>
+                                        <td>Tunai</td>
                                         <td>$20</td>
                                         <td><span class="custom-badge status-orange">Partially Paid</span></td>
                                         <td class="text-right">

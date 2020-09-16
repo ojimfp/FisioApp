@@ -40,7 +40,7 @@ class KasirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -60,9 +60,10 @@ class KasirController extends Controller
      * @param  \App\Kasir  $kasir
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kasir $kasir)
+    public function edit()
     {
-        //
+        return view('edit_tagihan');
+
     }
 
     /**
