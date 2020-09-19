@@ -19,7 +19,7 @@ class DokterController extends Controller
         $dokter = DB::table('dokter')->get();
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'List Dokter',
+                'title'         => config('app.name').' - '.'List Fisioterapis',
                 'side_active'   => 'dokter'
             ],
             'dokter' => $dokter

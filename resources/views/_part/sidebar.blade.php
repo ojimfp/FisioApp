@@ -8,7 +8,7 @@
                     <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                 </li>
                 <li class="{{ $meta['side_active'] == 'dokter' ? 'active' : '' }}">
-                    <a href="{{ route('dokter.index') }}"><i class="fa fa fa-user-md"></i> <span>List Dokter</span></a>
+                    <a href="{{ route('dokter.index') }}"><i class="fa fa fa-user-md"></i> <span>List Fisioterapis</span></a>
                 </li>
                 <li class="{{ $meta['side_active'] == 'jadwal' ? 'active' : '' }}">
                     <a href="{{ route('jadwal.index') }}"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
