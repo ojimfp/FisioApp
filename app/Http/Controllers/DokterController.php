@@ -17,8 +17,14 @@ class DokterController extends Controller
     public function index()
     {
         $dokter = DB::table('dokter')->get();
-
-        return view('dokter', ['dokter' => $dokter]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'List Dokter',
+                'side_active'   => 'dokter'
+            ],
+            'dokter' => $dokter
+        ];
+        return view('dokter', $result);
     }
 
     // Menampilkan view form tambah dokter

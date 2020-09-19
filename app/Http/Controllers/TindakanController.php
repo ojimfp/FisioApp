@@ -18,7 +18,15 @@ class TindakanController extends Controller
     {
         $tindakan = DB::table('tindakan')->get();
 
-        return view('tindakan', ['tindakan' => $tindakan]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'List Tindakan',
+                'side_active'   => 'tindakan'
+            ],
+            'tindakan' => $tindakan
+        ];
+
+        return view('tindakan', $result);
     }
 
     public function create()

@@ -18,8 +18,14 @@ class KasirController extends Controller
     public function index()
     {
         //$kasir = DB::table('kasir')->get();
-
-        return view('kasir');
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Riwayat Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
+            // 'kasir' => $dokter
+        ];
+        return view('kasir', $result);
     }
 
     /**
@@ -40,7 +46,7 @@ class KasirController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**

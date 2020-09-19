@@ -17,8 +17,14 @@ class JadwalController extends Controller
     public function index()
     {
         $jadwal = DB::table('jadwal')->get();
-
-        return view('jadwal', ['jadwal' => $jadwal]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'List Jadwal Pasien',
+                'side_active'   => 'jadwal'
+            ],
+            'jadwal' => $jadwal
+        ];
+        return view('jadwal', $result);
     }
 
     // Menampilkan view form tambah jadwal
@@ -87,5 +93,15 @@ class JadwalController extends Controller
         DB::table('jadwal')->where('id', $id)->delete();
 
         return redirect()->route('jadwal.index');
+    }
+
+    public function getDataPasien(Request $request)
+    {
+        $id = $request->id;
+        $datapasien = DB::table('pasien')->where('id',$id)->get();
+
+        return response()->json([
+            'datapasien' => $datapasien
+        ]);
     }
 }

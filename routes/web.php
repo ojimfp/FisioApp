@@ -40,6 +40,7 @@ Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
 
 Route::resource('jadwal', 'JadwalController')->except(['show']);
+Route::get('get-datapasien','JadwalController@getDataPasien')->name('jadwal.datapasien');
 
 Auth::routes();
 

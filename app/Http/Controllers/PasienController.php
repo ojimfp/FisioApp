@@ -19,8 +19,15 @@ class PasienController extends Controller
     {
         // $pasien = DB::table('pasien')->get();
         $pasien = Pasien::all();
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'List Pasien',
+                'side_active'   => 'pasien'
+            ],
+            'pasien' => $pasien
+        ];
 
-        return view('pasien', ['pasien' => $pasien]);
+        return view('pasien', $result);
     }
 
     // Menampilkan view form tambah pasien
