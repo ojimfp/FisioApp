@@ -13,6 +13,11 @@ class RekamMedis extends Model
         return $this->belongsTo('App\Pasien');
     }
 
+    public function dokter()
+    {
+        return $this->belongsTo('App\Dokter');
+    }
+
     public function tindakan()
     {
         return $this->belongsToMany('App\Tindakan');

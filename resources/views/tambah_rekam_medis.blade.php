@@ -114,8 +114,13 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Terapis <span class="text-danger">*</label>
-                                        <input class="form-control" type="text" name="nama_terapis" autocomplete="off">
+                                        <label>Nama Terapis<span class="text-danger">*</span></label>
+                                        <select class="select" name="nama_dokter" required autocomplete="off">
+                                            <option>Select</option>
+                                            @foreach($dokter as $d)
+                                            <option>{{ $d->nama_dokter }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

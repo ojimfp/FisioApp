@@ -160,8 +160,8 @@
                                             <tbody>
                                                 @foreach($rekam_medis as $rm)
                                                 <tr>
-                                                    <td>{{ $rm->created_at }}</td>
-                                                    <td>{{ $rm->nama_terapis }}</td>
+                                                    <td>{{ $rm->created_at->format('d/m/Y H:i:s') }}</td>
+                                                    <td>{{ $rm->dokter_id }}</td>
                                                     <td>{{ $rm->anamnesa }}</td>
                                                     <td>{{ $rm->pemeriksaan }}</td>
                                                     <td>{{ $rm->diagnosa }}</td>
@@ -170,8 +170,8 @@
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="" data-target="#delete_user"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                                <a class="dropdown-item" href="{{ route('rekam-medis.edit', $rm->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $rm->id }}')" data-target="#delete_rm"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -180,6 +180,24 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="delete_rm" class="modal fade delete-modal" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form action="" id="deleteForm" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="modal-body text-center">
+                                            <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
+                                            <h3>Apakah Anda yakin ingin menghapus rekam medis ini?</h3>
+                                            <div class="m-t-20">
+                                                <button class="btn btn-white" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -202,6 +220,20 @@
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    <!-- Script modal konfirmasi hapus rekam medis -->
+    <script type="text/javascript">
+        function deleteData(id) {
+            var id = id;
+            var url = '{{ route("rekam-medis.destroy", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm").attr('action', url);
+        }
+
+        function formSubmit() {
+            $("#deleteForm").submit();
+        }
+    </script>
 </body>
 
 

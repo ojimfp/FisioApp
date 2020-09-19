@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
-    <title>FisioApp - Edit Jadwal</title>
+    <title>FisioApp - Edit Rekam Medis</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
@@ -71,7 +71,7 @@
                             <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                         </li>
                         <li>
-                            <a href="/jadwal"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
+                            <a href="{{ route('jadwal.index') }}"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-money"></i> <span> Kasir </span> <span class="menu-arrow"></span></a>
@@ -98,127 +98,59 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Jadwal</h4>
+                        <h4 class="page-title">Edit Rekam Medis a.n. {{ $rekam_medis->pasien()->get()->pluck('nama') }}</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        @foreach($jadwal as $j)
-                        <form action="{{ route('jadwal.update', ['jadwal' => $j->id]) }}" method="POST">
+                        <form action="{{ route('rekam-medis.update', $rekam_medis->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" type="hidden" name="id" value="{{ $j->id }}">
-                                </div>
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Pasien<span class="text-danger">*</span></label>
-                                        <input class="form-control" name="nama_pasien" required value="{{ $j->nama_pasien }}">
-                                        <!-- <select class="select" name="nama_pasien" required value>
-                                            <option>Select</option>
-                                            @foreach($jadwal as $j)
-                                            <option>{{ $j->nama_pasien }}</option>
+                                        <label>Nama Terapis<span class="text-danger">*</span></label>
+                                        <select class="select" name="nama_dokter" required autocomplete="off">
+                                            @foreach($dokter as $d)
+                                            <option value="{{ $d->nama_dokter }}" @if($d->nama_dokter == $rekam_medis->dokter_id) selected @endif>{{ $d->nama_dokter }}</option>
                                             @endforeach
-                                        </select> -->
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Umur Pasien<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="umur_pasien" required value="{{ $j->umur_pasien }}">
+                                        <label>Anamnesa <span class="text-danger">*</span></label></br>
+                                        <textarea name="anamnesa" id="" cols="88" rows="4">{{ $rekam_medis->anamnesa }}</textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Dokter<span class="text-danger">*</span></label>
-                                        <input class="form-control" name="nama_dokter" required value="{{ $j->nama_dokter }}">
-                                        <!-- <select class="select" name="nama_dokter" required autocomplete="off">
-                                            <option>Select</option>
-                                            @foreach($jadwal as $j)
-                                            <option>{{ $j->nama_dokter }}</option>
-                                            @endforeach
-                                        </select> -->
+                                        <label>Pemeriksaan <span class="text-danger">*</span></label></br>
+                                        <textarea name="pemeriksaan" id="" cols="88" rows="4">{{ $rekam_medis->pemeriksaan }}</textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Tanggal Tindakan<span class="text-danger">*</span></label>
-                                        <div class="cal-icon">
-                                            <input type="text" name="tgl_tindakan" class="form-control datetimepicker" value="{{ $j->tgl_tindakan }}">
+                                        <label>Diagnosa <span class="text-danger">*</span></label></br>
+                                        <textarea name="diagnosa" id="" cols="88" rows="4">{{ $rekam_medis->diagnosa }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Tindakan</label>
+                                        @foreach($tindakan as $t)
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="tindakan[]" value="{{ $t->id }}" @if($rekam_medis->tindakan->pluck('id')->contains($t->id)) checked @endif>
+                                            <label>{{ $t->nama_tindakan }}</label>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Jam Tindakan<span class="text-danger">*</span></label>
-                                        <div class="time-icon">
-                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3" name="jam_tindakan" value="{{ $j->jam_tindakan }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Patient Email</label>
-                                        <input class="form-control" type="email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Patient Phone Number</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Message</label>
-                                <textarea cols="30" rows="4" class="form-control"></textarea>
-                            </div> -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>
-                                        <input type="text" name="status" class="form-control" name="status" value="{{ $j->status }}">
-                                        <!-- <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
-                                        <label class="form-check-label" for="product_active">
-                                            Active
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive">
-                                        <label class="form-check-label" for="product_inactive">
-                                            Inactive
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="product_lainnya" value="Lainnya">
-                                        <label class="form-check-label" for="product_lainnya">
-                                            Lainnya
-                                        </label>
-                                    </div> -->
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Keterangan Status<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="ket_status" required value="">
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Simpan Jadwal</button>
+                                <button class="btn btn-primary submit-btn">Simpan</button>
                             </div>
                         </form>
-                        @endforeach
                     </div>
                 </div>
             </div>

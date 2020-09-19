@@ -185,7 +185,7 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    <!-- Script modal konfirmasi hapus pasien -->
+    <!-- Script modal konfirmasi hapus user -->
     <script type="text/javascript">
         function deleteData(id) {
             var id = id;

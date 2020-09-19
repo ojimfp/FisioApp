@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\RekamMedis;
 use App\Pasien;
+use App\Dokter;
 use App\Tindakan;
 
 class RekamMedisController extends Controller
@@ -17,8 +18,8 @@ class RekamMedisController extends Controller
      */
     public function index($id)
     {
-        $pasien = Pasien::find($id);
-        $rekam_medis = RekamMedis::all();
+        $pasien = Pasien::findOrFail($id);
+        $rekam_medis = RekamMedis::all()->where('pasien_id', $id);
 
         return view('riwayat_pasien', [
             'pasien' => $pasien,
@@ -34,12 +35,14 @@ class RekamMedisController extends Controller
      */
     public function create($id)
     {
-        $pasien = Pasien::find($id);
+        $pasien = Pasien::findOrFail($id);
+        $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
         return view('tambah_rekam_medis', [
             'pasien' => $pasien,
-            'tindakan' => $tindakan
+            'tindakan' => $tindakan,
+            'dokter' => $dokter
         ]);
     }
 
@@ -49,19 +52,12 @@ class RekamMedisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        // DB::table('rekam_medis')->insert([
-        //     'anamnesa' => $request->anamnesa,
-        //     'pemeriksaan' => $request->pemeriksaan,
-        //     'diagnosa' => $request->diagnosa,
-        //     'tindakan' => $request->tindakan,
-        //     'nama_terapis' => $request->nama_terapis
-        // ]);
         $rekam_medis = new RekamMedis;
 
         $rekam_medis->pasien()->associate($request->id_pasien);
-        $rekam_medis->nama_terapis = $request->nama_terapis;
+        $rekam_medis->dokter()->associate($request->nama_dokter);
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
         $rekam_medis->diagnosa = $request->diagnosa;
@@ -69,7 +65,9 @@ class RekamMedisController extends Controller
 
         $rekam_medis->tindakan()->sync($request->tindakan);
 
-        return redirect()->route('rekam-medis.index');
+        $pasien = Pasien::findOrFail($id);
+
+        return redirect()->route('rekam-medis.index', ['pasien' => $pasien]);
     }
 
     /**
@@ -80,7 +78,15 @@ class RekamMedisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rekam_medis = RekamMedis::findOrFail($id);
+        $dokter = Dokter::all();
+        $tindakan = Tindakan::all();
+
+        return view('edit_rekam_medis')->with([
+            'rekam_medis' => $rekam_medis,
+            'dokter' => $dokter,
+            'tindakan' => $tindakan
+        ]);
     }
 
     /**
@@ -92,7 +98,15 @@ class RekamMedisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rekam_medis = RekamMedis::findOrFail($id);
+
+        $rekam_medis->dokter()->associate($request->nama_dokter);
+        $rekam_medis->anamnesa = $request->anamnesa;
+        $rekam_medis->pemeriksaan = $request->pemeriksaan;
+        $rekam_medis->tindakan()->sync($request->tindakan);
+        $rekam_medis->update();
+
+        return redirect()->route('rekam-medis.index');
     }
 
     /**
@@ -103,6 +117,10 @@ class RekamMedisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rekam_medis = RekamMedis::findOrFail($id);
+
+        $rekam_medis->delete();
+
+        return redirect()->route('rekam-medis.index');
     }
 }

@@ -26,7 +26,7 @@ class JadwalController extends Controller
     {
         $pasien = DB::table('pasien')->get();
         $dokter = DB::table('dokter')->get();
-        
+
         return view('tambah_jadwal', ['pasien' => $pasien, 'dokter' => $dokter]);
     }
 
@@ -40,7 +40,7 @@ class JadwalController extends Controller
             'tgl_tindakan' => $request->tgl_tindakan,
             'jam_tindakan' => $request->jam_tindakan,
             'status' => $request->status,
-            'ket_status' => $request->ket_status
+            // 'ket_status' => $request->ket_status
         ]);
 
         return redirect()->route('jadwal.index');
@@ -75,7 +75,7 @@ class JadwalController extends Controller
             'tgl_tindakan' => $request->tgl_tindakan,
             'jam_tindakan' => $request->jam_tindakan,
             'status' => $request->status,
-            'ket_status' => $request->ket_status
+            // 'ket_status' => $request->ket_status
         ]);
 
         return redirect()->route('jadwal.index');

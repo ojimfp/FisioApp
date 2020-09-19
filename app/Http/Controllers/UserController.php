@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -68,7 +67,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('users')->where('id', $id)->delete();
+        $user = User::findOrFail($id);
+
+        $user->delete();
 
         return redirect('user');
     }

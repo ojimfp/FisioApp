@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Dokter extends Model
 {
     protected $table = 'dokter';
+
+    public function rekamMedis()
+    {
+        return $this->hasMany('App\Dokter');
+    }
 }
