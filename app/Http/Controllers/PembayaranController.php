@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Kasir;
+use App\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
 
-class KasirController extends Controller
+class PembayaranController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    // Menampilkan halaman utama kasir
+    // Menampilkan halaman utama pembayaran
     public function index()
     {
-        //$kasir = DB::table('kasir')->get();
+        //$pembayaran = DB::table('pembayaran')->get();
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
-            // 'kasir' => $dokter
+            // 'pembayaran' => $dokter
         ];
-        return view('kasir', $result);
+        return view('pembayaran', $result);
     }
 
     /**
@@ -52,10 +52,10 @@ class KasirController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Kasir  $kasir
+     * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function show(Kasir $kasir)
+    public function show(Pembayaran $pembayaran)
     {
         //
     }
@@ -63,7 +63,7 @@ class KasirController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Kasir  $kasir
+     * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
     public function edit()
@@ -76,10 +76,10 @@ class KasirController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kasir  $kasir
+     * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kasir $kasir)
+    public function update(Request $request, Pembayaran $pembayaran)
     {
         //
     }
@@ -87,10 +87,10 @@ class KasirController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Kasir  $kasir
+     * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kasir $kasir)
+    public function destroy(Pembayaran $pembayaran)
     {
         //
     }

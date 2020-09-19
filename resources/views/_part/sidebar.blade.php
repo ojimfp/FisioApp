@@ -20,7 +20,7 @@
                             <a href="{{ route('tindakan.index') }}">Tindakan</a>
                         </li>
                         <li {{ $meta['side_active'] == 'pembayaran' ? 'active' : '' }}>
-                            <a href="{{ route('kasir.index') }}">Riwayat Pembayaran</a>
+                            <a href="{{ route('pembayaran.index') }}">Riwayat Pembayaran</a>
                         </li>
                         {{-- <li><a href="expenses.html">Expenses</a></li>
                         <li><a href="taxes.html">Taxes</a></li>
