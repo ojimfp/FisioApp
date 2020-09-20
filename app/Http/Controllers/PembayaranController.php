@@ -20,7 +20,7 @@ class PembayaranController extends Controller
         //$pembayaran = DB::table('pembayaran')->get();
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Riwayat Pembayaran',
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
             // 'pembayaran' => $dokter
@@ -35,7 +35,15 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        //
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
+            // 'pembayaran' => $dokter
+        ];
+
+        return view('tambah_pembayaran', $result);
     }
 
     /**
@@ -46,7 +54,6 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -69,7 +76,6 @@ class PembayaranController extends Controller
     public function edit()
     {
         return view('edit_tagihan');
-
     }
 
     /**
