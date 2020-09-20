@@ -130,19 +130,19 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Alergi Obat</label>
-                                        <input class="form-control" type="text" name="alergi_obat" autocomplete="off">
+                                        <textarea class="form-control" name="alergi_obat" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Masalah Kulit</label>
-                                        <input class="form-control" type="text" name="masalah_kulit" autocomplete="off">
+                                        <textarea class="form-control" name="masalah_kulit" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Catatan</label>
-                                        <input class="form-control" type="text" name="catatan" autocomplete="off">
+                                        <textarea class="form-control" name="catatan" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                             </div>
