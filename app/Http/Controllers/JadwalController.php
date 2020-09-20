@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
 use App\Jadwal;
+use App\Pasien;
+use App\Dokter;
 
 class JadwalController extends Controller
 {
@@ -16,13 +18,17 @@ class JadwalController extends Controller
 
     public function index()
     {
-        $jadwal = DB::table('jadwal')->get();
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+        $jadwal = Jadwal::all();
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'List Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
-            'jadwal' => $jadwal
+            'jadwal' => $jadwal,
+            'pasien' => $pasien,
+            'dokter' => $dokter
         ];
         return view('jadwal', $result);
     }
@@ -30,8 +36,8 @@ class JadwalController extends Controller
     // Menampilkan view form tambah jadwal
     public function create()
     {
-        $pasien = DB::table('pasien')->get();
-        $dokter = DB::table('dokter')->get();
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'Tambah Jadwal Pasien',
@@ -46,15 +52,25 @@ class JadwalController extends Controller
     // Menyimpan data ke dalam table jadwal
     public function store(Request $request)
     {
-        DB::table('jadwal')->insert([
-            'pasien_id' => $request->pasien_id,
-            'umur_pasien' => $request->umur_pasien,
-            'dokter_id' => $request->dokter_id,
-            'tgl_tindakan' => $request->tgl_tindakan,
-            'jam_tindakan' => $request->jam_tindakan,
-            'status' => $request->status,
-            // 'ket_status' => $request->ket_status
-        ]);
+        // DB::table('jadwal')->insert([
+        //     'pasien_id' => $request->pasien_id,
+        //     'umur_pasien' => $request->umur_pasien,
+        //     'dokter_id' => $request->dokter_id,
+        //     'tgl_tindakan' => $request->tgl_tindakan,
+        //     'jam_tindakan' => $request->jam_tindakan,
+        //     'status' => $request->status,
+        //     // 'ket_status' => $request->ket_status
+        // ]);
+
+        $jadwal = new Jadwal;
+
+        $jadwal->pasien()->associate($request->pasien_id);
+        $jadwal->dokter()->associate($request->dokter_id);
+        $jadwal->umur_pasien = $request->umur_pasien;
+        $jadwal->tgl_tindakan = $request->tgl_tindakan;
+        $jadwal->jam_tindakan = $request->jam_tindakan;
+        $jadwal->status = $request->status;
+        $jadwal->save();
 
         return redirect()->route('jadwal.index');
     }
@@ -73,13 +89,21 @@ class JadwalController extends Controller
     // Meng-edit data jadwal
     public function edit($id)
     {
-        $jadwal = DB::table('jadwal')->where('id', $id)->get();
+        $jadwal = Jadwal::findOrFail($id);
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+
+        $jadwal->pasien()->associate($request->pasien_id);
+        $jadwal->dokter()->associate($request->dokter_id);
+
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'Ubah Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
-            'jadwal' => $jadwal
+            'jadwal' => $jadwal,
+            'dokter' => $dokter,
+            'pasien' => $pasien
         ];
         return view('edit_jadwal', $result);
     }

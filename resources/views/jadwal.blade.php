@@ -50,9 +50,9 @@
                                 @foreach($jadwal as $j)
                                     <tr>
                                         <td>{{ sprintf('%04d', $j->id) }}</td>
-                                        <td>{{ $j->pasien_id }}</td>
+                                        <td>{{ implode($j->pasien()->get()->pluck('nama')->toArray()) }}</td>
                                         <td>{{ $j->umur_pasien }}</td>
-                                        <td>{{ $j->dokter_id }}</td>
+                                        <td>{{ implode($j->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
                                         <td>{{ $j->tgl_tindakan }}</td>
                                         <td>{{ $j->jam_tindakan }}</td>
                                         <td>{{ $j->status }}</td>

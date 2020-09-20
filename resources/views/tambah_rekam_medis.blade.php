@@ -118,7 +118,7 @@
                                         <select class="select" name="nama_dokter" required autocomplete="off">
                                             <option>Select</option>
                                             @foreach($dokter as $d)
-                                            <option>{{ $d->nama_dokter }}</option>
+                                            <option value="{{ $d->id }}">{{ $d->nama_dokter }}</option>
                                             @endforeach
                                         </select>
                                     </div>

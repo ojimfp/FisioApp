@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
 {
-    protected $fillable = ['nama_pasien','nama_dokter',
-    'tgl_tindakan','jam_tindakan','status'];
-    protected $dates = ['created_at', 'update_at'];
+    protected $table = 'jadwal';
+
+    public function pasien()
+    {
+        return $this->belongsTo('App\Pasien');
+    }
+    public function dokter()
+    {
+        return $this->belongsTo('App\Dokter');
+    }
 }

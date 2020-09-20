@@ -161,7 +161,7 @@
                                                 @foreach($rekam_medis as $rm)
                                                 <tr>
                                                     <td>{{ $rm->created_at->format('d/m/Y H:i:s') }}</td>
-                                                    <td>{{ $rm->dokter_id }}</td>
+                                                    <td>{{ implode($rm->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
                                                     <td>{{ $rm->anamnesa }}</td>
                                                     <td>{{ $rm->pemeriksaan }}</td>
                                                     <td>{{ $rm->diagnosa }}</td>

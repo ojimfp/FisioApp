@@ -12,4 +12,8 @@ class Dokter extends Model
     {
         return $this->hasMany('App\Dokter');
     }
+    public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal');
+    }
 }

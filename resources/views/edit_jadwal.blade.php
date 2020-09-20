@@ -30,19 +30,19 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         @foreach($jadwal as $j)
-                        <form action="{{ route('jadwal.update', ['jadwal' => $j->id]) }}" method="POST">
+                        <form action="{{ route('jadwal.update', $jadwal->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="col-sm-6">
+                            {{-- <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="form-control" type="hidden" name="id" value="{{ $j->id }}">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nama Pasien<span class="text-danger">*</span></label>
-                                        <input class="form-control" name="pasien_id" required value="{{ $j->pasien_id }}">
+                                        <input class="form-control" name="pasien_id" required value="{{ implode($j->pasien()->get()->pluck('nama')->toArray()) }}">
                                         <!-- <select class="select" name="pasien_id" required value>
                                             <option>Select</option>
                                             @foreach($jadwal as $j)
