@@ -14,11 +14,11 @@ class CreateTindakanTable extends Migration
     public function up()
     {
         Schema::create('tindakan', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('kode_tindakan');
             $table->string('nama_tindakan');
-            $table->string('harga_jual');
-            $table->string('komisi_tindakan');
+            $table->integer('harga_jual');
+            $table->integer('komisi_tindakan');
             $table->string('kategori_tindakan');
             $table->string('status_member');
             $table->string('status_aktif');

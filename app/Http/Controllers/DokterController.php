@@ -30,7 +30,13 @@ class DokterController extends Controller
     // Menampilkan view form tambah dokter
     public function create()
     {
-        return view('tambah_dokter');
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Tambah Fisioterapis',
+                'side_active'   => 'dokter'
+            ],
+        ];
+        return view('tambah_dokter',$result);
     }
 
     // Menyimpan data ke dalam table dokter
@@ -48,8 +54,14 @@ class DokterController extends Controller
     public function edit($id)
     {
         $dokter = DB::table('dokter')->where('id', $id)->get();
-
-        return view('edit_dokter', ['dokter' => $dokter]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Ubah Fisioterapis',
+                'side_active'   => 'dokter'
+            ],
+            'dokter' => $dokter
+        ];
+        return view('edit_dokter', $result);
     }
 
     // Update data dokter yg sudah di-edit

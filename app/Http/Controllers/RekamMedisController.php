@@ -52,7 +52,7 @@ class RekamMedisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $rekam_medis = new RekamMedis;
 
@@ -65,9 +65,9 @@ class RekamMedisController extends Controller
 
         $rekam_medis->tindakan()->sync($request->tindakan);
 
-        $pasien = Pasien::findOrFail($id);
+        // $pasien = Pasien::findOrFail($id);
 
-        return redirect()->route('rekam-medis.index', ['pasien' => $pasien]);
+        return redirect()->route('rekam-medis.index');
     }
 
     /**

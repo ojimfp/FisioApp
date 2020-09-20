@@ -32,17 +32,24 @@ class JadwalController extends Controller
     {
         $pasien = DB::table('pasien')->get();
         $dokter = DB::table('dokter')->get();
-
-        return view('tambah_jadwal', ['pasien' => $pasien, 'dokter' => $dokter]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Tambah Jadwal Pasien',
+                'side_active'   => 'jadwal'
+            ],
+            'pasien' => $pasien,
+            'dokter' => $dokter
+        ];
+        return view('tambah_jadwal',$result);
     }
 
     // Menyimpan data ke dalam table jadwal
     public function store(Request $request)
     {
         DB::table('jadwal')->insert([
-            'nama_pasien' => $request->nama_pasien,
+            'pasien_id' => $request->pasien_id,
             'umur_pasien' => $request->umur_pasien,
-            'nama_dokter' => $request->nama_dokter,
+            'dokter_id' => $request->dokter_id,
             'tgl_tindakan' => $request->tgl_tindakan,
             'jam_tindakan' => $request->jam_tindakan,
             'status' => $request->status,
@@ -67,17 +74,23 @@ class JadwalController extends Controller
     public function edit($id)
     {
         $jadwal = DB::table('jadwal')->where('id', $id)->get();
-
-        return view('edit_jadwal', ['jadwal' => $jadwal]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Ubah Jadwal Pasien',
+                'side_active'   => 'jadwal'
+            ],
+            'jadwal' => $jadwal
+        ];
+        return view('edit_jadwal', $result);
     }
 
     // Update jadwal yg sudah di-edit
     public function update(Request $request)
     {
         DB::table('jadwal')->where('id', $request->id)->update([
-            'nama_pasien' => $request->nama_pasien,
+            'pasien_id' => $request->pasien_id,
             'umur_pasien' => $request->umur_pasien,
-            'nama_dokter' => $request->nama_dokter,
+            'dokter_id' => $request->dokter_id,
             'tgl_tindakan' => $request->tgl_tindakan,
             'jam_tindakan' => $request->jam_tindakan,
             'status' => $request->status,
