@@ -31,7 +31,13 @@ class TindakanController extends Controller
 
     public function create()
     {
-        return view('tambah_tindakan');
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Tambah List Tindakan',
+                'side_active'   => 'tindakan'
+            ]
+        ];
+        return view('tambah_tindakan',$result);
     }
 
     public function store(Request $request)

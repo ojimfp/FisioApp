@@ -33,17 +33,32 @@ class PasienController extends Controller
     // Menampilkan view form tambah pasien
     public function create()
     {
-        return view('tambah_pasien');
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Tambah Pasien',
+                'side_active'   => 'pasien'
+            ],
+        ];
+        return view('tambah_pasien', $result);
     }
 
     // Menyimpan data ke dalam table pasien
     public function store(Request $request)
     {
         DB::table('pasien')->insert([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'tgl_lahir' => $request->tgl_lahir,
-            'no_telp' => $request->no_telp
+            'nama'              => $request->nama,
+            'alamat'            => $request->alamat,
+            'kota'              => $request->kota,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'status_perkawinan' => $request->status_perkawinan,
+            'pekerjaan'         => $request->pekerjaan,
+            'tempat_lahir'      => $request->tempat_lahir,
+            'tgl_lahir'         => $request->tgl_lahir,
+            'no_telp'           => $request->no_telp,
+            'email'             => $request->email,
+            'alergi_obat'       => $request->alergi_obat,
+            'masalah_kulit'     => $request->masalah_kulit,
+            'catatan'           => $request->catatan
         ]);
 
         return redirect()->route('pasien.index');
@@ -53,18 +68,33 @@ class PasienController extends Controller
     public function edit($id)
     {
         $pasien = DB::table('pasien')->where('id', $id)->get();
-
-        return view('edit_pasien', ['pasien' => $pasien]);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Ubah Pasien',
+                'side_active'   => 'pasien'
+            ],
+            'pasien' => $pasien
+        ];
+        return view('edit_pasien', $result);
     }
 
     // Update data pasien yg sudah di-edit
     public function update(Request $request)
     {
         DB::table('pasien')->where('id', $request->id)->update([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'tgl_lahir' => $request->tgl_lahir,
-            'no_telp' => $request->no_telp
+            'nama'              => $request->nama,
+            'alamat'            => $request->alamat,
+            'kota'              => $request->kota,
+            'jenis_kelamin'     => $request->jenis_kelamin,
+            'status_perkawinan' => $request->status_perkawinan,
+            'pekerjaan'         => $request->pekerjaan,
+            'tempat_lahir'      => $request->tempat_lahir,
+            'tgl_lahir'         => $request->tgl_lahir,
+            'no_telp'           => $request->no_telp,
+            'email'             => $request->email,
+            'alergi_obat'       => $request->alergi_obat,
+            'masalah_kulit'     => $request->masalah_kulit,
+            'catatan'           => $request->catatan
         ]);
 
         return redirect()->route('pasien.index');

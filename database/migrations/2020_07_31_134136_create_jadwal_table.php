@@ -14,14 +14,13 @@ class CreateJadwalTable extends Migration
     public function up()
     {
         Schema::create('jadwal', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama_pasien');
+            $table->id();
+            $table->unsignedBigInteger('pasien_id');
             $table->string('umur_pasien');
-            $table->string('nama_dokter');
+            $table->unsignedBigInteger('dokter_id');
             $table->string('tgl_tindakan');
             $table->string('jam_tindakan');
             $table->string('status');
-            $table->string('ket_status');
             $table->timestamps();
         });
     }

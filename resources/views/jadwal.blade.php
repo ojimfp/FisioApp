@@ -39,7 +39,7 @@
                                         <th>ID</th>
                                         <th>Nama Pasien</th>
                                         <th>Umur Pasien</th>
-                                        <th>Nama Dokter</th>
+                                        <th>Nama Fisioterapis</th>
                                         <th>Tanggal Tindakan</th>
                                         <th>Jam Tindakan</th>
                                         <th>Status</th>
@@ -50,9 +50,9 @@
                                 @foreach($jadwal as $j)
                                     <tr>
                                         <td>{{ sprintf('%04d', $j->id) }}</td>
-                                        <td>{{ $j->nama_pasien }}</td>
+                                        <td>{{ $j->pasien_id }}</td>
                                         <td>{{ $j->umur_pasien }}</td>
-                                        <td>{{ $j->nama_dokter }}</td>
+                                        <td>{{ $j->dokter_id }}</td>
                                         <td>{{ $j->tgl_tindakan }}</td>
                                         <td>{{ $j->jam_tindakan }}</td>
                                         <td>{{ $j->status }}</td>

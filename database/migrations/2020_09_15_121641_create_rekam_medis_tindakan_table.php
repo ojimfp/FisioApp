@@ -15,8 +15,8 @@ class CreateRekamMedisTindakanTable extends Migration
     {
         Schema::create('rekam_medis_tindakan', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('rekam_medis_id')->unsigned();
-            $table->integer('tindakan_id')->unsigned();
+            $table->unsignedBigInteger('rekam_medis_id');
+            $table->unsignedBigInteger('tindakan_id');
             $table->timestamps();
         });
     }

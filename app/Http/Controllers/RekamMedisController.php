@@ -65,6 +65,8 @@ class RekamMedisController extends Controller
 
         $rekam_medis->tindakan()->sync($request->tindakan);
 
+        // $pasien = Pasien::findOrFail($id);
+
         return redirect()->route('rekam-medis.index');
     }
 
