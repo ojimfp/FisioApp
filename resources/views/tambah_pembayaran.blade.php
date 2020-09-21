@@ -30,7 +30,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Tambah Pembayaran</h4>
+                        <h4 class="page-title">Tambah Pembayaran untuk Rekam Medis (id rekam medis)</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -39,39 +39,45 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label>No. Registrasi <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
+                                        <label>No. Registrasi Pasien<span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label>Nama Pasien <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text">
+                                        <label>Nama Pasien<span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text">
+                                        <input class="form-control" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Alamat Pasien</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label>Kota</label>
+                                        <input class="form-control" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Tipe Pembayaran</label>
                                         <select class="select">
-                                            <option>Pilih tipe</option>
+                                            <option></option>
                                             <option>Tunai</option>
                                             <option>Debit</option>
                                             <option>Internet Banking</option>
@@ -80,15 +86,7 @@
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label>Invoice date <span class="text-danger">*</span></label>
-                                        <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label>Due Date <span class="text-danger">*</span></label>
+                                        <label>Tanggal Periksa <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
                                             <input class="form-control datetimepicker" type="text">
                                         </div>
@@ -104,7 +102,7 @@
                                                     <th style="width: 20px">#</th>
                                                     <th class="col-sm-2">Kode Tindakan</th>
                                                     <th class="col-md-8">Nama Tindakan</th>
-                                                    <th>Amount</th>
+                                                    <th>Biaya</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -137,12 +135,12 @@
                                                 <tr>
                                                     <td colspan="5" class="text-right">Tax</td>
                                                     <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                        <input class="form-control text-right form-amt" value="0" readonly="" type="text">
+                                                        <input class="form-control text-right form-amt" value="10%" readonly="" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="5" class="text-right">
-                                                        Discount %
+                                                        Diskon %
                                                     </td>
                                                     <td style="text-align: right; padding-right: 30px;width: 230px">
                                                         <input class="form-control text-right" type="text">
@@ -153,7 +151,7 @@
                                                         Grand Total
                                                     </td>
                                                     <td style="text-align: right; padding-right: 30px; font-weight: bold; font-size: 16px;width: 230px">
-                                                        $ 0.00
+                                                        Rp
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -162,7 +160,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Other Information</label>
+                                                <label>Informasi Lain</label>
                                                 <textarea class="form-control"></textarea>
                                             </div>
                                         </div>

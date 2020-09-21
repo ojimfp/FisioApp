@@ -15,6 +15,11 @@ class CreateRiwayatPembayaranTable extends Migration
     {
         Schema::create('riwayat_pembayaran', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('rekam_medis_id');
+            $table->unsignedBigInteger('pasien_id');
+            $table->string('tipe_pembayaran');
+            $table->integer('total_biaya');
+            $table->string('status');
             $table->timestamps();
         });
     }

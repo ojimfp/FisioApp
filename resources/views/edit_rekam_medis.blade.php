@@ -98,7 +98,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Rekam Medis a.n. {{ $rekam_medis->pasien()->get()->pluck('nama') }}</h4>
+                        <h4 class="page-title">Edit Rekam Medis a.n. {{ implode($rekam_medis->pasien()->pluck('nama')->toArray()) }}</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -112,7 +112,7 @@
                                         <label>Nama Terapis<span class="text-danger">*</span></label>
                                         <select class="select" name="nama_dokter" required autocomplete="off">
                                             @foreach($dokter as $d)
-                                            <option value="{{ $d->nama_dokter }}" @if($d->nama_dokter == $rekam_medis->dokter_id) selected @endif>{{ $d->nama_dokter }}</option>
+                                            <option value="{{ $d->id }}" @if($d->id == $rekam_medis->dokter_id) selected @endif>{{ $d->nama_dokter }}</option>
                                             @endforeach
                                         </select>
                                     </div>

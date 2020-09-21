@@ -11,10 +11,15 @@ class Pasien extends Model
     public function rekamMedis()
     {
         return $this->hasMany('App\RekamMedis');
-
     }
+
     public function jadwal()
     {
         return $this->hasMany('App\Jadwal');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasMany('App\Pembayaran');
     }
 }
