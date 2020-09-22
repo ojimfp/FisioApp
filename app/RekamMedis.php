@@ -22,4 +22,9 @@ class RekamMedis extends Model
     {
         return $this->belongsToMany('App\Tindakan');
     }
+
+    public function pembayaran()
+    {
+        return $this->hasOne('App\Pembayaran');
+    }
 }

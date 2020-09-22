@@ -120,19 +120,19 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Anamnesa <span class="text-danger">*</span></label></br>
-                                        <textarea name="anamnesa" id="" cols="88" rows="4">{{ $rekam_medis->anamnesa }}</textarea>
+                                        <textarea class="form-control" name="anamnesa" id="" cols="88" rows="4">{{ $rekam_medis->anamnesa }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Pemeriksaan <span class="text-danger">*</span></label></br>
-                                        <textarea name="pemeriksaan" id="" cols="88" rows="4">{{ $rekam_medis->pemeriksaan }}</textarea>
+                                        <textarea class="form-control" name="pemeriksaan" id="" cols="88" rows="4">{{ $rekam_medis->pemeriksaan }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Diagnosa <span class="text-danger">*</span></label></br>
-                                        <textarea name="diagnosa" id="" cols="88" rows="4">{{ $rekam_medis->diagnosa }}</textarea>
+                                        <textarea class="form-control" name="diagnosa" id="" cols="88" rows="4">{{ $rekam_medis->diagnosa }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

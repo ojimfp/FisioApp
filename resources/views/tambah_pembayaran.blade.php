@@ -30,7 +30,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Tambah Pembayaran untuk Rekam Medis (id rekam medis)</h4>
+                        <h4 class="page-title">Tambah Pembayaran untuk Rekam Medis {{ $rekam_medis->id }}</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -40,37 +40,37 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>No. Registrasi Pasien<span class="text-danger"></span></label>
-                                        <input class="form-control" type="text" readonly>
+                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->id }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Nama Pasien<span class="text-danger"></span></label>
-                                        <input class="form-control" type="text" readonly>
+                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->nama }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input class="form-control" type="text" readonly>
+                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->tgl_lahir }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text" readonly>
+                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->no_telp }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Alamat Pasien</label>
-                                        <textarea class="form-control" rows="3" readonly></textarea>
+                                        <textarea class="form-control" rows="3" value="{{ $rekam_medis->pasien->alamat }}" readonly></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Kota</label>
-                                        <input class="form-control" type="text" readonly>
+                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->kota }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -106,18 +106,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($rekam_medis->tindakan as $tindakan)
                                                 <tr>
                                                     <td>1</td>
                                                     <td>
-                                                        <input class="form-control" type="text" style="min-width:150px">
+                                                        <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="text" style="min-width:150px">
+                                                        <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->nama_tindakan }}">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control form-amt" readonly="" style="width:120px" type="text">
+                                                        <input class="form-control form-amt" readonly="" style="width:120px; text-align:right; padding-right: 16px" type="text" value="{{ $tindakan->harga_jual }}">
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

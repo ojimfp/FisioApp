@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pembayaran;
+use App\RekamMedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
@@ -17,11 +18,14 @@ class PembayaranController extends Controller
     // Menampilkan halaman utama pembayaran
     public function index()
     {
+        $pembayaran = Pembayaran::all();
+
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
+            'pembayaran' => $pembayaran
         ];
 
         return view('pembayaran', $result);
@@ -32,13 +36,15 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
+        $rekam_medis = RekamMedis::with('tindakan')->findOrFail($id);
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
+            'rekam_medis' => $rekam_medis
         ];
 
         return view('tambah_pembayaran', $result);

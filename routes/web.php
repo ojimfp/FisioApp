@@ -31,7 +31,8 @@ Route::get('dokter/search', 'DokterController@search')->name('dokter.search');
 Route::resource('tindakan', 'TindakanController')->except(['show']);
 Route::get('tindakan/search', 'TindakanController@search')->name('tindakan.search');
 
-Route::resource('pembayaran', 'PembayaranController')->except(['show']);
+Route::resource('pembayaran', 'PembayaranController')->except(['show', 'create']);
+Route::get('pembayaran/{id}/create', 'PembayaranController@create')->name('pembayaran.create');
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');
@@ -40,7 +41,7 @@ Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
 
 Route::resource('jadwal', 'JadwalController')->except(['show']);
-Route::get('get-datapasien','JadwalController@getDataPasien')->name('jadwal.datapasien');
+Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.datapasien');
 
 Auth::routes();
 
