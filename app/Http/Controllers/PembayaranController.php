@@ -36,18 +36,9 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $rekam_medis = RekamMedis::with('tindakan')->findOrFail($id);
-        $result = [
-            'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
-                'side_active'   => 'pembayaran'
-            ],
-            'rekam_medis' => $rekam_medis
-        ];
-
-        return view('tambah_pembayaran', $result);
+        //
     }
 
     /**
@@ -58,17 +49,6 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $pembayaran = new Pembayaran;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pembayaran $pembayaran)
-    {
         //
     }
 
@@ -78,9 +58,18 @@ class PembayaranController extends Controller
      * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('edit_tagihan');
+        $rekam_medis = RekamMedis::with('tindakan')->findOrFail($id);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
+            'rekam_medis' => $rekam_medis
+        ];
+
+        return view('edit_tagihan', $result);
     }
 
     /**

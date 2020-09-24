@@ -23,6 +23,11 @@ class CreateJadwalTable extends Migration
             $table->string('status');
             $table->timestamps();
         });
+
+        Schema::table('jadwal', function (Blueprint $table) {
+            $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
+            $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
+        });
     }
 
     /**
@@ -32,6 +37,11 @@ class CreateJadwalTable extends Migration
      */
     public function down()
     {
+        Schema::table('jadwal', function (Blueprint $table) {
+            $table->dropForeign('jadwal_pasien_id_foreign');
+            $table->dropForeign('jadwal_dokter_id_foreign');
+        });
+
         Schema::dropIfExists('jadwal');
     }
 }

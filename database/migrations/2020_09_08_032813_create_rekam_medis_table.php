@@ -22,6 +22,11 @@ class CreateRekamMedisTable extends Migration
             $table->string('diagnosa');
             $table->timestamps();
         });
+
+        Schema::table('rekam_medis', function (Blueprint $table) {
+            $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
+            $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
+        });
     }
 
     /**
@@ -31,6 +36,11 @@ class CreateRekamMedisTable extends Migration
      */
     public function down()
     {
+        Schema::table('rekam_medis', function (Blueprint $table) {
+            $table->dropForeign('rekam_medis_pasien_id_foreign');
+            $table->dropForeign('rekam_medis_dokter_id_foreign');
+        });
+
         Schema::dropIfExists('rekam_medis');
     }
 }

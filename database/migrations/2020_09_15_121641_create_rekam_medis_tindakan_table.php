@@ -19,6 +19,11 @@ class CreateRekamMedisTindakanTable extends Migration
             $table->unsignedBigInteger('tindakan_id');
             $table->timestamps();
         });
+
+        Schema::table('rekam_medis_tindakan', function (Blueprint $table) {
+            $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
+            $table->foreign('tindakan_id')->references('id')->on('tindakan')->onDelete('cascade');
+        });
     }
 
     /**
@@ -28,6 +33,11 @@ class CreateRekamMedisTindakanTable extends Migration
      */
     public function down()
     {
+        Schema::table('rekam_medis_tindakan', function (Blueprint $table) {
+            $table->dropForeign('rekam_medis_tindakan_rekam_medis_id_foreign');
+            $table->dropForeign('rekam_medis_tindakan_tindakan_id_foreign');
+        });
+
         Schema::dropIfExists('rekam_medis_tindakan');
     }
 }
