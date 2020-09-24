@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
+use DateTime;
 use App\Jadwal;
 use App\Pasien;
 use App\Dokter;
@@ -21,6 +22,8 @@ class JadwalController extends Controller
         $pasien = Pasien::all();
         $dokter = Dokter::all();
         $jadwal = Jadwal::all();
+        $today = new DateTime('today');
+
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'List Jadwal Pasien',
@@ -28,7 +31,8 @@ class JadwalController extends Controller
             ],
             'jadwal' => $jadwal,
             'pasien' => $pasien,
-            'dokter' => $dokter
+            'dokter' => $dokter,
+            'today' => $today
         ];
         return view('jadwal', $result);
     }
@@ -90,11 +94,11 @@ class JadwalController extends Controller
     public function edit($id)
     {
         $jadwal = Jadwal::findOrFail($id);
-        $pasien = Pasien::all();
-        $dokter = Dokter::all();
-
-        $jadwal->pasien()->associate($request->pasien_id);
-        $jadwal->dokter()->associate($request->dokter_id);
+        $dokter = Dokter::findOrFail($jadwal->dokter_id);
+        $pasien = Pasien::findOrFail($jadwal->pasien_id);
+        $today = new DateTime('today');
+        $tgl = new DateTime($pasien->tgl_lahir);
+        $umur = $today->diff($tgl)->y;
 
         $result = [
             'meta' => [
@@ -103,8 +107,10 @@ class JadwalController extends Controller
             ],
             'jadwal' => $jadwal,
             'dokter' => $dokter,
-            'pasien' => $pasien
+            'pasien' => $pasien,
+            'umur' => $umur
         ];
+        // return $result;
         return view('edit_jadwal', $result);
     }
 

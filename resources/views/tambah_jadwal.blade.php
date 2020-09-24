@@ -93,24 +93,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Patient Email</label>
-                                        <input class="form-control" type="email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Patient Phone Number</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Message</label>
-                                <textarea cols="30" rows="4" class="form-control"></textarea>
-                            </div> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

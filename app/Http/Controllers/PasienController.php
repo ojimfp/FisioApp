@@ -79,23 +79,24 @@ class PasienController extends Controller
     }
 
     // Update data pasien yg sudah di-edit
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('pasien')->where('id', $request->id)->update([
-            'nama'              => $request->nama,
-            'alamat'            => $request->alamat,
-            'kota'              => $request->kota,
-            'jenis_kelamin'     => $request->jenis_kelamin,
-            'status_perkawinan' => $request->status_perkawinan,
-            'pekerjaan'         => $request->pekerjaan,
-            'tempat_lahir'      => $request->tempat_lahir,
-            'tgl_lahir'         => $request->tgl_lahir,
-            'no_telp'           => $request->no_telp,
-            'email'             => $request->email,
-            'alergi_obat'       => $request->alergi_obat,
-            'masalah_kulit'     => $request->masalah_kulit,
-            'catatan'           => $request->catatan
-        ]);
+        $pasien = Pasien::findOrFail($id);
+
+        $pasien->nama               = $request->nama;
+        $pasien->alamat             = $request->alamat;
+        $pasien->kota               = $request->kota;
+        $pasien->jenis_kelamin      = $request->jenis_kelamin;
+        $pasien->status_perkawinan  = $request->status_perkawinan;
+        $pasien->pekerjaan          = $request->pekerjaan;
+        $pasien->tempat_lahir       = $request->tempat_lahir;
+        $pasien->tgl_lahir          = $request->tgl_lahir;
+        $pasien->no_telp            = $request->no_telp;
+        $pasien->email              = $request->email;
+        $pasien->alergi_obat        = $request->alergi_obat;
+        $pasien->masalah_kulit      = $request->masalah_kulit;
+        $pasien->catatan            = $request->catatan;
+        $pasien->update();
 
         return redirect()->route('pasien.index');
     }

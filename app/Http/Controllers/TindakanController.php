@@ -74,7 +74,15 @@ class TindakanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tindakan = DB::table('tindakan')->where('id', $id)->get();
+        $result = [
+            'meta' => [
+                'title'         => config('app.name').' - '.'Ubah Tindakan',
+                'side_active'   => 'tindakan'
+            ],
+            'tindakan' => $tindakan
+        ];
+        return view('edit_tindakan', $result);
     }
 
     /**
@@ -86,7 +94,19 @@ class TindakanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tindakan = Tindakan::findOrFail($id);
+
+        $tindakan->kode_tindakan    = $request->kode_tindakan;
+        $tindakan->nama_tindakan    = $request->nama_tindakan;
+        $tindakan->harga_jual       = $request->harga_jual;
+        $tindakan->komisi_tindakan  = $request->komisi_tindakan;
+        $tindakan->kategori_tindakan = $request->kategori_tindakan;
+        $tindakan->status_member    =  $request->status_member;
+        $tindakan->status_aktif     = $request->status_aktif;
+        $tindakan->keterangan       = $request->keterangan;
+        $tindakan->update();
+
+        return redirect()->route('tindakan.index');
     }
 
     /**
@@ -97,7 +117,9 @@ class TindakanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('tindakan')->where('id', $id)->delete();
+
+        return redirect()->route('tindakan.index');
     }
 
     //Mencari data tindakan

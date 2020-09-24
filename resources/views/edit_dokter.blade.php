@@ -24,49 +24,30 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Pasien</h4>
+                        <h4 class="page-title">Edit Fisioterapis</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        @foreach($pasien as $p)
-                        <form action="{{ route('pasien.update', ['pasien' => $p->id]) }}" method="POST">
+                        @foreach($dokter as $d)
+                        <form action="{{ route('dokter.update', ['dokter' => $d->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" type="hidden" name="id" value="{{ $p->id }}">
-                                    </div>
-                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama" value="{{ $p->nama }}" required>
+                                        <label>Nama Fisioterapis <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="nama_dokter" value="{{ $d->nama_dokter }}" required readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Alamat</label>
-                                                <input type="text" class="form-control" name="alamat" value="{{ $p->alamat }}">
+                                                <label>Spesialisasi</label>
+                                                <input type="text" class="form-control" name="spesialisasi" value="{{ $d->spesialisasi }}">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Tanggal Lahir</label>
-                                        <div class="cal-icon">
-                                            <input type="date" class="form-control" name="tgl_lahir" value="{{ $p->tgl_lahir }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text" name="no_telp" value="{{ $p->no_telp }}">
                                     </div>
                                 </div>
                             </div>

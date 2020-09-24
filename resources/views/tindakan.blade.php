@@ -72,8 +72,8 @@
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <a class="dropdown-item" href="{{ route('tindakan.edit', ['tindakan' => $t->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $t->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a> -->
+                                                    <a class="dropdown-item" href="{{ route('tindakan.edit', ['tindakan' => $t->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $t->id }}')" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -109,7 +109,7 @@
     @include('_part.footer')
 
     <!-- Script modal konfirmasi hapus tindakan -->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         function deleteData(id) {
             var id = id;
             var url = '{{ route("tindakan.destroy", ":id") }}';
@@ -120,7 +120,7 @@
         function formSubmit() {
             $("#deleteForm").submit();
         }
-    </script> -->
+    </script>
 </body>
 
 

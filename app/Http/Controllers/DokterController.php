@@ -65,12 +65,13 @@ class DokterController extends Controller
     }
 
     // Update data dokter yg sudah di-edit
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('dokter')->where('id', $request->id)->update([
-            'nama_dokter' => $request->nama_dokter,
-            'spesialisasi' => $request->spesialisasi
-        ]);
+        $dokter = Dokter::findOrFail($id);
+
+        $dokter->nama_dokter = $request->nama_dokter;
+        $dokter->spesialisasi = $request->spesialisasi;
+        $dokter->update();
 
         return redirect()->route('dokter.index');
     }

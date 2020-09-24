@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- add-patient24:06-->
+<!-- edit-patient24:07-->
 
 <head>
     @include('_part.meta')
@@ -24,18 +24,20 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Tambah Tindakan</h4>
+                        <h4 class="page-title">Edit Tindakan</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form action="{{ route('tindakan.store') }}" method="POST">
+                        @foreach($tindakan as $t)
+                        <form action="{{ route('tindakan.update', ['tindakan' => $t->id]) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Kode Tindakan <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" placeholder="Contoh : US 10x" >
+                                    <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" value="{{ $t->kode_tindakan}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -43,7 +45,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Nama Tindakan</label>
-                                                <input type="text" class="form-control" name="nama_tindakan" autocomplete="off" placeholder="Harap diawal dengan huruf kapital">
+                                                <input type="text" class="form-control" name="nama_tindakan" autocomplete="off" value="{{ $t->nama_tindakan}}">
                                             </div>
                                         </div>
                                     </div>
@@ -51,22 +53,22 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Harga Jual</label>
-                                        <input type="form_control" class="form-control" name="harga_jual" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
+                                        <input type="form_control" class="form-control" name="harga_jual" autocomplete="off"  value="{{ $t->harga_jual}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Komisi Tindakan</label>
-                                        <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
+                                        <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off"  value="{{ $t->komisi_tindakan}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Kategori Tindakan<span class="text-danger">*</span></label>
                                         <select class="select" name="kategori_tindakan" required autocomplete="off">
-                                            <option>Rendah</option>
-                                            <option>Medium</option>
-                                            <option>Tinggi</option>
+                                            <option @if ($t->kategori_tindakan == 'Rendah') selected @endif>Rendah</option>
+                                            <option @if ($t->kategori_tindakan == 'Medium') selected @endif>Medium</option>
+                                            <option @if ($t->kategori_tindakan == 'Tinggi') selected @endif>Tinggi</option>
                                         </select>
                                     </div>
                                 </div>
@@ -74,8 +76,8 @@
                                     <div class="form-group">
                                         <label>Status Member</label>
                                         <select class="select" name="status_member" required autocomplete="off">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
+                                            <option  @if ($t->status_member == 'Ya') selected @endif>Ya</option>
+                                            <option  @if ($t->status_member == 'Tidak') selected @endif>Tidak</option>
                                         </select>
                                     </div>
                                 </div>
@@ -83,32 +85,35 @@
                                     <div class="form-group">
                                         <label>Status Aktif</label>
                                         <select class="select" name="status_aktif" required autocomplete="off">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
+                                            <option  @if ($t->status_aktif == 'Ya') selected @endif>Ya</option>
+                                            <option  @if ($t->status_aktif == 'Tidak') selected @endif>Tidak</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Keterangan</label>
-                                        <input class="form-control" type="text" name="keterangan" autocomplete="off">
+                                        <input class="form-control" type="text" name="keterangan" autocomplete="off" value="{{ $t->komisi_tindakan}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Tambah Tindakan</button>
+                                <button class="btn btn-primary submit-btn">Simpan Perubahan Tindakan</button>
                             </div>
                         </form>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <!-- FOOTER -->
-     @include('_part.footer')
+
+    <!-- FOOTER -->
+    @include('_part.footer')
 
 </body>
 
-<!-- add-patient24:07-->
+
+<!-- edit-patient24:07-->
 
 </html>

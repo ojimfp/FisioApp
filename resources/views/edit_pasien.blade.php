@@ -42,31 +42,113 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Alamat</label>
-                                                <input type="text" class="form-control" name="alamat" value="{{ $p->alamat }}">
+                                                <input type="text" class="form-control" name="alamat" value="{{ $p->alamat }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Kota <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="kota" value="{{ $p->kota }}" required autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Tanggal Lahir</label>
-                                        <div class="cal-icon">
-                                            <input type="date" class="form-control" name="tgl_lahir" value="{{ $p->tgl_lahir }}">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="display-block">Jenis Kelamin <span class="text-danger">*</span></label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_pria" value="Pria"  @if ($p->jenis_kelamin == 'Pria') checked @endif>
+                                                    <label class="form-check-label" for="jns_pria">
+                                                        Pria
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_wanita" value="Wanita"  @if ($p->jenis_kelamin == 'Wanita') checked @endif>
+                                                    <label class="form-check-label" for="jns_wanita">
+                                                        Wanita
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Status Perkawinan <span class="text-danger">*</span></label>
+                                                <select class="select" name="status_perkawinan" required autocomplete="off">
+                                                    <option value="Belum Kawin"  @if ($p->status_perkawinan == 'Belum Kawin') selected @endif>Belum Kawin</option>
+                                                    <option value="Kawin" @if ($p->status_perkawinan == 'Kawin') selected @endif>Kawin</option>
+                                                    <option value="Cerai Hidup" @if ($p->status_perkawinan == 'Cerai Hidup') selected @endif>Cerai Hidup</option>
+                                                    <option value="Cerai Mati" @if ($p->status_perkawinan == 'Cerai Mati') selected @endif>Cerai Mati</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text" name="no_telp" value="{{ $p->no_telp }}">
+                                        <label>Pekerjaan</label>
+                                    <input class="form-control" type="text" name="pekerjaan" autocomplete="off" value="{{ $p->pekerjaan}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Tempat Lahir</label>
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Tanggal Lahir <span class="text-danger">*</span></label>
+                                                <div class="cal-icon">
+                                                <input type="date" class="form-control" name="tgl_lahir" required autocomplete="off" value="{{ $p->tgl_lahir}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>No. Telepon/HP <span class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Email <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="email" name="email" required autocomplete="off"  value="{{ $p->email }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Alergi Obat</label>
+                                        <textarea class="form-control" name="alergi_obat" autocomplete="off">{{ $p->alergi_obat }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Masalah Kulit</label>
+                                        <textarea class="form-control" name="masalah_kulit" autocomplete="off">{{ $p->masalah_kulit }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Catatan</label>
+                                        <textarea class="form-control" name="catatan" autocomplete="off">{{ $p->catatan }}</textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Simpan</button>
+                                <button class="btn btn-primary submit-btn">Simpan Perubahan</button>
                             </div>
                         </form>
                         @endforeach

@@ -35,7 +35,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama" required autocomplete="off">
+                                        <input class="form-control" type="text" name="nama" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -43,13 +43,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Alamat <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="alamat" required autocomplete="off">
+                                                <input type="text" class="form-control" name="alamat" required autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Kota <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="kota" required autocomplete="off">
+                                                <input type="text" class="form-control" name="kota" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Pekerjaan</label>
-                                        <input class="form-control" type="text" name="pekerjaan" autocomplete="off">
+                                        <input class="form-control" type="text" name="pekerjaan" autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -98,7 +98,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tempat Lahir</label>
-                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off">
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -116,7 +116,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>No. Telepon/HP <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" name="no_telp" required autocomplete="off">
+                                                <input class="form-control" type="tel" name="no_telp" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57" placeholder="08xxxxxxx">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
