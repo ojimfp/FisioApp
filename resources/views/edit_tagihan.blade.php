@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form>
+                        <form name="kasir">
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
@@ -107,7 +107,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($rekam_medis->tindakan as $tindakan)
-                                                <tr>
+                                                <tr name="harga">
                                                     <td>1</td>
                                                     <td>
                                                         <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}">
@@ -116,7 +116,7 @@
                                                         <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->nama_tindakan }}">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control form-amt" readonly="" style="width:120px; text-align:right; padding-right: 16px" type="text" value="{{ $tindakan->harga_jual }}">
+                                                        <input class="form-control form-amt text-right" id="harga" readonly="" name="harga" style="width:120px; padding-right: 16px" type="text" value="{{ number_format($tindakan->harga_jual) }}">
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -131,13 +131,9 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td class="text-right">Total</td>
-                                                    <td style="text-align: right; padding-right: 30px;width: 230px">0</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5" class="text-right">Tax</td>
-                                                    <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                        <input class="form-control text-right form-amt" value="10%" readonly="" type="text">
+                                                    <td class="text-right">Total Rp</td>
+                                                    <td style="padding-right: 12px;width: 230px">
+                                                        <input type="text" class="form-control text-right input" id="total" name="total" jAutoCalc="SUM({harga})">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -145,15 +141,15 @@
                                                         Diskon %
                                                     </td>
                                                     <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                        <input class="form-control text-right" type="text">
+                                                        <input class="form-control text-right input" id="diskon" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="5" style="text-align: right; font-weight: bold">
-                                                        Grand Total
+                                                        Grand Total Rp
                                                     </td>
-                                                    <td style="text-align: right; padding-right: 30px; font-weight: bold; font-size: 16px;width: 230px">
-                                                        Rp
+                                                    <td style="text-align: right; padding-right: 12px; width: 230px">
+                                                        <input type="text" class="form-control text-right input" id="grand_total" style="font-weight: bold" readonly>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -188,6 +184,8 @@
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/jautocalc.min.js') }}"></script>
+    <script src="{{ asset('assets/js/calc.js') }}"></script>
 </body>
 
 

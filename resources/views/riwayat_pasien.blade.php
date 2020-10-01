@@ -208,7 +208,6 @@
                                         <table class="table table-border table-striped custom-table datatable mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>No. Tagihan</th>
                                                     <th>Tanggal Tagihan</th>
                                                     <th>Tanggal Pembayaran</th>
@@ -221,10 +220,9 @@
                                             <tbody>
                                                 @foreach($pembayaran as $bayar)
                                                 <tr>
-                                                    <td>1</td>
                                                     <td><a href="invoice-view.html">#INV-0001</a></td>
-                                                    <td>{{ $bayar->created_at }}</td>
-                                                    <td>7 Aug 2018</td>
+                                                    <td>{{ $bayar->created_at->format('d/m/Y H:i') }}</td>
+                                                    <td>{{ $bayar->updated_at->format('d/m/Y H:i') }}</td>
                                                     <td>{{ $bayar->tipe_pembayaran }}</td>
                                                     <td>{{ $bayar->total_biaya }}</td>
                                                     <td><span class="custom-badge status-red">Belum Dibayar</span></td>
