@@ -16,14 +16,16 @@ autoCalcSetup();
 $(".input").on("input", function() {
     var x = document.getElementById("total").value;
     x = parseInt(x.replace(/,/g, ""));
-    var y = document.getElementById("diskon").value;
+    var y = document.getElementById("diskon_persen").value;
     y = parseInt(y);
+    var z = document.getElementById("diskon_rupiah").value;
+    z = parseInt(z);
 
-    if (Number.isNaN(x)) {
-        x = 0;
-    } else if (Number.isNaN(y)) {
+    if (Number.isNaN(y)) {
         y = 0;
+    } else if (Number.isNaN(z)) {
+        z = 0;
     }
 
-    document.getElementById("grand_total").value = x - x * (y / 100);
+    document.getElementById("grand_total").value = x - x * (y / 100) - z;
 });

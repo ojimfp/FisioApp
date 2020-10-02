@@ -66,12 +66,6 @@ class RekamMedisController extends Controller
         $rekam_medis->diagnosa = $request->diagnosa;
         $rekam_medis->save();
 
-        $pembayaran = new Pembayaran;
-
-        $pembayaran->rekam_medis_id = $rekam_medis->id;
-        $pembayaran->pasien_id = $request->id_pasien;
-        $rekam_medis->pembayaran()->save($pembayaran);
-
         $rekam_medis->tindakan()->sync($request->tindakan);
 
         return redirect()->route('rekam-medis.index');

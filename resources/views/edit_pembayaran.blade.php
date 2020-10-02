@@ -64,7 +64,7 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Alamat Pasien</label>
-                                        <textarea class="form-control" rows="3" value="{{ $rekam_medis->pasien->alamat }}" readonly></textarea>
+                                        <textarea class="form-control" rows="3" readonly>{{ $rekam_medis->pasien->alamat }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -140,8 +140,16 @@
                                                     <td colspan="5" class="text-right">
                                                         Diskon %
                                                     </td>
-                                                    <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                        <input class="form-control text-right input" id="diskon" type="text">
+                                                    <td style="text-align: right; padding-right: 12px;width: 230px">
+                                                        <input class="form-control text-right input" id="diskon-persen" type="text">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5" class="text-right">
+                                                        Diskon Rp
+                                                    </td>
+                                                    <td style="text-align: right; padding-right: 12px;width: 230px">
+                                                        <input class="form-control text-right input" id="diskon-rupiah" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -158,7 +166,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Informasi Lain</label>
+                                                <label>Catatan</label>
                                                 <textarea class="form-control"></textarea>
                                             </div>
                                         </div>

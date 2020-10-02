@@ -17,8 +17,10 @@ class CreateRiwayatPembayaranTable extends Migration
             $table->id();
             $table->unsignedBigInteger('rekam_medis_id');
             $table->unsignedBigInteger('pasien_id');
-            $table->string('tipe_pembayaran')->nullable();
-            $table->integer('total_biaya')->nullable();
+            $table->string('tipe_pembayaran');
+            $table->integer('diskon_persen')->nullable();
+            $table->integer('diskon_rupiah')->nullable();
+            $table->integer('total_biaya');
             $table->string('status')->nullable();
             $table->timestamps();
         });

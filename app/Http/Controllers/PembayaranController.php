@@ -36,29 +36,7 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pembayaran  $pembayaran
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function create($id)
     {
         $rekam_medis = RekamMedis::with('tindakan')->findOrFail($id);
         $result = [
@@ -69,7 +47,50 @@ class PembayaranController extends Controller
             'rekam_medis' => $rekam_medis
         ];
 
-        return view('edit_tagihan', $result);
+        return view('tambah_pembayaran', $result);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $pembayaran = new Pembayaran;
+
+        $pembayaran->rekam_medis()->associate($request->rekam_medis_id);
+        $pembayaran->pasien()->associate($request->id_pasien);
+        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->diskon_persen = $request->diskon_persen;
+        $pembayaran->diskon_rupiah = $request->diskon_rupiah;
+        $pembayaran->total_biaya = $request->grand_total;
+        $pembayaran->save();
+
+        $pembayaran->tindakan()->sync($request->tindakan);
+
+        return redirect()->route('rekam-medis.index');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Pembayaran  $pembayaran
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
+            'pembayaran' => $pembayaran
+        ];
+
+        return view('edit_pembayaran', $result);
     }
 
     /**
@@ -79,9 +100,18 @@ class PembayaranController extends Controller
      * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pembayaran $pembayaran)
+    public function update(Request $request, $id)
     {
-        //
+        $pembayaran = Pembayaran::findOrFail($id);
+
+        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->diskon_persen = $request->diskon_persen;
+        $pembayaran->diskon_rupiah = $request->diskon_rupiah;
+        $pembayaran->total_biaya = $request->grand_total;
+        $pembayaran->tindakan()->sync($request->tindakan);
+        $pembayaran->update();
+
+        return redirect()->route('rekam-medis.index');
     }
 
     /**
