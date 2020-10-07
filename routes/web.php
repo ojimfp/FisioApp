@@ -31,8 +31,10 @@ Route::get('dokter/search', 'DokterController@search')->name('dokter.search');
 Route::resource('tindakan', 'TindakanController')->except(['show']);
 Route::get('tindakan/search', 'TindakanController@search')->name('tindakan.search');
 
-Route::resource('pembayaran', 'PembayaranController')->except(['show', 'create']);
+Route::resource('pembayaran', 'PembayaranController')->except(['show', 'create', 'destroy']);
 Route::get('pembayaran/{id}/create', 'PembayaranController@create')->name('pembayaran.create');
+Route::delete('pembayaran/p/{id}', 'PembayaranController@destroyFromPembayaran')->name('pembayaran.destroy.p');
+Route::delete('pembayaran/rm/{id}', 'PembayaranController@destroyFromRekamMedis')->name('pembayaran.destroy.rm');
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');

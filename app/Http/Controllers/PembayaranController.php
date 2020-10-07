@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pembayaran;
 use App\RekamMedis;
+use App\Tindakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
@@ -60,12 +61,13 @@ class PembayaranController extends Controller
     {
         $pembayaran = new Pembayaran;
 
-        $pembayaran->rekam_medis()->associate($request->rekam_medis_id);
+        $pembayaran->rekam_medis()->associate($request->id_rekam_medis);
         $pembayaran->pasien()->associate($request->id_pasien);
-        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->dokter()->associate($request->id_terapis);
         $pembayaran->diskon_persen = $request->diskon_persen;
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
+        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->save();
 
         $pembayaran->tindakan()->sync($request->tindakan);
@@ -104,10 +106,10 @@ class PembayaranController extends Controller
     {
         $pembayaran = Pembayaran::findOrFail($id);
 
-        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->diskon_persen = $request->diskon_persen;
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
+        $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
 
@@ -120,8 +122,27 @@ class PembayaranController extends Controller
      * @param  \App\Pembayaran  $pembayaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pembayaran $pembayaran)
+    public function destroyFromPembayaran($id)
     {
-        //
+        $pembayaran = Pembayaran::findOrFail($id);
+
+        $pembayaran->delete();
+
+        return redirect()->route('pembayaran.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Pembayaran  $pembayaran
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyFromRekamMedis($id)
+    {
+        $pembayaran = Pembayaran::findOrFail($id);
+
+        $pembayaran->delete();
+
+        return redirect()->route('rekam-medis.index');
     }
 }

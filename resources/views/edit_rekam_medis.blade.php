@@ -98,7 +98,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Rekam Medis a.n. {{ implode($rekam_medis->pasien()->pluck('nama')->toArray()) }}</h4>
+                        <h4 class="page-title">Edit Rekam Medis a.n. {{ $rekam_medis->pasien->nama }}</h4>
                     </div>
                 </div>
                 <div class="row">

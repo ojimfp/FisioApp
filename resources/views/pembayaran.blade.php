@@ -65,29 +65,29 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-striped custom-table mb-0">
+                            <table class="table table-striped custom-table datatable mb-0">
                                 <thead>
                                     <tr>
                                         <th>No. Tagihan</th>
-                                        <th>Nama Pasien</th>
-                                        <th>Tanggal Tagihan</th>
                                         <th>Tanggal Pembayaran</th>
-                                        <th>Tipe Pembayaran </th>
+                                        <th>Nama Pasien</th>
+                                        <th>Tindakan</th>
                                         <th>Total Biaya</th>
-                                        <th>Status</th>
+                                        <th>Tipe Pembayaran</th>
+                                        <th>Nama Terapis</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($pembayaran as $bayar)
                                     <tr>
-                                        <td><a href="invoice-view.html">#INV-0001</a></td>
-                                        <td>{{ $bayar->pasien->nama }}</td>
+                                        <td>{{ $bayar->id }}</td>
                                         <td>{{ $bayar->created_at->format('d/m/Y H:i') }}</td>
-                                        <td>{{ $bayar->updated_at->format('d/m/Y H:i') }}</td>
-                                        <td>Tunai</td>
-                                        <td>$20</td>
-                                        <td><span class="custom-badge status-red">Belum dibayar</span></td>
+                                        <td>{{ $bayar->pasien->nama }}</td>
+                                        <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
+                                        <td>Rp {{ $bayar->total_biaya }}</td>
+                                        <td>{{ $bayar->tipe_pembayaran }}</td>
+                                        <td>{{ $bayar->dokter->nama_dokter }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -95,7 +95,7 @@
                                                     <a class="dropdown-item" href="{{ route('pembayaran.edit', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="invoice-view.html"><i class="fa fa-eye m-r-5"></i> View</a>
                                                     <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_invoice"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_inv"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -107,16 +107,21 @@
                     </div>
                 </div>
             </div>
-            <div id="delete_invoice" class="modal fade delete-modal" role="dialog">
+            <div id="delete_inv" class="modal fade delete-modal" role="dialog">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <img src="assets/img/sent.png" alt="" width="50" height="46">
-                            <h3>Are you sure want to delete this Invoice?</h3>
-                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                        <form action="" id="deleteForm" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body text-center">
+                                <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
+                                <h3>Apakah Anda yakin ingin menghapus riwayat pembayaran ini?</h3>
+                                <div class="m-t-20">
+                                    <button class="btn btn-white" data-dismiss="modal">Tidak</button>
+                                    <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -132,6 +137,19 @@
         <script src="assets/js/moment.min.js"></script>
         <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
         <script src="assets/js/app.js"></script>
+        <!-- Script modal konfirmasi hapus pasien -->
+        <script type="text/javascript">
+            function deleteData(id) {
+                var id = id;
+                var url = '{{ route("pembayaran.destroy.p", ":id") }}';
+                url = url.replace(':id', id);
+                $("#deleteForm").attr('action', url);
+            }
+
+            function formSubmit() {
+                $("#deleteForm").submit();
+            }
+        </script>
 </body>
 
 

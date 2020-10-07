@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pembayaran extends Model
 {
-    protected $table = 'riwayat_pembayaran';
+    protected $table = 'pembayaran';
 
-    public function rekamMedis()
+    public function rekam_medis()
     {
         return $this->belongsTo('App\RekamMedis');
     }
@@ -16,5 +16,15 @@ class Pembayaran extends Model
     public function pasien()
     {
         return $this->belongsTo('App\Pasien');
+    }
+
+    public function tindakan()
+    {
+        return $this->belongsToMany('App\Tindakan');
+    }
+
+    public function dokter()
+    {
+        return $this->belongsTo('App\Dokter');
     }
 }

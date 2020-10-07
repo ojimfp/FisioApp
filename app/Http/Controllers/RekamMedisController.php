@@ -23,11 +23,17 @@ class RekamMedisController extends Controller
         $rekam_medis = RekamMedis::all()->where('pasien_id', $id);
         $pembayaran = Pembayaran::all()->where('pasien_id', $id);
 
-        return view('riwayat_pasien', [
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
             'pasien' => $pasien,
             'rekam_medis' => $rekam_medis,
             'pembayaran' => $pembayaran
-        ]);
+        ];
+
+        return view('riwayat_pasien', $result);
     }
 
 

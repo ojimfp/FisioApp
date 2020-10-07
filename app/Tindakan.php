@@ -12,4 +12,9 @@ class Tindakan extends Model
     {
         return $this->belongsToMany('App\RekamMedis');
     }
+
+    public function pembayaran()
+    {
+        return $this->belongsToMany('App\Pembayaran');
+    }
 }

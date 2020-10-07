@@ -21,7 +21,7 @@ class PasienController extends Controller
         $pasien = Pasien::all();
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'List Pasien',
+                'title'         => config('app.name') . ' - ' . 'List Pasien',
                 'side_active'   => 'pasien'
             ],
             'pasien' => $pasien
@@ -35,7 +35,7 @@ class PasienController extends Controller
     {
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Tambah Pasien',
+                'title'         => config('app.name') . ' - ' . 'Tambah Pasien',
                 'side_active'   => 'pasien'
             ],
         ];
@@ -70,7 +70,7 @@ class PasienController extends Controller
         $pasien = DB::table('pasien')->where('id', $id)->get();
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Ubah Pasien',
+                'title'         => config('app.name') . ' - ' . 'Ubah Pasien',
                 'side_active'   => 'pasien'
             ],
             'pasien' => $pasien
