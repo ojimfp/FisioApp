@@ -42,7 +42,7 @@ class PembayaranController extends Controller
         $rekam_medis = RekamMedis::with('tindakan')->findOrFail($id);
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'title'         => config('app.name') . ' - ' . 'Tambah Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
             'rekam_medis' => $rekam_medis
@@ -68,6 +68,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->users()->associate($request->admin);
         $pembayaran->save();
 
         $pembayaran->tindakan()->sync($request->tindakan);
@@ -86,7 +87,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'title'         => config('app.name') . ' - ' . 'Edit Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
             'pembayaran' => $pembayaran

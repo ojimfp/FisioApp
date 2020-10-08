@@ -17,7 +17,6 @@ class PasienController extends Controller
     // Menampilkan halaman utama pasien
     public function index()
     {
-        // $pasien = DB::table('pasien')->get();
         $pasien = Pasien::all();
         $result = [
             'meta' => [
@@ -70,7 +69,7 @@ class PasienController extends Controller
         $pasien = DB::table('pasien')->where('id', $id)->get();
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Ubah Pasien',
+                'title'         => config('app.name') . ' - ' . 'Edit Pasien',
                 'side_active'   => 'pasien'
             ],
             'pasien' => $pasien

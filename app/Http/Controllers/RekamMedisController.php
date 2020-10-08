@@ -48,11 +48,17 @@ class RekamMedisController extends Controller
         $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
-        return view('tambah_rekam_medis', [
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Tambah Rekam Medis',
+                'side_active'   => 'pasien'
+            ],
             'pasien' => $pasien,
             'tindakan' => $tindakan,
             'dokter' => $dokter
-        ]);
+        ];
+
+        return view('tambah_rekam_medis', $result);
     }
 
     /**
@@ -89,11 +95,17 @@ class RekamMedisController extends Controller
         $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
-        return view('edit_rekam_medis')->with([
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Edit Rekam Medis',
+                'side_active'   => 'pasien'
+            ],
             'rekam_medis' => $rekam_medis,
-            'dokter' => $dokter,
-            'tindakan' => $tindakan
-        ]);
+            'tindakan' => $tindakan,
+            'dokter' => $dokter
+        ];
+
+        return view('edit_rekam_medis', $result);
     }
 
     /**

@@ -27,4 +27,9 @@ class Pembayaran extends Model
     {
         return $this->belongsTo('App\Dokter');
     }
+
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

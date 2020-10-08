@@ -126,18 +126,10 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar-overlay" data-reff=""></div>
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-        <script src="assets/js/select2.min.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="assets/js/app.js"></script>
-        <!-- Script modal konfirmasi hapus pasien -->
+        <!-- FOOTER -->
+        @include('_part.footer')
+
+        <!-- Script modal konfirmasi hapus riwayat pembayaran -->
         <script type="text/javascript">
             function deleteData(id) {
                 var id = id;
@@ -151,7 +143,6 @@
             }
         </script>
 </body>
-
 
 <!-- patients23:19-->
 

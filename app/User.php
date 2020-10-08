@@ -50,4 +50,9 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function pembayaran()
+    {
+        return $this->hasOne('App\Pembayaran');
+    }
 }

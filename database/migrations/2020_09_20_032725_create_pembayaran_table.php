@@ -22,6 +22,7 @@ class CreatePembayaranTable extends Migration
             $table->integer('diskon_persen')->nullable();
             $table->integer('diskon_rupiah')->nullable();
             $table->integer('total_biaya');
+            $table->unsignedBigInteger('users_id');
             $table->timestamps();
         });
 
@@ -29,6 +30,7 @@ class CreatePembayaranTable extends Migration
             $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
             $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -43,6 +45,7 @@ class CreatePembayaranTable extends Migration
             $table->dropForeign('pembayaran_rekam_medis_id_foreign');
             $table->dropForeign('pembayaran_pasien_id_foreign');
             $table->dropForeign('pembayaran_dokter_id_foreign');
+            $table->dropForeign('pembayaran_users_id_foreign');
         });
 
         Schema::dropIfExists('pembayaran');
