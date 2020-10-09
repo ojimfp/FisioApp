@@ -25,7 +25,7 @@ class RekamMedisController extends Controller
 
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
+                'title'         => config('app.name') . ' - ' . 'Riwayat Pasien',
                 'side_active'   => 'pembayaran'
             ],
             'pasien' => $pasien,
