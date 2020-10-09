@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="hidden" name="id_pasien" value="{{ $pasien->id }}">
+                                        <input class="form-control" name="id_pasien" value="{{ $pasien->id }}" hidden>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

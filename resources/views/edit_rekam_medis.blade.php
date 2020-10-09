@@ -33,6 +33,11 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="id_pasien" value="{{ $rekam_medis->pasien->id }}" hidden>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Terapis<span class="text-danger">*</span></label>

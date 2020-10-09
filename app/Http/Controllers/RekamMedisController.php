@@ -69,6 +69,8 @@ class RekamMedisController extends Controller
      */
     public function store(Request $request)
     {
+        $pasien = Pasien::findOrFail($request->id_pasien);
+
         $rekam_medis = new RekamMedis;
 
         $rekam_medis->pasien()->associate($request->id_pasien);
@@ -80,7 +82,7 @@ class RekamMedisController extends Controller
 
         $rekam_medis->tindakan()->sync($request->tindakan);
 
-        return redirect()->route('rekam-medis.index');
+        return redirect()->route('rekam-medis.index', $pasien);
     }
 
     /**
@@ -125,7 +127,7 @@ class RekamMedisController extends Controller
         $rekam_medis->tindakan()->sync($request->tindakan);
         $rekam_medis->update();
 
-        return redirect()->route('rekam-medis.index');
+        return redirect()->route('rekam-medis.index', $rekam_medis->pasien->id);
     }
 
     /**
@@ -140,6 +142,6 @@ class RekamMedisController extends Controller
 
         $rekam_medis->delete();
 
-        return redirect()->route('rekam-medis.index');
+        return redirect()->route('rekam-medis.index', $rekam_medis->pasien->id);
     }
 }
