@@ -16,9 +16,9 @@ class CreateJadwalTable extends Migration
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pasien_id');
-            $table->string('umur_pasien');
             $table->unsignedBigInteger('dokter_id');
             $table->string('tgl_tindakan');
+            $table->unsignedBigInteger('shift');
             $table->string('jam_tindakan');
             $table->string('status');
             $table->timestamps();

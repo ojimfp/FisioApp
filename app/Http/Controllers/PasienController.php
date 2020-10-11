@@ -49,12 +49,10 @@ class PasienController extends Controller
             'alamat'            => $request->alamat,
             'kota'              => $request->kota,
             'jenis_kelamin'     => $request->jenis_kelamin,
-            'status_perkawinan' => $request->status_perkawinan,
             'pekerjaan'         => $request->pekerjaan,
             'tempat_lahir'      => $request->tempat_lahir,
             'tgl_lahir'         => $request->tgl_lahir,
             'no_telp'           => $request->no_telp,
-            'email'             => $request->email,
             'alergi_obat'       => $request->alergi_obat,
             'masalah_kulit'     => $request->masalah_kulit,
             'catatan'           => $request->catatan
@@ -86,12 +84,10 @@ class PasienController extends Controller
         $pasien->alamat             = $request->alamat;
         $pasien->kota               = $request->kota;
         $pasien->jenis_kelamin      = $request->jenis_kelamin;
-        $pasien->status_perkawinan  = $request->status_perkawinan;
         $pasien->pekerjaan          = $request->pekerjaan;
         $pasien->tempat_lahir       = $request->tempat_lahir;
         $pasien->tgl_lahir          = $request->tgl_lahir;
         $pasien->no_telp            = $request->no_telp;
-        $pasien->email              = $request->email;
         $pasien->alergi_obat        = $request->alergi_obat;
         $pasien->masalah_kulit      = $request->masalah_kulit;
         $pasien->catatan            = $request->catatan;
@@ -119,10 +115,24 @@ class PasienController extends Controller
                 ->orWhere('nama', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('alamat', 'LIKE', "%" . $keyword . "%")
                 ->get();
+            $result = [
+                'meta' => [
+                    'title'         => config('app.name') . ' - ' . 'List Pasien',
+                    'side_active'   => 'pasien'
+                ],
+                'pasien' => $pasien
+            ];
         } else {
             $pasien = DB::table('pasien')->get();
+            $result = [
+                'meta' => [
+                    'title'         => config('app.name') . ' - ' . 'List Pasien',
+                    'side_active'   => 'pasien'
+                ],
+                'pasien' => $pasien
+            ];
         }
 
-        return view('pasien', ['pasien' => $pasien]);
+        return view('pasien',$result);
     }
 }

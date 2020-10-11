@@ -8,7 +8,7 @@
                     <a href="{{ route('pasien.index') }}"><i class="fa fa-wheelchair"></i> <span>List Pasien</span></a>
                 </li>
                 <li class="{{ $meta['side_active'] == 'dokter' ? 'active' : '' }}">
-                    <a href="{{ route('dokter.index') }}"><i class="fa fa fa-user-md"></i> <span>List Fisioterapis</span></a>
+                    <a href="{{ route('dokter.index') }}"><i class="fa fa fa-user-md"></i> <span>List Karyawan</span></a>
                 </li>
                 <li class="{{ $meta['side_active'] == 'jadwal' ? 'active' : '' }}">
                     <a href="{{ route('jadwal.index') }}"><i class="fa fa-calendar"></i> <span>Jadwal Janji Pasien</span></a>
@@ -30,8 +30,12 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-book"></i> <span> Daftar Gaji </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="salary.html"> Employee Salary </a></li>
-                        {{-- <li><a href="salary-view.html"> Payslip </a></li> --}}
+                        {{-- <li class="{{ $meta['side_active'] == 'gaji' ? 'active' : '' }}">
+                            <a href="{{ route('gaji.index') }}">Gaji Karyawan</a>
+                        </li> --}}
+                        {{-- <li class="{{ $meta['side_active'] == 'slip' ? 'active' : '' }}">
+                            <a href="{{ route('slip.index') }}">Slip Gaji</a>
+                        </li> --}}
                     </ul>
                 </li>
             </ul>

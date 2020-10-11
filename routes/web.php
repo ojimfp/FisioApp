@@ -45,6 +45,10 @@ Route::post('change-password', 'Auth\ChangePasswordController@store')->name('pas
 Route::resource('jadwal', 'JadwalController')->except(['show']);
 Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.datapasien');
 
+Route::resource('gaji', 'GajiController')->except(['index', 'show', 'create']);
+Route::get('gaji/{id}', 'GajiController@index')->name('gaji.index');
+// Route::get('gaji/{id}/create', 'RekamMedisController@create')->name('rekam-medis.create');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

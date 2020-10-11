@@ -39,19 +39,15 @@
                                         <input class="form-control" type="text" name="nama" required value="{{ $pasien->nama }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Umur Pasien<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="umur_pasien" required value="{{ $umur }} tahun" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Nama Dokter<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama_dokter" required value="{{ $dokter->nama_dokter }}" readonly>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Nama Terapis<span class="text-danger">*</span></label>
+                                    <select class="select" name="nama_dokter" required autocomplete="off">
+                                        @foreach($dokter as $d)
+                                        <option value="{{ $d->id }}" @if($d->id == $jadwal->dokter_id) selected @endif>{{ $d->nama_dokter }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -73,6 +69,15 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Shift<span class="text-danger">*</span></label>
+                                        <select class="select" name="shift" required autocomplete="off">
+                                            <option @if ($jadwal->shift == '1') selected @endif value='1'>Pagi</option>
+                                            <option @if ($jadwal->shift == '2') selected @endif value='2'>Siang</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>

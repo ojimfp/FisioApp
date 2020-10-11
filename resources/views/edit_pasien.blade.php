@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label>Status Perkawinan <span class="text-danger">*</span></label>
                                                 <select class="select" name="status_perkawinan" required autocomplete="off">
                                                     <option value="Belum Kawin"  @if ($p->status_perkawinan == 'Belum Kawin') selected @endif>Belum Kawin</option>
@@ -84,14 +84,12 @@
                                                     <option value="Cerai Hidup" @if ($p->status_perkawinan == 'Cerai Hidup') selected @endif>Cerai Hidup</option>
                                                     <option value="Cerai Mati" @if ($p->status_perkawinan == 'Cerai Mati') selected @endif>Cerai Mati</option>
                                                 </select>
+                                            </div> --}}
+                                            <div class="form-group">
+                                                <label>Pekerjaan</label>
+                                            <input class="form-control" type="text" name="pekerjaan" autocomplete="off" value="{{ $p->pekerjaan}}" required>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Pekerjaan</label>
-                                    <input class="form-control" type="text" name="pekerjaan" autocomplete="off" value="{{ $p->pekerjaan}}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -99,7 +97,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tempat Lahir</label>
-                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}}}">
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -118,12 +116,6 @@
                                             <div class="form-group">
                                                 <label>No. Telepon/HP <span class="text-danger">*</span></label>
                                             <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Email <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="email" name="email" required autocomplete="off"  value="{{ $p->email }}">
                                             </div>
                                         </div>
                                     </div>

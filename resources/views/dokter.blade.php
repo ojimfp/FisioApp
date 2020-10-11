@@ -24,20 +24,21 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">List Fisioterapis</h4>
+                        <h4 class="page-title">List Karyawan</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{ route('dokter.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Fisioterapis Baru</a>
+                        <a href="{{ route('dokter.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Karyawan Baru</a>
                     </div>
                 </div>
+                <h9 class="text-danger">cari berdasarkan nama/no hp</h9>
                 <div class="row filter-row">
                     <form action="{{ route('dokter.search') }}" method="GET">
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Cari Fisioterapis</label>
+                                <label class="focus-label">Cari Karyawan</label>
                                 <input type="text" class="form-control floating" name="keyword">
                                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-1 col-12">
-                                    <button class="btn btn-success submit-btn">Cari Fisioterapis</button>
+                                    <button class="btn btn-success submit-btn">Cari Karyawan</button>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +51,9 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nama Fisioterapis</th>
-                                        <th>Spesialisasi</th>
+                                        <th>Nama Karyawan</th>
+                                        <th>No HP</th>
+                                        <th>Gaji Pokok</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
@@ -60,12 +62,13 @@
                                     <tr>
                                         <td>{{ $d->id }}</td>
                                         <td>{{ $d->nama_dokter }}</td>
-                                        <td>{{ $d->spesialisasi }}</td>
+                                        <td>{{ $d->hp }}</td>
+                                        <td>{{ $d->gaji_pokok }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <!-- <a class="dropdown-item" href="riwayat-pasien"><i class="fa fa-history m-r-5"></i> Riwayat Pasien</a> -->
+                                                    <a class="dropdown-item" href="{{ route('gaji.index', $d->id) }}"><i class="fa fa-history m-r-5"></i> Riwayat Gaji</a>
                                                     <a class="dropdown-item" href="{{ route('dokter.edit', ['dokter' => $d->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $d->id }}')" data-target="#delete_dokter"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>

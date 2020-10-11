@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Fisioterapis <span class="text-danger">*</span></label>
+                                        <label>Nama Karyawan <span class="text-danger">*</span></label>
                                         <input class="form-control" type="text" name="nama_dokter" value="{{ $d->nama_dokter }}" required readonly>
                                     </div>
                                 </div>
@@ -44,8 +44,18 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Spesialisasi</label>
-                                                <input type="text" class="form-control" name="spesialisasi" value="{{ $d->spesialisasi }}">
+                                                <label>No HP</label>
+                                                <input type="text" class="form-control" name="hp" value="{{ $d->hp }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gaji Pokok</label>
+                                                <input type="text" class="form-control" name="gaji_pokok" value="{{ $d->gaji_pokok }}">
                                             </div>
                                         </div>
                                     </div>

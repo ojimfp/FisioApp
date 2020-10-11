@@ -75,6 +75,12 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                <label>Pekerjaan</label>
+                                                <input class="form-control" type="text" name="pekerjaan" autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-sm-6">
+                                            <div class="form-group">
                                                 <label>Status Perkawinan <span class="text-danger">*</span></label>
                                                 <select class="select" name="status_perkawinan" required autocomplete="off">
                                                     <option>Select</option>
@@ -84,13 +90,7 @@
                                                     <option value="Cerai Mati">Cerai Mati</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Pekerjaan</label>
-                                        <input class="form-control" type="text" name="pekerjaan" autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -119,12 +119,12 @@
                                                 <input class="form-control" type="tel" name="no_telp" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57" placeholder="08xxxxxxx">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        {{-- <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Email <span class="text-danger">*</span></label>
                                                 <input class="form-control" type="email" name="email" required autocomplete="off">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

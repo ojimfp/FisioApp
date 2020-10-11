@@ -14,15 +14,18 @@ class TerapisSeeder extends Seeder
     {
         Dokter::create([
             'nama_dokter' => 'Healer',
-            'spesialisasi' => 'Penyembuh'
+            'hp' => '08111111',
+            'gaji_pokok' => 40000
         ]);
         Dokter::create([
             'nama_dokter' => 'Neko, S.Kom',
-            'spesialisasi' => 'Pijat Kucing'
+            'hp' => '019919191',
+            'gaji_pokok' => 30000
         ]);
         Dokter::create([
             'nama_dokter' => 'Thor, M.Fis',
-            'spesialisasi' => 'Tukang Setrum'
+            'hp' => '9292292',
+            'gaji_pokok' => 10000
         ]);
     }
 }

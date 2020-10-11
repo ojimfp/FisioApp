@@ -42,8 +42,18 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Spesialisasi</label>
-                                                <input type="text" class="form-control" name="spesialisasi" autocomplete="off">
+                                                <label>No HP</label>
+                                                <input type="text" class="form-control" name="hp" required autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Gaji Pokok</label>
+                                                <input type="text" class="form-control" name="gaji_pokok" required autocomplete="off">
                                             </div>
                                         </div>
                                     </div>

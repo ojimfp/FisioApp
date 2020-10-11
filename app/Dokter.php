@@ -22,4 +22,9 @@ class Dokter extends Model
     {
         return $this->hasMany('App\Pembayaran');
     }
+
+    public function gaji()
+    {
+        return $this->hasMany('App\Gaji');
+    }
 }

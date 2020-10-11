@@ -21,7 +21,9 @@ class JadwalController extends Controller
     {
         $pasien = Pasien::all();
         $dokter = Dokter::all();
-        $jadwal = Jadwal::all();
+        // $jadwal = Jadwal::all();
+        $jadwal_pg = Jadwal::all()->where('shift', '1');
+        $jadwal_sg = Jadwal::all()->where('shift', '2');
         $today = new DateTime('today');
 
         $result = [
@@ -29,7 +31,8 @@ class JadwalController extends Controller
                 'title'         => config('app.name').' - '.'List Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
-            'jadwal' => $jadwal,
+            'jadwal_pg' => $jadwal_pg,
+            'jadwal_sg' => $jadwal_sg,
             'pasien' => $pasien,
             'dokter' => $dokter,
             'today' => $today
@@ -56,22 +59,13 @@ class JadwalController extends Controller
     // Menyimpan data ke dalam table jadwal
     public function store(Request $request)
     {
-        // DB::table('jadwal')->insert([
-        //     'pasien_id' => $request->pasien_id,
-        //     'umur_pasien' => $request->umur_pasien,
-        //     'dokter_id' => $request->dokter_id,
-        //     'tgl_tindakan' => $request->tgl_tindakan,
-        //     'jam_tindakan' => $request->jam_tindakan,
-        //     'status' => $request->status,
-        //     // 'ket_status' => $request->ket_status
-        // ]);
 
         $jadwal = new Jadwal;
 
         $jadwal->pasien()->associate($request->pasien_id);
         $jadwal->dokter()->associate($request->dokter_id);
-        $jadwal->umur_pasien = $request->umur_pasien;
         $jadwal->tgl_tindakan = $request->tgl_tindakan;
+        $jadwal->shift = $request->shift;
         $jadwal->jam_tindakan = $request->jam_tindakan;
         $jadwal->status = $request->status;
         $jadwal->save();
@@ -94,7 +88,7 @@ class JadwalController extends Controller
     public function edit($id)
     {
         $jadwal = Jadwal::findOrFail($id);
-        $dokter = Dokter::findOrFail($jadwal->dokter_id);
+        $dokter = Dokter::all();
         $pasien = Pasien::findOrFail($jadwal->pasien_id);
         $today = new DateTime('today');
         $tgl = new DateTime($pasien->tgl_lahir);
@@ -115,19 +109,28 @@ class JadwalController extends Controller
     }
 
     // Update jadwal yg sudah di-edit
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('jadwal')->where('id', $request->id)->update([
-            'pasien_id' => $request->pasien_id,
-            'umur_pasien' => $request->umur_pasien,
-            'dokter_id' => $request->dokter_id,
-            'tgl_tindakan' => $request->tgl_tindakan,
-            'jam_tindakan' => $request->jam_tindakan,
-            'status' => $request->status,
-            // 'ket_status' => $request->ket_status
-        ]);
+        // DB::table('jadwal')->where('id', $request->id)->update([
+        //     'pasien_id' => $request->pasien_id,
+        //     'dokter_id' => $request->dokter_id,
+        //     'tgl_tindakan' => $request->tgl_tindakan,
+        //     'shift' => $request->shift,
+        //     'jam_tindakan' => $request->jam_tindakan,
+        //     'status' => $request->status
+        // ]);
 
-        return redirect()->route('jadwal.index');
+        // return redirect()->route('jadwal.index');
+        $jadwal = Jadwal::findOrFail($id);
+
+        $jadwal->dokter()->associate($request->nama_dokter);
+        $jadwal->tgl_tindakan = $request->tgl_tindakan;
+        $jadwal->shift = $request->shift;
+        $jadwal->jam_tindakan = $request->jam_tindakan;
+        $jadwal->status = $request->status;
+        $jadwal->update();
+
+        return redirect()->route('jadwal.index', $jadwal->pasien->id);
     }
 
     //Menghapus data jadwal

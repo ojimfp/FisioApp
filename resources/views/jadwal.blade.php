@@ -30,275 +30,138 @@
                         <a href="{{ route('jadwal.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Jadwal</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nama Pasien</th>
-                                        <th>Umur Pasien</th>
-                                        <th>Nama Fisioterapis</th>
-                                        <th>Tanggal Tindakan</th>
-                                        <th>Jam Tindakan</th>
-                                        <th>Status</th>
-                                        <th class="text-right">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($jadwal as $j)
-                                    <tr>
-                                        <td>{{ sprintf('%04d', $j->id) }}</td>
-                                        <td>{{ implode($j->pasien()->get()->pluck('nama')->toArray()) }}</td>
-                                        <td>{{ $today->diff(new DateTime(implode($j->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
-                                        <td>{{ implode($j->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
-                                        <td>{{ $j->tgl_tindakan }}</td>
-                                        <td>{{ $j->jam_tindakan }}</td>
-                                        <td>{{ $j->status }}</td>
-                                        <td class="text-right">
-                                            <div class="dropdown dropdown-action">
-                                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $j->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $j->id }}')" data-target="#delete_jadwal"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="notification-box">
-                <div class="msg-sidebar notifications msg-noti">
-                    <div class="topnav-dropdown-header">
-                        <span>Messages</span>
-                    </div>
-                    <div class="drop-scroll msg-list-scroll" id="msg_list">
-                        <ul class="list-box">
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Richard Miles </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
+                <div class="profile-tabs">
+                    <ul class="nav nav-tabs nav-tabs-bottom">
+                        <li class="nav-item"><a class="nav-link active" href="#pagi" data-toggle="tab">Pagi</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#siang" data-toggle="tab">Siang</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="pagi">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-border table-striped custom-table datatable mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nama Pasien</th>
+                                                    <th>Umur Pasien</th>
+                                                    <th>Nama Fisioterapis</th>
+                                                    <th>Tanggal Tindakan</th>
+                                                    <th>Jam Tindakan</th>
+                                                    <th>Status</th>
+                                                    <th class="text-right">Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($jadwal_pg as $pg)
+                                                <tr>
+                                                    <td>{{ sprintf('%04d', $pg->id) }}</td>
+                                                    <td>{{ implode($pg->pasien()->get()->pluck('nama')->toArray()) }}</td>
+                                                    <td>{{ $today->diff(new DateTime(implode($pg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
+                                                    <td>{{ implode($pg->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
+                                                    <td>{{ $pg->tgl_tindakan }}</td>
+                                                    <td>{{ $pg->jam_tindakan }}</td>
+                                                    <td>{{ $pg->status }}</td>
+                                                    <td class="text-right">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $pg->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $pg->id }}')" data-target="#delete_pg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item new-message">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">John Doe</span>
-                                            <span class="message-time">1 Aug</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Tarah Shropshire </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Mike Litorus</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Catherine Manseau </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">D</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Domenic Houston </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">B</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Buster Wigton </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">R</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Rolland Webber </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">C</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"> Claire Mapes </span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">M</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Melita Faucher</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">J</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Jeffery Lalor</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">L</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Loren Gatlin</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author">Tarah Shropshire</span>
-                                            <span class="message-time">12:28 AM</span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="topnav-dropdown-footer">
-                        <a href="chat.html">See all messages</a>
-                    </div>
-                </div>
-            </div>
-            <div id="delete_jadwal" class="modal fade delete-modal" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form action="" id="deleteForm" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body text-center">
-                            <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
-                            <h3>Apakah Anda yakin ingin menghapus pasien ini?</h3>
-                            <div class="m-t-20">
-                                <button class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                        <div id="delete_pg" class="modal fade delete-modal" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form action="" id="deleteForm_pg" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="modal-body text-center">
+                                            <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
+                                            <h3>Apakah Anda yakin ingin menghapus jadwal ini?</h3>
+                                            <div class="m-t-20">
+                                                <button class="btn btn-white" data-dismiss="modal">Tidak</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="siang">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-border table-striped custom-table datatable mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nama Pasien</th>
+                                                    <th>Umur Pasien</th>
+                                                    <th>Nama Fisioterapis</th>
+                                                    <th>Tanggal Tindakan</th>
+                                                    <th>Jam Tindakan</th>
+                                                    <th>Status</th>
+                                                    <th class="text-right">Opsi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($jadwal_sg as $sg)
+                                                <tr>
+                                                    <td>{{ sprintf('%04d', $sg->id) }}</td>
+                                                    <td>{{ implode($sg->pasien()->get()->pluck('nama')->toArray()) }}</td>
+                                                    <td>{{ $today->diff(new DateTime(implode($sg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
+                                                    <td>{{ implode($sg->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
+                                                    <td>{{ $sg->tgl_tindakan }}</td>
+                                                    <td>{{ $sg->jam_tindakan }}</td>
+                                                    <td>{{ $sg->status }}</td>
+                                                    <td class="text-right">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $sg->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $sg->id }}')" data-target="#delete_sg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="delete_sg" class="modal fade delete-modal" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form action="" id="deleteForm_sg" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="modal-body text-center">
+                                            <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
+                                            <h3>Apakah Anda yakin ingin menghapus jadwal ini?</h3>
+                                            <div class="m-t-20">
+                                                <button class="btn btn-white" data-dismiss="modal">Tidak</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
         </div>
     </div>

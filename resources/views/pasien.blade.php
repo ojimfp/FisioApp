@@ -30,6 +30,7 @@
                         <a href="{{ route('pasien.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Pasien Baru</a>
                     </div>
                 </div>
+                <h9 class="text-danger">cari berdasarkan nama/alamat</h9>
                 <div class="row filter-row">
                     <form action="{{ route('pasien.search') }}" method="GET">
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">

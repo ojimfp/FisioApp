@@ -44,7 +44,8 @@ class DokterController extends Controller
     {
         DB::table('dokter')->insert([
             'nama_dokter' => $request->nama_dokter,
-            'spesialisasi' => $request->spesialisasi
+            'hp' => $request->hp,
+            'gaji_pokok' => $request->gaji_pokok
         ]);
 
         return redirect()->route('dokter.index');
@@ -70,7 +71,8 @@ class DokterController extends Controller
         $dokter = Dokter::findOrFail($id);
 
         $dokter->nama_dokter = $request->nama_dokter;
-        $dokter->spesialisasi = $request->spesialisasi;
+        $dokter->hp = $request->hp;
+        $dokter->gaji_pokok = $request->gaji_pokok;
         $dokter->update();
 
         return redirect()->route('dokter.index');
@@ -93,12 +95,26 @@ class DokterController extends Controller
             $dokter = DB::table('dokter')
                 ->where('id', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('nama_dokter', 'LIKE', "%" . $keyword . "%")
-                ->orWhere('spesialisasi', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('hp', 'LIKE', "%" . $keyword . "%")
                 ->get();
+            $result = [
+                'meta' => [
+                    'title'         => config('app.name').' - '.'Ubah Fisioterapis',
+                    'side_active'   => 'dokter'
+                ],
+                'dokter' => $dokter
+            ];
         } else {
             $dokter = DB::table('dokter')->get();
+            $result = [
+                'meta' => [
+                    'title'         => config('app.name').' - '.'Ubah Fisioterapis',
+                    'side_active'   => 'dokter'
+                ],
+                'dokter' => $dokter
+            ];
         }
 
-        return view('dokter', ['dokter' => $dokter]);
+        return view('dokter',$result);
     }
 }
