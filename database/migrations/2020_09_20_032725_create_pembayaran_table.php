@@ -19,6 +19,7 @@ class CreatePembayaranTable extends Migration
             $table->unsignedBigInteger('pasien_id');
             $table->unsignedBigInteger('dokter_id');
             $table->string('tipe_pembayaran');
+            // $table->integer('subtotal');
             $table->integer('diskon_persen')->nullable();
             $table->integer('diskon_rupiah')->nullable();
             $table->integer('total_biaya');

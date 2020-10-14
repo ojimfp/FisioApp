@@ -7,12 +7,6 @@
 <head>
     @include('_part.meta')
     @include('_part.style')
-    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> -->
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -35,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form name="kasir" action="{{ route('pembayaran.update', $pembayaran->id) }}" method="POST">
+                        <form name="kasir" action="{{ route('pembayaran.update.p', $pembayaran->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -97,10 +91,10 @@
                                         <table class="table table-hover table-white">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 20px" hidden>ID Tindakan</th>
-                                                    <th class="col-sm-2">Kode Tindakan</th>
+                                                    <th hidden>ID Tindakan</th>
+                                                    <th class="col-sm-1">Kode Tindakan</th>
                                                     <th class="col-md-8">Nama Tindakan</th>
-                                                    <th>Biaya</th>
+                                                    <th class="col-sm-3">Biaya</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -110,13 +104,18 @@
                                                         <input class=" form-control" type="text" name="tindakan[]" style="min-width:150px" value="{{ $tindakan->id }}" hidden>
                                                     </td>
                                                     <td>
-                                                        <input class=" form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}" readonly>
+                                                        <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}" readonly>
                                                     </td>
                                                     <td>
                                                         <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->nama_tindakan }}" readonly>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control form-amt text-right" type="text" id="harga" name="harga" style="width:150px; padding-right: 16px" value="{{ number_format($tindakan->harga_jual) }}" readonly>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input class="form-control text-right" type="text" id="harga" name="harga" value="{{ number_format($tindakan->harga_jual) }}" style="width:50px; padding-right: 16px" readonly>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -127,32 +126,52 @@
                                         <table class="table table-hover table-white">
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-right">Total Rp</td>
+                                                    <td class="text-right">Total</td>
                                                     <td>
-                                                        <input type="text" class="form-control text-right input" id="total" name="total" jAutoCalc="SUM({harga})">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input type="text" class="form-control text-right input" id="total" name="total" jAutoCalc="SUM({harga})">
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon %</td>
-                                                    <td style="text-align: right; padding-right: 12px;width: 175px">
-                                                        <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" value="{{ $pembayaran->diskon_persen }}">
+                                                    <td class="text-right">Diskon (Rp)</td>
+                                                    <td style="text-align: right; padding-right: 12px;width: 240px">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" value="{{ $pembayaran->diskon_rupiah }}">
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon Rp</td>
-                                                    <td style="text-align: right; padding-right: 12px;width: 175px">
-                                                        <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" value="{{ $pembayaran->diskon_rupiah }}">
+                                                    <td class="text-right">Diskon (%)</td>
+                                                    <td style="text-align: right; padding-right: 12px;width: 240px">
+                                                        <div class="input-group">
+                                                            <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" value="{{ $pembayaran->diskon_persen }}">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">%</span>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="text-align: right; font-weight: bold">Grand Total Rp</td>
-                                                    <td style="text-align: right; padding-right: 12px; width: 175px">
-                                                        <input type="text" class="form-control text-right input" id="grand_total" name="grand_total" style="font-weight: bold" value="{{ $pembayaran->total_biaya }}" readonly>
+                                                    <td style="text-align: right; font-weight: bold">Grand Total</td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input type="text" class="form-control text-right input" id="grand_total" name="grand_total" style="font-weight: bold" value="{{ $pembayaran->total_biaya }}" readonly>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-right">Tipe Pembayaran</td>
-                                                    <td style="text-align: right; padding-right: 12px;width: 175px">
+                                                    <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <select class="select" name="tipe_pembayaran">
                                                             <option {{ $pembayaran->tipe_pembayaran == 'Tunai' ? 'selected' : '' }}>Tunai</option>
                                                             <option {{ $pembayaran->tipe_pembayaran == 'Debit' ? 'selected' : '' }}>Debit</option>

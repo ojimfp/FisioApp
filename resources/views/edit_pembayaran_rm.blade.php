@@ -24,63 +24,63 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Pembayaran untuk Rekam Medis {{ $rekam_medis->id }}</h4>
+                        <h4 class="page-title">Edit Pembayaran untuk Rekam Medis {{ $pembayaran->rekam_medis->id }}</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form name="kasir" action="{{ route('pembayaran.store') }}" method="POST">
+                        <form name="kasir" action="{{ route('pembayaran.update.rm', $pembayaran->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
-                                <input class="form-control" type="text" name="id_rekam_medis" value="{{ $rekam_medis->id }}" hidden>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>No. Registrasi Pasien<span class="text-danger"></span></label>
-                                        <input class="form-control" type="text" name="id_pasien" value="{{ $rekam_medis->pasien->id }}" readonly>
+                                        <input class="form-control" type="text" value="{{ $pembayaran->pasien->id }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Nama Pasien<span class="text-danger"></span></label>
-                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->nama }}" readonly>
+                                        <input class="form-control" type="text" value="{{ $pembayaran->pasien->nama }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->tgl_lahir }}" readonly>
+                                        <input class="form-control" type="text" value="{{ $pembayaran->pasien->tgl_lahir }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>No. Telepon/HP</label>
-                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->no_telp }}" readonly>
+                                        <input class="form-control" type="text" value="{{ $pembayaran->pasien->no_telp }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Alamat Pasien</label>
-                                        <textarea class="form-control" rows="3" readonly>{{ $rekam_medis->pasien->alamat }}</textarea>
+                                        <textarea class="form-control" rows="3" readonly>{{ $pembayaran->pasien->alamat }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Kota</label>
-                                        <input class="form-control" type="text" value="{{ $rekam_medis->pasien->kota }}" readonly>
+                                        <input class="form-control" type="text" value="{{ $pembayaran->pasien->kota }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Nama Terapis</label>
-                                        <input class="form-control" type="text" name="id_terapis" value="{{ $rekam_medis->dokter->id }}" hidden>
-                                        <input class="form-control" type="text" name="nama_terapis" value="{{ $rekam_medis->dokter->nama_dokter }}" readonly>
+                                        <input class="form-control" type="text" name="id_terapis" value="{{ $pembayaran->dokter->id }}" hidden>
+                                        <input class="form-control" type="text" name="nama_terapis" value="{{ $pembayaran->dokter->nama_dokter }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Tanggal Periksa <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" value="{{ $rekam_medis->created_at->format('d/m/Y') }}">
+                                            <input class="form-control datetimepicker" type="text" value="{{ $pembayaran->created_at->format('d/m/Y') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -98,10 +98,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($rekam_medis->tindakan as $tindakan)
+                                                @foreach($pembayaran->tindakan as $tindakan)
                                                 <tr name="harga">
                                                     <td hidden>
-                                                        <input class="form-control" type="text" name="tindakan[]" style="min-width:150px" value="{{ $tindakan->id }}" hidden>
+                                                        <input class=" form-control" type="text" name="tindakan[]" style="min-width:150px" value="{{ $tindakan->id }}" hidden>
                                                     </td>
                                                     <td>
                                                         <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}" readonly>
@@ -137,21 +137,21 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon (Rp) <span class="text-danger">*</span></td>
+                                                    <td class="text-right">Diskon (Rp)</td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" required>
+                                                            <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" value="{{ $pembayaran->diskon_rupiah }}">
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon (%) <span class="text-danger">*</span></td>
+                                                    <td class="text-right">Diskon (%)</td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <div class="input-group">
-                                                            <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" required>
+                                                            <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" value="{{ $pembayaran->diskon_persen }}">
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">%</span>
                                                             </div>
@@ -165,7 +165,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input type="text" class="form-control text-right input" id="grand_total" name="grand_total" style="font-weight: bold" readonly>
+                                                            <input type="text" class="form-control text-right input" id="grand_total" name="grand_total" style="font-weight: bold" value="{{ $pembayaran->total_biaya }}" readonly>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -173,14 +173,14 @@
                                                     <td class="text-right">Tipe Pembayaran</td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <select class="select" name="tipe_pembayaran">
-                                                            <option>-- Pilih tipe pembayaran --</option>
-                                                            <option>Tunai</option>
-                                                            <option>Debit</option>
-                                                            <option>Internet Banking</option>
+                                                            <option {{ $pembayaran->tipe_pembayaran == 'Tunai' ? 'selected' : '' }}>Tunai</option>
+                                                            <option {{ $pembayaran->tipe_pembayaran == 'Debit' ? 'selected' : '' }}>Debit</option>
+                                                            <option {{ $pembayaran->tipe_pembayaran == 'Internet Banking' ? 'selected' : '' }}>Internet Banking</option>
                                                         </select>
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                        </table>
                                         </table>
                                     </div>
                                     <div class="row">
@@ -188,7 +188,6 @@
                                             <div class="form-group">
                                                 <label>Catatan</label>
                                                 <textarea class="form-control"></textarea>
-                                                <input type="text" class="form-control" name="admin" value="{{ Auth::user()->id }}" hidden>
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +195,7 @@
                             </div>
                             <div class="text-center m-t-20">
                                 <!-- <button class="btn btn-grey submit-btn m-r-10">Save & Send</button> -->
-                                <button class="btn btn-primary submit-btn">Bayar</button>
+                                <button class="btn btn-primary submit-btn">Simpan</button>
                             </div>
                         </form>
                     </div>
