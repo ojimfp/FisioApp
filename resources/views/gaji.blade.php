@@ -84,13 +84,16 @@
                             <table class="table table-striped custom-table datatable">
                                 <thead>
                                     <tr>
-                                        <th style="width:25%;">Employee</th>
-                                        <th>Employee ID</th>
-                                        <th>Email</th>
-                                        <th>Joining Date</th>
-                                        <th>Role</th>
-                                        <th>Salary</th>
-                                        <th>Payslip</th>
+                                        <th style="width:25%;">Nama Karyawan</th>
+                                        <th>Bulan</th>
+                                        <th>Hari Kerja</th>
+                                        <th>Hari Masuk</th>
+                                        <th>Gaji Bersih</th>
+                                        <th>Insentif Koordinator</th>
+                                        <th>Insentif Tindakan</th>
+                                        <th>Insentif Exercise</th>
+                                        <th>Insentif Minggu</th>
+                                        <th>Bonus</th>
                                         <th class="text-right">Action</th>
                                     </tr>
                                 </thead>

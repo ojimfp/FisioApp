@@ -16,12 +16,14 @@ class GajiController extends Controller
     public function index($id)
     {
         $dokter = Dokter::findOrFail($id);
+        // $gaji = Gaji::all()->where('dokter_id', $id);
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'Gaji Karyawan',
                 'side_active'   => 'gaji'
             ],
             'dokter' => $dokter
+            // 'gaji' => $gaji
         ];
         return view('gaji', $result);
     }
