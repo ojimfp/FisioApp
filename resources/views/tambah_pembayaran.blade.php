@@ -35,13 +35,13 @@
                                 <input class="form-control" type="text" name="id_rekam_medis" value="{{ $rekam_medis->id }}" hidden>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label>No. Registrasi Pasien<span class="text-danger"></span></label>
+                                        <label>No. Registrasi Pasien<span class="text-danger">*</span></label>
                                         <input class="form-control" type="text" name="id_pasien" value="{{ $rekam_medis->pasien->id }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label>Nama Pasien<span class="text-danger"></span></label>
+                                        <label>Nama Pasien<span class="text-danger">*</span></label>
                                         <input class="form-control" type="text" value="{{ $rekam_medis->pasien->nama }}" readonly>
                                     </div>
                                 </div>

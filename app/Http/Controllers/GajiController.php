@@ -31,21 +31,20 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $dokter = Dokter::all();
+        $dokter = Dokter::findOrFail($id);
+        // $gaji = Gaji::all();
 
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Tambah Rekam Medis',
                 'side_active'   => 'pasien'
             ],
-            'pasien' => $pasien,
-            'tindakan' => $tindakan,
             'dokter' => $dokter
         ];
 
-        return view('tambah_rekam_medis', $result);
+        return view('tambah_gaji', $result);
     }
 
     /**
