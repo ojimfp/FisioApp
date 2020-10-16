@@ -1,16 +1,18 @@
-// setup jautocalc untuk menghitung total pembayaran (sebelum diskon)
-function autoCalcSetup() {
-    $("form[name=kasir] tr[name=harga]").jAutoCalc({
-        keyEventsFire: true,
-        decimalPlaces: -1
-    });
+// $.fn.digits = function() {
+//     return this.each(function() {
+//         $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//     })
+// }
 
-    $("form[name=kasir]").jAutoCalc({
-        decimalPlaces: -1
-    });
-}
-
-autoCalcSetup();
+// menghitung subtotal (sebelum diskon)
+var sum = 0;
+$('.harga').each(function() {
+    var num = $(this).val();
+    if (num != 0) {
+        sum += parseInt(num);
+    }
+});
+$('#total').val(sum);
 
 // menghitung grand total pembayaran (sesudah diskon)
 $(".input").on("input", function() {
