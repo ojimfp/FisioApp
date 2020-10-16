@@ -66,7 +66,7 @@ class PembayaranController extends Controller
         $pembayaran->rekam_medis()->associate($request->id_rekam_medis);
         $pembayaran->pasien()->associate($request->id_pasien);
         $pembayaran->dokter()->associate($request->id_terapis);
-        // $pembayaran->subtotal = $request->total;
+        $pembayaran->subtotal = $request->total;
         $pembayaran->diskon_persen = $request->diskon_persen;
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
@@ -76,7 +76,7 @@ class PembayaranController extends Controller
 
         $pembayaran->tindakan()->sync($request->tindakan);
 
-        return redirect()->route('rekam-medis.index', $pasien);
+        return redirect()->route('invoice', $pembayaran->id);
     }
 
     /**

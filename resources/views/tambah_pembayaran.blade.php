@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form name="kasir" action="{{ route('pembayaran.store') }}" method="POST">
+                        <form action="{{ route('pembayaran.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <input class="form-control" type="text" name="id_rekam_medis" value="{{ $rekam_medis->id }}" hidden>
@@ -99,7 +99,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($rekam_medis->tindakan as $tindakan)
-                                                <tr name="harga">
+                                                <tr>
                                                     <td hidden>
                                                         <input class="form-control" type="text" name="tindakan[]" style="min-width:150px" value="{{ $tindakan->id }}" hidden>
                                                     </td>
@@ -114,7 +114,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input class="form-control text-right" type="text" id="harga" name="harga" value="{{ number_format($tindakan->harga_jual) }}" style="width:50px; padding-right: 16px" readonly>
+                                                            <input class="form-control text-right harga" type="text" id="harga" name="harga" value="{{ $tindakan->harga_jual }}" style="width:50px; padding-right: 16px" readonly>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -132,7 +132,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input type="text" class="form-control text-right input" id="total" name="total" jAutoCalc="SUM({harga})">
+                                                            <input type="text" class="form-control text-right input" id="total" name="total" readonly>
                                                         </div>
                                                     </td>
                                                 </tr>

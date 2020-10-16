@@ -28,8 +28,7 @@
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white">CSV</button>
-                            <button class="btn btn-white">PDF</button>
+                            <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
                             <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
                         </div>
                     </div>
@@ -60,7 +59,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-lg-6 m-b-20">
-
                                         <h5>Invoice untuk:</h5>
                                         <ul class="list-unstyled">
                                             <li>
@@ -125,11 +123,11 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th>Subtotal:</th>
-                                                                <td class="text-right">Rp {{ $pembayaran->subtotal }}</td>
+                                                                <td class="text-right">Rp {{ number_format($pembayaran->subtotal) }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Diskon (Rp)</th>
-                                                                <td class="text-right">Rp {{ $pembayaran->diskon_rupiah }}</td>
+                                                                <td class="text-right">Rp {{ number_format($pembayaran->diskon_rupiah) }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Diskon (%)</th>
@@ -150,6 +148,7 @@
                                     <div class="invoice-info">
                                         <h5>Other information</h5>
                                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero, eu finibus sapien interdum vel</p>
+                                        <h5 class="text-center">-- Kasir: {{ $pembayaran->users->name }} --</h5>
                                     </div>
                                 </div>
                             </div>
