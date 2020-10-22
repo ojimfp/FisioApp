@@ -54,7 +54,7 @@ Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.dat
 
 Route::resource('gaji', 'GajiController')->except(['index', 'show', 'create']);
 Route::get('gaji/{id}', 'GajiController@index')->name('gaji.index');
-// Route::get('gaji/{id}/create', 'RekamMedisController@create')->name('rekam-medis.create');
+Route::get('gaji/{id}/create', 'GajiController@create')->name('gaji.create');
 
 Auth::routes();
 

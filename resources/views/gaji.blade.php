@@ -24,7 +24,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-5">
-                        <h4 class="page-title">Gaji Karyawan</h4>
+                        <h4 class="page-title">Gaji Karyawan {{ $dokter->nama_dokter }}</h4>
                     </div>
                     <div class="col-sm-8 col-7 text-right m-b-30">
                         <a href="{{ route('gaji.create', $dokter->id) }}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Masukkan Gaji</a>
@@ -84,13 +84,16 @@
                             <table class="table table-striped custom-table datatable">
                                 <thead>
                                     <tr>
-                                        <th style="width:25%;">Employee</th>
-                                        <th>Employee ID</th>
-                                        <th>Email</th>
-                                        <th>Joining Date</th>
-                                        <th>Role</th>
-                                        <th>Salary</th>
-                                        <th>Payslip</th>
+                                        <th style="width:25%;">Nama Karyawan</th>
+                                        <th>Bulan</th>
+                                        <th>Hari Kerja</th>
+                                        <th>Hari Masuk</th>
+                                        <th>Gaji Bersih</th>
+                                        <th>Insentif Koordinator</th>
+                                        <th>Insentif Tindakan</th>
+                                        <th>Insentif Exercise</th>
+                                        <th>Insentif Minggu</th>
+                                        <th>Bonus</th>
                                         <th class="text-right">Action</th>
                                     </tr>
                                 </thead>

@@ -16,12 +16,14 @@ class GajiController extends Controller
     public function index($id)
     {
         $dokter = Dokter::findOrFail($id);
+        // $gaji = Gaji::all()->where('dokter_id', $id);
         $result = [
             'meta' => [
                 'title'         => config('app.name').' - '.'Gaji Karyawan',
                 'side_active'   => 'gaji'
             ],
             'dokter' => $dokter
+            // 'gaji' => $gaji
         ];
         return view('gaji', $result);
     }
@@ -31,21 +33,20 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $dokter = Dokter::all();
+        $dokter = Dokter::findOrFail($id);
+        // $gaji = Gaji::all();
 
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Tambah Rekam Medis',
                 'side_active'   => 'pasien'
             ],
-            'pasien' => $pasien,
-            'tindakan' => $tindakan,
             'dokter' => $dokter
         ];
 
-        return view('tambah_rekam_medis', $result);
+        return view('tambah_gaji', $result);
     }
 
     /**
