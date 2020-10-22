@@ -26,41 +26,29 @@
                     <div class="col-sm-5 col-4">
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
-                    <!-- <div class="col-sm-7 col-8 text-right m-b-30">
-                        <a href="create-invoice.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i>Tambah Pembayaran</a>
-                    </div> -->
                 </div>
                 <div class="row filter-row">
-                    <div class="col-sm-6 col-md-3">
-                        <div class="form-group form-focus">
-                            <label class="focus-label">Dari</label>
-                            <div class="cal-icon">
-                                <input class="form-control floating datetimepicker" type="text">
+                    <form action="{{ route('pembayaran.search') }}" method="GET">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
+                            <div class="form-group form-focus">
+                                <label class="focus-label">Dari...</label>
+                                <div class="cal-icon">
+                                    <input class="form-control floating datetimepicker" type="text" name="start_date">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="form-group form-focus">
-                            <label class="focus-label">Sampai</label>
-                            <div class="cal-icon">
-                                <input class="form-control floating datetimepicker" type="text">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
+                            <div class="form-group form-focus">
+                                <label class="focus-label">Sampai...</label>
+                                <div class="cal-icon">
+                                    <input class="form-control floating datetimepicker" type="text" name="end_date">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="form-group form-focus select-focus">
-                            <label class="focus-label">Status</label>
-                            <select class="select floating">
-                                <option>Pilih Status</option>
-                                <option>Ditunda</option>
-                                <option>Dibayar</option>
-                                <option>Diangsur</option>
-                            </select>
+                        <div class="col-sm-6 col-md-4" style="float: left;">
+                            <button class="btn btn-success submit-btn">Cari Pembayaran</button>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="#" class="btn btn-success btn-block"> Cari </a>
-                    </div>
+                    </form>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -85,7 +73,7 @@
                                         <td>{{ $bayar->created_at->format('d/m/Y H:i') }}</td>
                                         <td>{{ $bayar->pasien->nama }}</td>
                                         <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
-                                        <td>Rp {{ $bayar->total_biaya }}</td>
+                                        <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                         <td>{{ $bayar->tipe_pembayaran }}</td>
                                         <td>{{ $bayar->dokter->nama_dokter }}</td>
                                         <td class="text-right">

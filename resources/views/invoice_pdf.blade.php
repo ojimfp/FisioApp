@@ -15,23 +15,11 @@
 
 <body>
     <div class="main-wrapper">
-        <!-- HEADER -->
-        @include('_part.header')
-        <!-- SIDEBAR -->
-        @include('_part.sidebar')
-        <!-- END SIDEBAR -->
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-5 col-4">
                         <h4 class="page-title">Invoice</h4>
-                    </div>
-                    <div class="col-sm-7 col-8 text-right m-b-30">
-                        <a href="{{ route('invoice.download', $pembayaran->id) }}">Unduh PDF</a>
-                        <!-- <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
-                            <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
-                        </div> -->
                     </div>
                 </div>
                 <div class="row">
@@ -160,7 +148,6 @@
         </div>
     </div>
     <!-- FOOTER -->
-    @include('_part.footer')
 </body>
 
 

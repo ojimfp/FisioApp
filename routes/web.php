@@ -39,7 +39,9 @@ Route::put('pembayaran/update-p/{id}', 'PembayaranController@updateFromPembayara
 Route::put('pembayaran/update-rm/{id}', 'PembayaranController@updateFromRekamMedis')->name('pembayaran.update.rm');
 Route::delete('pembayaran/delete-p/{id}', 'PembayaranController@destroyFromPembayaran')->name('pembayaran.destroy.p');
 Route::delete('pembayaran/delete-rm/{id}', 'PembayaranController@destroyFromRekamMedis')->name('pembayaran.destroy.rm');
+Route::get('pembayaran/search', 'PembayaranController@search')->name('pembayaran.search');
 Route::get('invoice/{id}', 'PembayaranController@invoice')->name('invoice');
+Route::get('invoice/{id}/download', 'PembayaranController@invoicePDF')->name('invoice.download');
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');

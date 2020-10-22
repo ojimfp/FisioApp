@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pembayaran;
 use App\RekamMedis;
 use App\Pasien;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
@@ -191,6 +192,25 @@ class PembayaranController extends Controller
         return redirect()->route('rekam-medis.index', $pembayaran->pasien->id);
     }
 
+    public function search(Request $request)
+    {
+        $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+        $start_date = $start_date->format('Y-m-d');
+        $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+        $end_date = $end_date->format('Y-m-d');
+
+        $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Pembayaran',
+                'side_active'   => 'pembayaran'
+            ],
+            'pembayaran' => $pembayaran
+        ];
+
+        return view('pembayaran', $result);
+    }
+
     public function invoice($id)
     {
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
@@ -203,5 +223,20 @@ class PembayaranController extends Controller
         ];
 
         return view('invoice', $result);
+    }
+
+    public static function invoicePDF($id)
+    {
+        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        // $result = [
+        //     'meta' => [
+        //         'title'         => config('app.name') . ' - ' . 'Download invoice'
+        //     ],
+        //     'pembayaran' => $pembayaran
+        // ];
+
+        $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
+        return $pdf->download('invoice.pdf');
+        // return view('invoice', $result);
     }
 }
