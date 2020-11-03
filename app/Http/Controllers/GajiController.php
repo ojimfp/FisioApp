@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Gaji;
 use App\Dokter;
+use App\Pembayaran;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class GajiController extends Controller
@@ -19,7 +21,7 @@ class GajiController extends Controller
         // $gaji = Gaji::all()->where('dokter_id', $id);
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Gaji Karyawan',
+                'title'         => config('app.name') . ' - ' . 'Gaji Karyawan',
                 'side_active'   => 'gaji'
             ],
             'dokter' => $dokter
@@ -36,14 +38,28 @@ class GajiController extends Controller
     public function create($id)
     {
         $dokter = Dokter::findOrFail($id);
-        // $gaji = Gaji::all();
+        $hari_masuk = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')->count('dokter_id');
+        $total_tindakan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')->sum('total_biaya');
+        $total_exercise = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+            ->whereHas('tindakan', function ($q) {
+                $q->where('nama_tindakan', 'LIKE', '%Exercise%');
+            })->sum('total_biaya');
+        $total_minggu = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+            ->whereRaw('WEEKDAY(pembayaran.created_at) = 6')->sum('total_biaya');
+        $jml_karyawan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+            ->whereRaw('WEEKDAY(pembayaran.created_at) = 6')->count('dokter_id');
 
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Tambah Rekam Medis',
+                'title'         => config('app.name') . ' - ' . 'Tambah Gaji',
                 'side_active'   => 'pasien'
             ],
-            'dokter' => $dokter
+            'dokter' => $dokter,
+            'hari_masuk' => $hari_masuk,
+            'total_tindakan' => $total_tindakan,
+            'total_exercise' => $total_exercise,
+            'total_minggu' => $total_minggu,
+            'jml_karyawan' => $jml_karyawan
         ];
 
         return view('tambah_gaji', $result);

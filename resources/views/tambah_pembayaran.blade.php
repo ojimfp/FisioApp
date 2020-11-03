@@ -207,8 +207,7 @@
     <!-- FOOTER -->
     @include('_part.footer')
 
-    <script src="{{ asset('assets/js/jautocalc.min.js') }}"></script>
-    <script src="{{ asset('assets/js/calc.js') }}"></script>
+    <script src="{{ asset('assets/js/pembayaran.js') }}"></script>
 </body>
 
 

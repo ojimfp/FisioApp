@@ -96,7 +96,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="{{ route('pembayaran.create', $rm->id) }}"><i class="fa fa-money m-r-5"></i> Tambah Pembayaran</a>
                                                                 <a class="dropdown-item" href="{{ route('rekam-medis.edit', $rm->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $rm->id }}')" data-target="#delete_rm"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteDataRM('{{ $rm->id }}')" data-target="#delete_rm"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -119,7 +119,7 @@
                                             <h3>Apakah Anda yakin ingin menghapus rekam medis ini?</h3>
                                             <div class="m-t-20">
                                                 <button class="btn btn-white" data-dismiss="modal">Tidak</button>
-                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmitRM()">Hapus</button>
                                             </div>
                                         </div>
                                     </form>
@@ -158,7 +158,7 @@
                                                                 <a class="dropdown-item" href="{{ route('pembayaran.edit.rm', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                                 <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> View</a>
                                                                 <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
-                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_invoice"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteDataP('{{ $bayar->id }}')" data-target="#delete_invoice"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -181,7 +181,7 @@
                                             <h3>Apakah Anda yakin ingin menghapus riwayat pembayaran ini?</h3>
                                             <div class="m-t-20">
                                                 <button class="btn btn-white" data-dismiss="modal">Tidak</button>
-                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmitP()">Hapus</button>
                                             </div>
                                         </div>
                                     </form>
@@ -197,28 +197,28 @@
 
         <!-- Script modal konfirmasi hapus rekam medis -->
         <script type="text/javascript">
-            function deleteData(id) {
+            function deleteDataRM(id) {
                 var id = id;
                 var url = '{{ route("rekam-medis.destroy", ":id") }}';
                 url = url.replace(':id', id);
                 $("#deleteForm_rm").attr('action', url);
             }
 
-            function formSubmit() {
+            function formSubmitRM() {
                 $("#deleteForm_rm").submit();
             }
         </script>
 
         <!-- Script modal konfirmasi hapus riwayat pembayaran -->
         <script type="text/javascript">
-            function deleteData(id) {
+            function deleteDataP(id) {
                 var id = id;
                 var url = '{{ route("pembayaran.destroy.rm", ":id") }}';
                 url = url.replace(':id', id);
                 $("#deleteForm_inv").attr('action', url);
             }
 
-            function formSubmit() {
+            function formSubmitP() {
                 $("#deleteForm_inv").submit();
             }
         </script>
