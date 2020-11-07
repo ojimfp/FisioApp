@@ -7,6 +7,7 @@ use App\Dokter;
 use App\Pembayaran;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class GajiController extends Controller
 {
@@ -38,15 +39,18 @@ class GajiController extends Controller
     public function create($id)
     {
         $dokter = Dokter::findOrFail($id);
-        $hari_masuk = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')->count('dokter_id');
-        $total_tindakan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')->sum('total_biaya');
-        $total_exercise = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+        $hari_masuk = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->month)->count('dokter_id');
+        $total_tindakan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->month)
+            ->whereHas('tindakan', function ($qy) {
+                $qy->where('nama_tindakan', 'NOT LIKE', '%Exercise%');
+            })->sum('total_biaya');
+        $total_exercise = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->month)
             ->whereHas('tindakan', function ($q) {
                 $q->where('nama_tindakan', 'LIKE', '%Exercise%');
             })->sum('total_biaya');
-        $total_minggu = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+        $total_minggu = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->month)
             ->whereRaw('WEEKDAY(pembayaran.created_at) = 6')->sum('total_biaya');
-        $jml_karyawan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', '11')
+        $jml_karyawan = Pembayaran::whereMonth('created_at', Carbon::now()->month)
             ->whereRaw('WEEKDAY(pembayaran.created_at) = 6')->count('dokter_id');
 
         $result = [

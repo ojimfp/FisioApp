@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" id="dynamic_field">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Biaya Tindakan Minggu</label>
@@ -205,6 +205,11 @@
                                             </div>
                                             <input class="form-control" id="ins_minggu" type="text" name="ins_minggu" value="">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="text-right">
+                                        <button class="btn btn-primary btn-sm" id="add" name="add">Tambah Biaya Minggu</button>
                                     </div>
                                 </div>
                             </div>
@@ -262,15 +267,10 @@
 
             var z = parseInt(document.getElementById("biaya_minggu").value);
             var a = parseInt(document.getElementById("jml_karyawan").value);
-            document.getElementById("ins_minggu").value = z * 0.5 / a;
+            document.getElementById("ins_minggu").value = parseInt(z * 0.5 / a) || 0;
         }
     </script>
     <script>
-        var count = 1;
-
-        function dynamic_field(number) {
-
-        }
     </script>
     <script src="{{ asset('assets/js/gaji.js') }}"></script>
 </body>
