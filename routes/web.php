@@ -40,6 +40,7 @@ Route::put('pembayaran/update-rm/{id}', 'PembayaranController@updateFromRekamMed
 Route::delete('pembayaran/delete-p/{id}', 'PembayaranController@destroyFromPembayaran')->name('pembayaran.destroy.p');
 Route::delete('pembayaran/delete-rm/{id}', 'PembayaranController@destroyFromRekamMedis')->name('pembayaran.destroy.rm');
 Route::get('pembayaran/search', 'PembayaranController@search')->name('pembayaran.search');
+Route::get('pembayaran/download', 'PembayaranController@download')->name('pembayaran.download');
 Route::get('invoice/{id}', 'PembayaranController@invoice')->name('invoice');
 Route::get('invoice/{id}/download', 'PembayaranController@invoicePDF')->name('invoice.download');
 

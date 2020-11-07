@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Pembayaran;
 use App\RekamMedis;
 use App\Pasien;
-use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
+use PDF;
+use View;
 
 class PembayaranController extends Controller
 {
@@ -210,6 +211,17 @@ class PembayaranController extends Controller
 
         return view('pembayaran', $result);
     }
+    public static function download()
+    {
+        $pembayaran = Pembayaran::all();
+        $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
+        return $pdf->stream();
+        // return $pdf->download('invoice_pdf');
+
+        // $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
+        // return $pdf->download('invoice.pdf');
+        // return view('invoice', $result);
+    }
 
     public function invoice($id)
     {
@@ -228,15 +240,17 @@ class PembayaranController extends Controller
     public static function invoicePDF($id)
     {
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        // $result = [
-        //     'meta' => [
-        //         'title'         => config('app.name') . ' - ' . 'Download invoice'
-        //     ],
-        //     'pembayaran' => $pembayaran
-        // ];
+        $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','potrait');
+        return $pdf->stream();
+        // return $pdf->download('invoice_pdf');
 
-        $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
-        return $pdf->download('invoice.pdf');
+        // $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
+        // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
+    }
+    public static function invoicesee($id)
+    {
+        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
     }
 }
