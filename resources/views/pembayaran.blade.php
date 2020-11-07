@@ -26,6 +26,13 @@
                     <div class="col-sm-5 col-4">
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
+                    <div class="col-sm-7 col-8 text-right m-b-30">
+                        <a href="{{ route('pembayaran.download') }}">Unduh PDF</a>
+                        <!-- <div class="btn-group btn-group-sm">
+                            <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
+                            <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
+                        </div> -->
+                    </div>
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('pembayaran.search') }}" method="GET">
@@ -82,7 +89,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" href="{{ route('pembayaran.edit.p', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> View</a>
-                                                    <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
+                                                    <a class="dropdown-item" href="{{ route('invoice.download', $bayar->id) }}"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_inv"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                 </div>
                                             </div>
