@@ -16,15 +16,19 @@ class CreateGajiTable extends Migration
         Schema::create('gaji', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('dokter_id');
-            $table->string('bulan');
             $table->integer('hari_kerja');
             $table->integer('hari_masuk');
             $table->integer('gaji_bersih');
-            $table->integer('uang_koor')->nullable();
+            $table->integer('ins_koor')->nullable();
             $table->integer('ins_tindakan')->nullable();
             $table->integer('ins_exe')->nullable();
-            $table->integer('ins_minggu')->nullable();
+            $table->integer('ins_minggu_satu')->nullable();
+            $table->integer('ins_minggu_dua')->nullable();
+            $table->integer('ins_minggu_tiga')->nullable();
+            $table->integer('ins_minggu_empat')->nullable();
+            $table->integer('ins_minggu_lima')->nullable();
             $table->integer('bonus')->nullable();
+            $table->integer('total_gaji');
             $table->timestamps();
         });
     }

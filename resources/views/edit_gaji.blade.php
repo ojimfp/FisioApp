@@ -25,30 +25,23 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Tambah Gaji a.n. {{ $dokter->nama_dokter }}</h4>
+                        <h4 class="page-title">Tambah Gaji a.n. {{ $gaji->dokter->nama_dokter }}</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form action="{{ route('gaji.store') }}" method="POST">
+                        <form action="{{ route('gaji.update', $gaji->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
-                                <input class="form-control" type="text" name="dokter_id" value="{{ $dokter->id }}" hidden>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Gaji Pokok</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="{{ $dokter->gaji_pokok }}" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="m-t-30">
-                                            <button type="button" class="btn btn-primary btn-lg" onclick="myFunction()">Hitung Gaji Bulan Lalu</button>
+                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="{{ $gaji->dokter->gaji_pokok }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -57,13 +50,13 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Hari Kerja<span class="text-danger"> *</span></label>
-                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" required autocomplete="off">
+                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" value="{{ $gaji->hari_kerja }}" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Hari Masuk</label>
-                                        <input class="form-control hari" id="hari_masuk" type="text" name="hari_masuk" autocomplete="off">
+                                        <input class="form-control hari" id="hari_masuk" type="text" name="hari_masuk" value="{{ $gaji->hari_masuk }}" readonly autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
@@ -73,7 +66,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="gaji_bersih" type="text" name="gaji_bersih" autocomplete="off">
+                                            <input class="form-control hari" id="gaji_bersih" type="text" name="gaji_bersih" value="{{ $gaji->gaji_bersih }}" readonly autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +79,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="">
+                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="{{ $gaji->ins_koor }}">
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +92,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_tindakan" type="text" name="biaya_tindakan" value="">
+                                            <input class="form-control" id="biaya_tindakan" type="text" name="biaya_tindakan" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +112,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_tindakan" type="text" name="ins_tindakan" value="">
+                                            <input class="form-control hari" id="ins_tindakan" type="text" name="ins_tindakan" value="{{ $gaji->ins_tindakan }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +125,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_exe" type="text" name="biaya_exe" value="">
+                                            <input class="form-control" id="biaya_exe" type="text" name="biaya_exe" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +145,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_exe" type="text" name="ins_exe" value="">
+                                            <input class="form-control hari" id="ins_exe" type="text" name="ins_exe" value="{{ $gaji->ins_exe }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +158,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_minggu_satu" type="text" name="biaya_minggu_satu" value="">
+                                            <input class="form-control" id="biaya_minggu_satu" type="text" name="biaya_minggu_satu" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +174,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_satu" type="text" name="jml_karyawan_satu" value="">
+                                        <input class="form-control" id="jml_karyawan_satu" type="text" name="jml_karyawan_satu" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -191,7 +184,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_satu" type="text" name="ins_minggu_satu" value="">
+                                            <input class="form-control hari" id="ins_minggu_satu" type="text" name="ins_minggu_satu" value="{{ $gaji->ins_minggu_satu }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +195,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_minggu_dua" type="text" name="biaya_minggu_dua" value="">
+                                            <input class="form-control" id="biaya_minggu_dua" type="text" name="biaya_minggu_dua" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +211,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_dua" type="text" name="jml_karyawan_dua" value="">
+                                        <input class="form-control" id="jml_karyawan_dua" type="text" name="jml_karyawan_dua" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -228,7 +221,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_dua" type="text" name="ins_minggu_dua" value="">
+                                            <input class="form-control hari" id="ins_minggu_dua" type="text" name="ins_minggu_dua" value="{{ $gaji->ins_minggu_dua }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +232,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_minggu_tiga" type="text" name="biaya_minggu_tiga" value="">
+                                            <input class="form-control" id="biaya_minggu_tiga" type="text" name="biaya_minggu_tiga" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +248,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_tiga" type="text" name="jml_karyawan_tiga" value="">
+                                        <input class="form-control" id="jml_karyawan_tiga" type="text" name="jml_karyawan_tiga" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -265,7 +258,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_tiga" type="text" name="ins_minggu_tiga" value="">
+                                            <input class="form-control hari" id="ins_minggu_tiga" type="text" name="ins_minggu_tiga" value="{{ $gaji->ins_minggu_tiga }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +269,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_minggu_empat" type="text" name="biaya_minggu_empat" value="">
+                                            <input class="form-control" id="biaya_minggu_empat" type="text" name="biaya_minggu_empat" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +285,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_empat" type="text" name="jml_karyawan_empat" value="">
+                                        <input class="form-control" id="jml_karyawan_empat" type="text" name="jml_karyawan_empat" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -302,7 +295,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_empat" type="text" name="ins_minggu_empat" value="">
+                                            <input class="form-control hari" id="ins_minggu_empat" type="text" name="ins_minggu_empat" value="{{ $gaji->ins_minggu_empat }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -313,7 +306,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_minggu_lima" type="text" name="biaya_minggu_lima" value="">
+                                            <input class="form-control" id="biaya_minggu_lima" type="text" name="biaya_minggu_lima" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +322,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_lima" type="text" name="jml_karyawan_lima" value="">
+                                        <input class="form-control" id="jml_karyawan_lima" type="text" name="jml_karyawan_lima" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -339,7 +332,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_lima" type="text" name="ins_minggu_lima" value="">
+                                            <input class="form-control hari" id="ins_minggu_lima" type="text" name="ins_minggu_lima" value="{{ $gaji->ins_minggu_lima }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -352,7 +345,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="bonus" type="text" name="bonus" value="">
+                                            <input class="form-control hari" id="bonus" type="text" name="bonus" value="{{ $gaji->bonus }}" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -365,13 +358,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="total_gaji" type="text" name="total_gaji" value="">
+                                            <input class="form-control hari" id="total_gaji" type="text" name="total_gaji" value="{{ $gaji->total_gaji }}" readonly>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center m-t-20">
-                                <button class="btn btn-primary submit-btn">Tambah</button>
+                                <button class="btn btn-primary submit-btn">Edit Gaji</button>
                             </div>
                         </form>
                     </div>
@@ -381,49 +374,6 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
-    <script>
-        function myFunction() {
-            document.getElementById("hari_masuk").value = <?php echo json_encode($hari_masuk) ?>;
-            document.getElementById("biaya_tindakan").value = <?php echo json_encode($total_tindakan) ?>;
-            document.getElementById("biaya_exe").value = <?php echo json_encode($total_exercise) ?>;
-            document.getElementById("biaya_minggu_satu").value = <?php echo json_encode($total_minggu_satu) ?>;
-            document.getElementById("jml_karyawan_satu").value = <?php echo json_encode($jml_karyawan_satu) ?>;
-            document.getElementById("biaya_minggu_dua").value = <?php echo json_encode($total_minggu_dua) ?>;
-            document.getElementById("jml_karyawan_dua").value = <?php echo json_encode($jml_karyawan_dua) ?>;
-            document.getElementById("biaya_minggu_tiga").value = <?php echo json_encode($total_minggu_tiga) ?>;
-            document.getElementById("jml_karyawan_tiga").value = <?php echo json_encode($jml_karyawan_tiga) ?>;
-            document.getElementById("biaya_minggu_empat").value = <?php echo json_encode($total_minggu_empat) ?>;
-            document.getElementById("jml_karyawan_empat").value = <?php echo json_encode($jml_karyawan_empat) ?>;
-            document.getElementById("biaya_minggu_lima").value = <?php echo json_encode($total_minggu_lima) ?>;
-            document.getElementById("jml_karyawan_lima").value = <?php echo json_encode($jml_karyawan_lima) ?>;
-
-            var bt = parseInt(document.getElementById("biaya_tindakan").value);
-            document.getElementById("ins_tindakan").value = bt * 0.1;
-
-            var be = parseInt(document.getElementById("biaya_exe").value);
-            document.getElementById("ins_exe").value = be * 0.2;
-
-            var bma = parseInt(document.getElementById("biaya_minggu_satu").value);
-            var jka = parseInt(document.getElementById("jml_karyawan_satu").value);
-            document.getElementById("ins_minggu_satu").value = parseInt(bma * 0.5 / jka) || 0;
-
-            var bmb = parseInt(document.getElementById("biaya_minggu_dua").value);
-            var jkb = parseInt(document.getElementById("jml_karyawan_dua").value);
-            document.getElementById("ins_minggu_dua").value = parseInt(bmb * 0.5 / jkb) || 0;
-
-            var bmc = parseInt(document.getElementById("biaya_minggu_tiga").value);
-            var jkc = parseInt(document.getElementById("jml_karyawan_tiga").value);
-            document.getElementById("ins_minggu_tiga").value = parseInt(bmc * 0.5 / jkc) || 0;
-
-            var bmd = parseInt(document.getElementById("biaya_minggu_empat").value);
-            var jkd = parseInt(document.getElementById("jml_karyawan_empat").value);
-            document.getElementById("ins_minggu_empat").value = parseInt(bmd * 0.5 / jkd) || 0;
-
-            var bme = parseInt(document.getElementById("biaya_minggu_lima").value);
-            var jke = parseInt(document.getElementById("jml_karyawan_lima").value);
-            document.getElementById("ins_minggu_lima").value = parseInt(bme * 0.5 / jke) || 0;
-        }
-    </script>
     <!-- <script>
         $(document).ready(function() {
             var count = 1;

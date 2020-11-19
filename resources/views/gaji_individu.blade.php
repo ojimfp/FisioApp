@@ -17,7 +17,6 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
-        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -25,18 +24,15 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-5">
-                        <h4 class="page-title">Gaji Karyawan</h4>
+                        <h4 class="page-title">Gaji Karyawan a.n. {{ $dokter->nama_dokter }}</h4>
+                    </div>
+                    <div class="col-sm-8 col-7 text-right m-b-30">
+                        <a href="{{ route('gaji.create', $dokter->id) }}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Masukkan Gaji</a>
                     </div>
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('gaji.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
-                            <div class="form-group form-focus">
-                                <label class="focus-label">Nama/ID Karyawan</label>
-                                <input type="text" class="form-control floating" name="keyword">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Dari</label>
                                 <div class="cal-icon">
@@ -44,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Sampai</label>
                                 <div class="cal-icon">
@@ -52,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
                             <button class="btn btn-success submit-btn">Cari Gaji</button>
                         </div>
                     </form>
@@ -88,7 +84,7 @@
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" href="{{ route('slip.gaji', $g->id) }}"><i class="fa fa-book m-r-5"></i> Slip Gaji</a>
-                                                    <a class="dropdown-item" href="{{ route('gaji.edit', $g->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('gaji.edit.ind', $g->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                     <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $g->id }}')" data-target="#delete_gaji"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                 </div>
                                             </div>
@@ -127,7 +123,7 @@
     <script type="text/javascript">
         function deleteData(id) {
             var id = id;
-            var url = '{{ route("gaji.destroy", ":id") }}';
+            var url = '{{ route("gaji.destroy.ind", ":id") }}';
             url = url.replace(':id', id);
             $("#deleteForm").attr('action', url);
         }

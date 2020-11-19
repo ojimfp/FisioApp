@@ -21,8 +21,15 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'User Management',
+                'side_active'   => ''
+            ],
+            'users' => $users
+        ];
 
-        return view('user')->with('users', $users);
+        return view('user', $result);
     }
 
     /**

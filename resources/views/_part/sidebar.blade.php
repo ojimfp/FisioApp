@@ -27,7 +27,10 @@
                         <li><a href="provident-fund.html">Provident Fund</a></li> --}}
                     </ul>
                 </li>
-                <li class="submenu">
+                <li class="{{ $meta['side_active'] == 'gaji' ? 'active' : '' }}">
+                    <a href="{{ route('gaji.index') }}"><i class="fa fa-book"></i> <span>Daftar Gaji</span></span></a>
+                </li>
+                <!-- <li class="submenu">
                     <a href="#"><i class="fa fa-book"></i> <span> Daftar Gaji </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         {{-- <li class="{{ $meta['side_active'] == 'gaji' ? 'active' : '' }}">
@@ -37,7 +40,7 @@
                             <a href="{{ route('slip.index') }}">Slip Gaji</a>
                         </li> --}}
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
