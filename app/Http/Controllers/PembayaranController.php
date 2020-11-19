@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
 use PDF;
+use DateTime;
 use View;
 
 class PembayaranController extends Controller
@@ -28,7 +29,9 @@ class PembayaranController extends Controller
                 'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
-            'pembayaran' => $pembayaran
+            'pembayaran' => $pembayaran,
+            'start_date' => '',
+            'end_date'  => ''
         ];
 
         return view('pembayaran', $result);
@@ -195,10 +198,20 @@ class PembayaranController extends Controller
 
     public function search(Request $request)
     {
-        $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
-        $start_date = $start_date->format('Y-m-d');
-        $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
-        $end_date = $end_date->format('Y-m-d');
+        if ($request->end_date) {
+            $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+            $end_date = $end_date->format('Y-m-d');
+        }else{
+            $end_date = new DateTime('today');
+            $end_date = $end_date->format('Y-m-d');
+        }
+        if ($request->start_date) {
+            $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+            $start_date = $start_date->format('Y-m-d');
+        }else{
+            $start_date = new DateTime('today');
+            $start_date = $start_date->format('Y-m-d');
+        }
 
         $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
         $result = [
@@ -206,14 +219,24 @@ class PembayaranController extends Controller
                 'title'         => config('app.name') . ' - ' . 'Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
-            'pembayaran' => $pembayaran
+            'pembayaran' => $pembayaran,
+            'start_date'         => $start_date,
+            'end_date'           => $end_date
         ];
 
         return view('pembayaran', $result);
     }
-    public static function download()
+    public static function download(Request $request)
     {
-        $pembayaran = Pembayaran::all();
+        $start_date = $request->start ? $request->start : '';
+        $end_date = $request->end ? $request->end : '';
+
+        if ($start_date && $end_date) {
+            $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
+        } else {
+            $pembayaran = Pembayaran::all();
+        }
+
         $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
         return $pdf->stream();
         // return $pdf->download('invoice_pdf');
@@ -240,17 +263,15 @@ class PembayaranController extends Controller
     public static function invoicePDF($id)
     {
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','potrait');
-        return $pdf->stream();
+        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
+        // $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        // $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','potrait');
+        // return $pdf->stream();
         // return $pdf->download('invoice_pdf');
 
         // $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
         // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
     }
-    public static function invoicesee($id)
-    {
-        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
-    }
+
 }

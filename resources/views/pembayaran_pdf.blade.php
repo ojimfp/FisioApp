@@ -32,7 +32,6 @@
                                 <th>Total Biaya</th>
                                 <th>Tipe Pembayaran</th>
                                 <th>Nama Terapis</th>
-                                <th class="text-right">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,17 +44,6 @@
                                 <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                 <td>{{ $bayar->tipe_pembayaran }}</td>
                                 <td>{{ $bayar->dokter->nama_dokter }}</td>
-                                <td class="text-right">
-                                    <div class="dropdown dropdown-action">
-                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="{{ route('pembayaran.edit.p', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                            <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> View</a>
-                                            <a class="dropdown-item" href="{{ route('invoice.download', $bayar->id) }}"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
-                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_inv"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>

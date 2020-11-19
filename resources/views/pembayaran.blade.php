@@ -27,7 +27,7 @@
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
-                        <a href="{{ route('pembayaran.download') }}">Unduh PDF</a>
+                    <a href="{{ route('pembayaran.download') . '?start=' . $start_date . '&end=' . $end_date }}">Unduh PDF</a>
                         <!-- <div class="btn-group btn-group-sm">
                             <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
                             <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
@@ -40,7 +40,7 @@
                             <div class="form-group form-focus">
                                 <label class="focus-label">Dari...</label>
                                 <div class="cal-icon">
-                                    <input class="form-control floating datetimepicker" type="text" name="start_date">
+                                    <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
                                 </div>
                             </div>
                         </div>
@@ -48,12 +48,17 @@
                             <div class="form-group form-focus">
                                 <label class="focus-label">Sampai...</label>
                                 <div class="cal-icon">
-                                    <input class="form-control floating datetimepicker" type="text" name="end_date">
+                                    <input class="form-control floating datetimepicker" type="text" name="end_date" required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-4" style="float: left;">
                             <button class="btn btn-success submit-btn">Cari Pembayaran</button>
+                        </div>
+                    </form>
+                    <form action="{{ route('pembayaran.index') }}">
+                        <div class="col-sm-6 col-md-4" style="float: left;">
+                            <button class="btn btn-success submit-btn">Reset</button>
                         </div>
                     </form>
                 </div>
