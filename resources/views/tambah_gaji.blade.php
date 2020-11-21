@@ -25,7 +25,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Tambah Gaji a.n. {{ $dokter->nama_dokter }}</h4>
+                        <h4 class="page-title">Tambah Gaji</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -33,7 +33,7 @@
                         <form action="{{ route('gaji.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <input class="form-control" type="text" name="dokter_id" value="{{ $dokter->id }}" hidden>
+                                <input class="form-control" type="text" name="dokter_id" value="" hidden>
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label>Gaji Pokok</label>
@@ -41,7 +41,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="{{ $dokter->gaji_pokok }}" readonly>
+                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -370,6 +370,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" hidden>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input class="form-control" id="bulan_gajian" type="text" name="bulan_gajian" value="">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="text-center m-t-20">
                                 <button class="btn btn-primary submit-btn">Tambah</button>
                             </div>
@@ -381,21 +388,21 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
-    <script>
+    <!-- <script>
         function myFunction() {
-            document.getElementById("hari_masuk").value = <?php echo json_encode($hari_masuk) ?>;
-            document.getElementById("biaya_tindakan").value = <?php echo json_encode($total_tindakan) ?>;
-            document.getElementById("biaya_exe").value = <?php echo json_encode($total_exercise) ?>;
-            document.getElementById("biaya_minggu_satu").value = <?php echo json_encode($total_minggu_satu) ?>;
-            document.getElementById("jml_karyawan_satu").value = <?php echo json_encode($jml_karyawan_satu) ?>;
-            document.getElementById("biaya_minggu_dua").value = <?php echo json_encode($total_minggu_dua) ?>;
-            document.getElementById("jml_karyawan_dua").value = <?php echo json_encode($jml_karyawan_dua) ?>;
-            document.getElementById("biaya_minggu_tiga").value = <?php echo json_encode($total_minggu_tiga) ?>;
-            document.getElementById("jml_karyawan_tiga").value = <?php echo json_encode($jml_karyawan_tiga) ?>;
-            document.getElementById("biaya_minggu_empat").value = <?php echo json_encode($total_minggu_empat) ?>;
-            document.getElementById("jml_karyawan_empat").value = <?php echo json_encode($jml_karyawan_empat) ?>;
-            document.getElementById("biaya_minggu_lima").value = <?php echo json_encode($total_minggu_lima) ?>;
-            document.getElementById("jml_karyawan_lima").value = <?php echo json_encode($jml_karyawan_lima) ?>;
+            document.getElementById("hari_masuk").value = <?php /*echo json_encode($hari_masuk)*/ ?>;
+            document.getElementById("biaya_tindakan").value = <?php /*echo json_encode($total_tindakan)*/ ?>;
+            document.getElementById("biaya_exe").value = <?php /*echo json_encode($total_exercise)*/ ?>;
+            document.getElementById("biaya_minggu_satu").value = <?php /*echo json_encode($total_minggu_satu)*/ ?>;
+            document.getElementById("jml_karyawan_satu").value = <?php /*echo json_encode($jml_karyawan_satu)*/ ?>;
+            document.getElementById("biaya_minggu_dua").value = <?php /*echo json_encode($total_minggu_dua)*/ ?>;
+            document.getElementById("jml_karyawan_dua").value = <?php /*echo json_encode($jml_karyawan_dua)*/ ?>;
+            document.getElementById("biaya_minggu_tiga").value = <?php /*echo json_encode($total_minggu_tiga)*/ ?>;
+            document.getElementById("jml_karyawan_tiga").value = <?php /*echo json_encode($jml_karyawan_tiga)*/ ?>;
+            document.getElementById("biaya_minggu_empat").value = <?php /*echo json_encode($total_minggu_empat)*/ ?>;
+            document.getElementById("jml_karyawan_empat").value = <?php /*echo json_encode($jml_karyawan_empat)*/ ?>;
+            document.getElementById("biaya_minggu_lima").value = <?php /*echo json_encode($total_minggu_lima)*/ ?>;
+            document.getElementById("jml_karyawan_lima").value = <?php /*echo json_encode($jml_karyawan_lima)*/ ?>;
 
             var bt = parseInt(document.getElementById("biaya_tindakan").value);
             document.getElementById("ins_tindakan").value = bt * 0.1;
@@ -423,7 +430,7 @@
             var jke = parseInt(document.getElementById("jml_karyawan_lima").value);
             document.getElementById("ins_minggu_lima").value = parseInt(bme * 0.5 / jke) || 0;
         }
-    </script>
+    </script> -->
     <!-- <script>
         $(document).ready(function() {
             var count = 1;

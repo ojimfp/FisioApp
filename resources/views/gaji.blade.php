@@ -27,29 +27,28 @@
                     <div class="col-sm-4 col-5">
                         <h4 class="page-title">Gaji Karyawan</h4>
                     </div>
+                    @can('manage-users')
+                    <div class="col-sm-8 col-7 text-right m-b-30">
+                        <a href="{{ route('gaji.create') }}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Masukkan Gaji</a>
+                    </div>
+                    @endcan
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('gaji.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12" style="float: left;">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Nama/ID Karyawan</label>
-                                <input type="text" class="form-control floating" name="keyword">
+                                <input type="text" class="form-control floating" name="keyword" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
-                            <div class="form-group form-focus">
-                                <label class="focus-label">Dari</label>
-                                <div class="cal-icon">
-                                    <input class="form-control floating datetimepicker" type="text" name="start_date">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
-                            <div class="form-group form-focus">
-                                <label class="focus-label">Sampai</label>
-                                <div class="cal-icon">
-                                    <input class="form-control floating datetimepicker" type="text" name="end_date">
-                                </div>
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12" style="float: left;">
+                            <div class="form-group">
+                                <select class="select" name="bulan_gajian" required autocomplete="off">
+                                    <option>Pilih Bulan</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12" style="float: left;">
