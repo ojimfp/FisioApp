@@ -104,9 +104,9 @@
                             <label class="col-md-12">Pekerjaan</label>
                             <div class="col-md-12">
                                 <div class="radio">
-                                    <input type="radio" name="pekerjaan" value="fisioterapis">
+                                    <input type="radio" name="pekerjaan" value="Fisioterapis">
                                     <label style="margin-right: 10px;">Fisioterapis</label>
-                                    <input type="radio" name="pekerjaan" value="administrasi">
+                                    <input type="radio" name="pekerjaan" value="Administrasi">
                                     <label>Administrasi</label>
                                 </div>
                             </div>
