@@ -8,6 +8,7 @@ use App\Pembayaran;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DateTime;
 use NumberFormatter;
 
 class GajiController extends Controller
@@ -59,58 +60,60 @@ class GajiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $dokter = Dokter::findOrFail($id);
-        $hari_masuk = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->count('dokter_id');
-        $total_tindakan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-            ->whereHas('tindakan', function ($q) {
-                $q->where('nama_tindakan', 'NOT LIKE', '%Exercise%');
-            })->sum('total_biaya');
-        $total_exercise = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-            ->whereHas('tindakan', function ($q) {
-                $q->where('nama_tindakan', 'LIKE', '%Exercise%');
-            })->sum('total_biaya');
-        $total_minggu_satu = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('first sunday of previous month'))
-            ->sum('total_biaya');
-        $jml_karyawan_satu = Pembayaran::whereDay('created_at', Carbon::parse('first sunday of previous month'))
-            ->count('dokter_id');
-        $total_minggu_dua = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('second sunday of previous month'))
-            ->sum('total_biaya');
-        $jml_karyawan_dua = Pembayaran::whereDay('created_at', Carbon::parse('second sunday of previous month'))
-            ->count('dokter_id');
-        $total_minggu_tiga = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('third sunday of previous month'))
-            ->sum('total_biaya');
-        $jml_karyawan_tiga = Pembayaran::whereDay('created_at', Carbon::parse('third sunday of previous month'))
-            ->count('dokter_id');
-        $total_minggu_empat = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
-            ->sum('total_biaya');
-        $jml_karyawan_empat = Pembayaran::whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
-            ->count('dokter_id');
-        $total_minggu_lima = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
-            ->sum('total_biaya');
-        $jml_karyawan_lima = Pembayaran::whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
-            ->count('dokter_id');
+        // $dokter = Dokter::findOrFail($id);
+        // $hari_masuk = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->count('dokter_id');
+        // $total_tindakan = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
+        //     ->whereHas('tindakan', function ($q) {
+        //         $q->where('nama_tindakan', 'NOT LIKE', '%Exercise%');
+        //     })->sum('total_biaya');
+        // $total_exercise = Pembayaran::where('dokter_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
+        //     ->whereHas('tindakan', function ($q) {
+        //         $q->where('nama_tindakan', 'LIKE', '%Exercise%');
+        //     })->sum('total_biaya');
+        // $total_minggu_satu = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('first sunday of previous month'))
+        //     ->sum('total_biaya');
+        // $jml_karyawan_satu = Pembayaran::whereDay('created_at', Carbon::parse('first sunday of previous month'))
+        //     ->count('dokter_id');
+        // $total_minggu_dua = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('second sunday of previous month'))
+        //     ->sum('total_biaya');
+        // $jml_karyawan_dua = Pembayaran::whereDay('created_at', Carbon::parse('second sunday of previous month'))
+        //     ->count('dokter_id');
+        // $total_minggu_tiga = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('third sunday of previous month'))
+        //     ->sum('total_biaya');
+        // $jml_karyawan_tiga = Pembayaran::whereDay('created_at', Carbon::parse('third sunday of previous month'))
+        //     ->count('dokter_id');
+        // $total_minggu_empat = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
+        //     ->sum('total_biaya');
+        // $jml_karyawan_empat = Pembayaran::whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
+        //     ->count('dokter_id');
+        // $total_minggu_lima = Pembayaran::where('dokter_id', $id)->whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
+        //     ->sum('total_biaya');
+        // $jml_karyawan_lima = Pembayaran::whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
+        //     ->count('dokter_id');
+        // $bulan_gajian = Pembayaran::whereDay('created_at', Carbon::parse('last day of previous month'));
 
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Tambah Gaji',
                 'side_active'   => 'gaji'
             ],
-            'dokter' => $dokter,
-            'hari_masuk' => $hari_masuk,
-            'total_tindakan' => $total_tindakan,
-            'total_exercise' => $total_exercise,
-            'total_minggu_satu' => $total_minggu_satu,
-            'jml_karyawan_satu' => $jml_karyawan_satu,
-            'total_minggu_dua' => $total_minggu_dua,
-            'jml_karyawan_dua' => $jml_karyawan_dua,
-            'total_minggu_tiga' => $total_minggu_tiga,
-            'jml_karyawan_tiga' => $jml_karyawan_tiga,
-            'total_minggu_empat' => $total_minggu_empat,
-            'jml_karyawan_empat' => $jml_karyawan_empat,
-            'total_minggu_lima' => $total_minggu_lima,
-            'jml_karyawan_lima' => $jml_karyawan_lima
+            // 'dokter' => $dokter,
+            // 'hari_masuk' => $hari_masuk,
+            // 'total_tindakan' => $total_tindakan,
+            // 'total_exercise' => $total_exercise,
+            // 'total_minggu_satu' => $total_minggu_satu,
+            // 'jml_karyawan_satu' => $jml_karyawan_satu,
+            // 'total_minggu_dua' => $total_minggu_dua,
+            // 'jml_karyawan_dua' => $jml_karyawan_dua,
+            // 'total_minggu_tiga' => $total_minggu_tiga,
+            // 'jml_karyawan_tiga' => $jml_karyawan_tiga,
+            // 'total_minggu_empat' => $total_minggu_empat,
+            // 'jml_karyawan_empat' => $jml_karyawan_empat,
+            // 'total_minggu_lima' => $total_minggu_lima,
+            // 'jml_karyawan_lima' => $jml_karyawan_lima
+            // 'bulan_gajian' => $bulan_gajian
         ];
 
         return view('tambah_gaji', $result);
@@ -142,6 +145,7 @@ class GajiController extends Controller
         $gaji->ins_minggu_lima = $request->ins_minggu_lima;
         $gaji->bonus = $request->bonus;
         $gaji->total_gaji = $request->total_gaji;
+        // $gaji->bulan_gajian = $request->bulan_gajian;
         $gaji->save();
 
         return redirect()->route('slip.gaji', $dokter);
@@ -267,43 +271,45 @@ class GajiController extends Controller
     {
         $keyword = $request->keyword;
 
+        // if ($request->has('start_date')) {
+        //     $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+        //     $start_date = $start_date->format('Y-m-d');
+        // } else {
+        //     $start_date = new DateTime('today');
+        //     $start_date = $start_date->format('Y-m-d');
+        // }
+
+        // if ($request->has('end_date')) {
+        //     $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+        //     $end_date = $end_date->format('Y-m-d');
+        // } else {
+        //     $end_date = new DateTime('today');
+        //     $end_date = $end_date->format('Y-m-d');
+        // }
+
         if ($request->has('keyword')) {
-            $terapis = Gaji::where('dokter_id', 'LIKE', "%" . $keyword . "%")->get();
-
-            $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
-            $start_date = $start_date->format('Y-m-d');
-            $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
-            $end_date = $end_date->format('Y-m-d');
-
-            $gaji = Gaji::whereBetween('created_at', [$start_date, $end_date])->get();
-
-            $result = [
-                'meta' => [
-                    'title'         => config('app.name') . ' - ' . 'Gaji Karyawan',
-                    'side_active'   => 'gaji'
-                ],
-                'terapis' => $terapis,
-                'gaji' => $gaji
-            ];
-        } else {
-            $terapis = Gaji::all();
-
-            $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
-            $start_date = $start_date->format('Y-m-d');
-            $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
-            $end_date = $end_date->format('Y-m-d');
-
-            $gaji = Gaji::whereBetween('created_at', [$start_date, $end_date])->get();
-
-            $result = [
-                'meta' => [
-                    'title'         => config('app.name') . ' - ' . 'Gaji Karyawan',
-                    'side_active'   => 'gaji'
-                ],
-                'terapis' => $terapis,
-                'gaji' => $gaji
-            ];
+            $gaji = Gaji::where('dokter_id', 'LIKE', "%" . $keyword . "%")
+                ->orWhereHas('dokter', function ($q) use ($keyword) {
+                    $q->where('nama_dokter', 'LIKE', "%" . $keyword . "%");
+                })->get();
         }
+
+        // if ($request->has('start_date') && $request->has('end_date')) {
+        // $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+        // $start_date = $start_date->format('Y-m-d');
+        // $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+        // $end_date = $end_date->format('Y-m-d');
+
+        //     $gaji = Gaji::whereBetween('created_at', [$start_date, $end_date])->get();
+        // }
+
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Gaji Karyawan',
+                'side_active'   => 'gaji'
+            ],
+            'gaji' => $gaji
+        ];
 
         return view('gaji', $result);
     }

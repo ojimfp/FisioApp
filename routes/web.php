@@ -46,6 +46,8 @@ Route::get('invoice/{id}/download', 'PembayaranController@invoicePDF')->name('in
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');
+Route::get('karyawan/search', 'UserController@searchKaryawan')->name('karyawan.search');
+Route::get('user/list', 'UserController@indexKaryawan')->name('karyawan.index');
 
 Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user.password');
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
@@ -53,10 +55,9 @@ Route::post('change-password', 'Auth\ChangePasswordController@store')->name('pas
 Route::resource('jadwal', 'JadwalController')->except(['show']);
 Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.datapasien');
 
-Route::resource('gaji', 'GajiController')->except(['show', 'create']);
+Route::resource('gaji', 'GajiController')->except(['show']);
 Route::get('gaji/search', 'GajiController@search')->name('gaji.search');
 Route::get('gaji/{id}', 'GajiController@indexIndividu')->name('gaji.index.ind');
-Route::get('gaji/{id}/create', 'GajiController@create')->name('gaji.create');
 Route::get('gaji/{id}/edit-ind', 'GajiController@editIndividu')->name('gaji.edit.ind');
 Route::put('gaji/update-ind/{id}', 'GajiController@updateIndividu')->name('gaji.update.ind');
 Route::delete('gaji/delete-ind/{id}', 'GajiController@destroyIndividu')->name('gaji.destroy.ind');

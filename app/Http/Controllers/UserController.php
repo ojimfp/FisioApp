@@ -13,6 +13,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +34,26 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexKaryawan()
+    {
+        $users = User::all();
+
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'List Karyawan',
+                'side_active'   => 'karyawan'
+            ],
+            'users' => $users
+        ];
+
+        return view('karyawan', $result);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
@@ -42,10 +63,16 @@ class UserController extends Controller
     {
         $roles = Role::all();
 
-        return view('edit_user')->with([
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'User Management',
+                'side_active'   => ''
+            ],
             'user' => $user,
             'roles' => $roles
-        ]);
+        ];
+
+        return view('edit_user', $result);
     }
 
     /**
@@ -59,8 +86,12 @@ class UserController extends Controller
     {
         $user->roles()->sync($request->roles);
 
-        $user->name = $request->username;
+        $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
+        $user->no_hp = $request->no_hp;
+        $user->pekerjaan = $request->pekerjaan;
+        $user->gaji_pokok = $request->gaji_pokok;
         $user->update();
 
         return redirect()->route('user.index');
@@ -93,6 +124,38 @@ class UserController extends Controller
             $users = User::all();
         }
 
-        return view('user')->with('users', $users);
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'User Management',
+                'side_active'   => ''
+            ],
+            'users' => $users
+        ];
+
+        return view('user', $result);
+    }
+
+    public function searchKaryawan(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        if ($request->has('keyword')) {
+            $users = User::where('name', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('id', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('email', 'LIKE', "%" . $keyword . "%")
+                ->get();
+        } else {
+            $users = User::all();
+        }
+
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'User Management',
+                'side_active'   => ''
+            ],
+            'users' => $users
+        ];
+
+        return view('karyawan', $result);
     }
 }

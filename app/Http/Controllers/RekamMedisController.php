@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\RekamMedis;
 use App\Pasien;
-use App\Dokter;
 use App\Tindakan;
 use App\Pembayaran;
 
@@ -45,7 +44,7 @@ class RekamMedisController extends Controller
     public function create($id)
     {
         $pasien = Pasien::findOrFail($id);
-        $dokter = Dokter::all();
+        // $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
         $result = [
@@ -54,8 +53,7 @@ class RekamMedisController extends Controller
                 'side_active'   => 'pasien'
             ],
             'pasien' => $pasien,
-            'tindakan' => $tindakan,
-            'dokter' => $dokter
+            'tindakan' => $tindakan
         ];
 
         return view('tambah_rekam_medis', $result);
@@ -74,7 +72,8 @@ class RekamMedisController extends Controller
         $rekam_medis = new RekamMedis;
 
         $rekam_medis->pasien()->associate($request->id_pasien);
-        $rekam_medis->dokter()->associate($request->nama_dokter);
+        $rekam_medis->users()->associate($request->id_user);
+        $rekam_medis->nama_terapis = $request->nama_terapis;
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
         $rekam_medis->diagnosa = $request->diagnosa;
@@ -94,7 +93,7 @@ class RekamMedisController extends Controller
     public function edit($id)
     {
         $rekam_medis = RekamMedis::findOrFail($id);
-        $dokter = Dokter::all();
+        // $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
         $result = [
@@ -103,8 +102,7 @@ class RekamMedisController extends Controller
                 'side_active'   => 'pasien'
             ],
             'rekam_medis' => $rekam_medis,
-            'tindakan' => $tindakan,
-            'dokter' => $dokter
+            'tindakan' => $tindakan
         ];
 
         return view('edit_rekam_medis', $result);
@@ -121,9 +119,9 @@ class RekamMedisController extends Controller
     {
         $rekam_medis = RekamMedis::findOrFail($id);
 
-        $rekam_medis->dokter()->associate($request->nama_dokter);
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
+        $rekam_medis->diagnosa = $request->diagnosa;
         $rekam_medis->tindakan()->sync($request->tindakan);
         $rekam_medis->update();
 

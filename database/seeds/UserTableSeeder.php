@@ -19,15 +19,21 @@ class UserTableSeeder extends Seeder
         $adminRole = Role::where('name', 'admin')->first();
 
         $owner = User::create([
-            'name' => 'Owner',
+            'name' => 'Saya Owner',
+            'username' => 'owner',
             'email' => 'owner@fisioapp.com',
-            'password' => Hash::make('owner')
+            'no_hp' => '081234567890',
+            'password' => Hash::make('owner123'),
+            'pekerjaan' => 'Fisioterapis'
         ]);
 
         $admin = User::create([
-            'name' => 'Admin',
+            'name' => 'Saya Admin',
+            'username' => 'admin',
             'email' => 'admin@fisioapp.com',
-            'password' => Hash::make('admin')
+            'no_hp' => '089876543210',
+            'password' => Hash::make('admin123'),
+            'pekerjaan' => 'Administrasi'
         ]);
 
         $owner->roles()->attach($ownerRole);

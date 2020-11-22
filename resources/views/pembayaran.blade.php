@@ -27,7 +27,7 @@
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
-                    <a href="{{ route('pembayaran.download') . '?start=' . $start_date . '&end=' . $end_date }}">Unduh PDF</a>
+                        <a href="{{ route('pembayaran.download') . '?start=' . $start_date . '&end=' . $end_date }}">Unduh PDF</a>
                         <!-- <div class="btn-group btn-group-sm">
                             <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
                             <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
@@ -38,7 +38,7 @@
                     <form action="{{ route('pembayaran.search') }}" method="GET">
                         <div class="col-sm-6 col-md-4" style="float: left;">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Dari...</label>
+                                <label class="focus-label">Dari</label>
                                 <div class="cal-icon">
                                     <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
                                 </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-sm-6 col-md-4" style="float: left;">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Sampai...</label>
+                                <label class="focus-label">Sampai</label>
                                 <div class="cal-icon">
                                     <input class="form-control floating datetimepicker" type="text" name="end_date" required>
                                 </div>
@@ -87,7 +87,7 @@
                                         <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
                                         <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                         <td>{{ $bayar->tipe_pembayaran }}</td>
-                                        <td>{{ $bayar->dokter->nama_dokter }}</td>
+                                        <td>{{ $bayar->users->name }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

@@ -13,9 +13,9 @@ class RekamMedis extends Model
         return $this->belongsTo('App\Pasien');
     }
 
-    public function dokter()
+    public function users()
     {
-        return $this->belongsTo('App\Dokter');
+        return $this->belongsTo('App\User');
     }
 
     public function tindakan()

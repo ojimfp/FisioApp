@@ -11,7 +11,7 @@
             <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                 <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/img/user.jpg') }}" width="40" alt="Admin">
                     <span class="status online"></span></span>
-                <span>{{ Auth::user()->name }}</span>
+                <span>{{ Auth::user()->username }}</span>
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ route('user.password') }}">Ganti Password</a>

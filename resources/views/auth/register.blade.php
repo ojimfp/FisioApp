@@ -29,12 +29,25 @@
                             <a href="index-2.html"><img src="{{ asset('assets/img/logo-dark.png') }}" alt=""></a>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-12 col-form-label text-md-left">Username</label>
+                            <label for="name" class="col-md-12 col-form-label text-md-left">Nama Lengkap</label>
 
                             <div class="col-md-12">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-md-12 col-form-label text-md-left">Username</label>
+
+                            <div class="col-md-12">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                                @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -48,6 +61,19 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="no_hp" class="col-md-12 col-form-label text-md-left">No. Telepon/HP</label>
+
+                            <div class="col-md-12">
+                                <input id="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" value="{{ old('no_hp') }}" required autocomplete="no_hp">
+
+                                @error('no_hp')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -72,6 +98,17 @@
 
                             <div class="col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-12">Pekerjaan</label>
+                            <div class="col-md-12">
+                                <div class="radio">
+                                    <input type="radio" name="pekerjaan" value="fisioterapis">
+                                    <label style="margin-right: 10px;">Fisioterapis</label>
+                                    <input type="radio" name="pekerjaan" value="administrasi">
+                                    <label>Administrasi</label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group text-center">

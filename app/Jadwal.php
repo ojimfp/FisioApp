@@ -12,8 +12,14 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Pasien');
     }
-    public function dokter()
+
+    // public function dokter()
+    // {
+    //     return $this->belongsTo('App\Dokter');
+    // }
+
+    public function users()
     {
-        return $this->belongsTo('App\Dokter');
+        return $this->belongsTo('App\User');
     }
 }

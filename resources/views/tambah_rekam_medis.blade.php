@@ -39,31 +39,27 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Terapis<span class="text-danger">*</span></label>
-                                        <select class="select" name="nama_dokter" required autocomplete="off">
-                                            <option>Select</option>
-                                            @foreach($dokter as $d)
-                                            <option value="{{ $d->id }}">{{ $d->nama_dokter }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label>Nama Terapis</label></br>
+                                        <input class="form-control" name="id_user" value="{{ Auth::user()->id }}" hidden>
+                                        <input class="form-control" name="nama_terapis" value="{{ Auth::user()->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Anamnesa <span class="text-danger">*</span></label></br>
-                                        <textarea class="form-control" name="anamnesa" id="" cols="88" rows="4"></textarea>
+                                        <textarea class="form-control" name="anamnesa" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Pemeriksaan <span class="text-danger">*</span></label></br>
-                                        <textarea class="form-control" name="pemeriksaan" id="" cols="88" rows="4"></textarea>
+                                        <textarea class="form-control" name="pemeriksaan" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Diagnosa <span class="text-danger">*</span></label></br>
-                                        <textarea class="form-control" name="diagnosa" id="" cols="88" rows="4"></textarea>
+                                        <textarea class="form-control" name="diagnosa" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
