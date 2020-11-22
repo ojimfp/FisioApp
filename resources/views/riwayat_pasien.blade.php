@@ -157,7 +157,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="{{ route('pembayaran.edit.rm', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                                                 <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> View</a>
-                                                                <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
+                                                                <a class="dropdown-item" href="{{ route('invoice.download', $bayar->id) }}"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
                                                                 <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteDataP('{{ $bayar->id }}')" data-target="#delete_invoice"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>

@@ -170,9 +170,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Tipe Pembayaran</td>
+                                                    <td class="text-right">Tipe Pembayaran <span class="text-danger">*</span></td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
-                                                        <select class="select" name="tipe_pembayaran">
+                                                        <select class="select" name="tipe_pembayaran" required>
                                                             <option>-- Pilih tipe pembayaran --</option>
                                                             <option>Tunai</option>
                                                             <option>Debit</option>
@@ -187,7 +187,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Catatan</label>
-                                                <textarea class="form-control"></textarea>
+                                                <textarea class="form-control" name="catatan"></textarea>
                                                 <input type="text" class="form-control" name="nama_admin" value="{{ Auth::user()->name }}" hidden>
                                             </div>
                                         </div>

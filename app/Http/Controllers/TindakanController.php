@@ -132,10 +132,24 @@ class TindakanController extends Controller
                 ->where('kode_tindakan', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('nama_tindakan', 'LIKE', "%" . $keyword . "%")
                 ->get();
+            $result = [
+                'meta' => [
+                'title'         => config('app.name').' - '.'List Tindakan',
+                'side_active'   => 'tindakan'
+                ],
+                'tindakan' => $tindakan
+            ];
         } else {
             $tindakan = DB::table('tindakan')->get();
+            $result = [
+                'meta' => [
+                'title'         => config('app.name').' - '.'List Tindakan',
+                'side_active'   => 'tindakan'
+                ],
+                'tindakan' => $tindakan
+            ];
         }
 
-        return view('tindakan', ['tindakan' => $tindakan]);
+        return view('tindakan', $result);
     }
 }

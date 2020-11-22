@@ -70,13 +70,15 @@ class PembayaranController extends Controller
 
         $pembayaran->rekam_medis()->associate($request->id_rekam_medis);
         $pembayaran->pasien()->associate($request->id_pasien);
-        $pembayaran->dokter()->associate($request->id_terapis);
+        $pembayaran->users()->associate($request->id_terapis);
         $pembayaran->subtotal = $request->total;
         $pembayaran->diskon_persen = $request->diskon_persen;
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
-        $pembayaran->users()->associate($request->admin);
+        // $pembayaran->users()->associate($request->admin);
+        $pembayaran->nama_admin = $request->nama_admin;
+        $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
 
         $pembayaran->tindakan()->sync($request->tindakan);
@@ -197,21 +199,24 @@ class PembayaranController extends Controller
     }
 
     public function search(Request $request)
-    {
-        if ($request->end_date) {
-            $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
-            $end_date = $end_date->format('Y-m-d');
-        }else{
-            $end_date = new DateTime('today');
-            $end_date = $end_date->format('Y-m-d');
-        }
-        if ($request->start_date) {
-            $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
-            $start_date = $start_date->format('Y-m-d');
-        }else{
-            $start_date = new DateTime('today');
-            $start_date = $start_date->format('Y-m-d');
-        }
+    {   $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+        $end_date = $end_date->format('Y-m-d');
+        $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+        $start_date = $start_date->format('Y-m-d');
+        // if ($request->end_date) {
+        //     $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+        //     $end_date = $end_date->format('Y-m-d');
+        // }else{
+        //     $end_date = new DateTime('today');
+        //     $end_date = $end_date->format('Y-m-d');
+        // }
+        // if ($request->start_date) {
+        //     $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
+        //     $start_date = $start_date->format('Y-m-d');
+        // }else{
+        //     $start_date = new DateTime('today');
+        //     $start_date = $start_date->format('Y-m-d');
+        // }
 
         $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
         $result = [

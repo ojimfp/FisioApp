@@ -43,7 +43,7 @@
                                 <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
                                 <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                 <td>{{ $bayar->tipe_pembayaran }}</td>
-                                <td>{{ $bayar->dokter->nama_dokter }}</td>
+                                <td>{{ $bayar->users->name }}</td>
                             </tr>
                             @endforeach
                         </tbody>
