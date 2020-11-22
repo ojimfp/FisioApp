@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'no_hp' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'pekerjaan' => ['required', 'in:terapis,admin']
+            'pekerjaan' => ['required', 'in:fisioterapis,administrasi']
         ]);
     }
 
