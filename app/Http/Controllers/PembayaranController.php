@@ -237,8 +237,9 @@ class PembayaranController extends Controller
             $pembayaran = Pembayaran::all();
         }
 
-        $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
-        return $pdf->stream();
+        return view('pembayaran_pdf', ['pembayaran' => $pembayaran]);
+        // $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
+        // return $pdf->stream();
         // return $pdf->download('invoice_pdf');
 
         // $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);

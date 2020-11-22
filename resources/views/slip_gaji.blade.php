@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- salary-view23:28-->
+{{-- <!-- salary-view23:28-->
 
 <head>
     @include('_part.meta')
@@ -11,17 +11,24 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+</head> --}}
+<head>
+    @include('_part.meta')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 </head>
 
 <body>
-    <div class="main-wrapper">
+    {{-- <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
         <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
-        <div class="page-wrapper">
+        <div class="page-wrapper"> --}}
             <div class="content">
                 <div class="row">
                     <div class="col-sm-5 col-4">
@@ -29,8 +36,8 @@
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white">PDF</button>
-                            <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
+                            {{-- <button class="btn btn-white">PDF</button> --}}
+                            <button class="btn btn-white" onClick="window.print();"><i class="fa fa-print fa-lg"></i> Print</button>
                         </div>
                     </div>
                 </div>
@@ -118,17 +125,17 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <p><strong>Total Gaji: Rp {{ number_format($gaji->total_gaji) }}</strong> ({{ $terbilang->format($gaji->total_gaji) }} rupiah.)</p>
+                                    {{-- <p><strong>Total Gaji: Rp {{ number_format($gaji->total_gaji) }}</strong> ({{ $terbilang->format($gaji->total_gaji) }} rupiah.)</p> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {{-- </div>
     </div>
     <!-- FOOTER -->
-    @include('_part.footer')
+    @include('_part.footer') --}}
 </body>
 
 
