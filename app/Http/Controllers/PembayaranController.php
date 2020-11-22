@@ -70,13 +70,13 @@ class PembayaranController extends Controller
 
         $pembayaran->rekam_medis()->associate($request->id_rekam_medis);
         $pembayaran->pasien()->associate($request->id_pasien);
-        $pembayaran->dokter()->associate($request->id_terapis);
+        $pembayaran->users()->associate($request->id_terapis);
         $pembayaran->subtotal = $request->total;
         $pembayaran->diskon_persen = $request->diskon_persen;
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
-        $pembayaran->users()->associate($request->admin);
+        $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->save();
 
         $pembayaran->tindakan()->sync($request->tindakan);
@@ -201,14 +201,14 @@ class PembayaranController extends Controller
         if ($request->end_date) {
             $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
             $end_date = $end_date->format('Y-m-d');
-        }else{
+        } else {
             $end_date = new DateTime('today');
             $end_date = $end_date->format('Y-m-d');
         }
         if ($request->start_date) {
             $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
             $start_date = $start_date->format('Y-m-d');
-        }else{
+        } else {
             $start_date = new DateTime('today');
             $start_date = $start_date->format('Y-m-d');
         }
@@ -237,7 +237,7 @@ class PembayaranController extends Controller
             $pembayaran = Pembayaran::all();
         }
 
-        $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
+        $pdf = PDF::loadview('pembayaran_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4', 'landscape');
         return $pdf->stream();
         // return $pdf->download('invoice_pdf');
 
@@ -273,5 +273,4 @@ class PembayaranController extends Controller
         // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
     }
-
 }

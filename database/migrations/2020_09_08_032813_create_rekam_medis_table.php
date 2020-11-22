@@ -16,7 +16,8 @@ class CreateRekamMedisTable extends Migration
         Schema::create('rekam_medis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pasien_id');
-            $table->unsignedBigInteger('dokter_id');
+            $table->unsignedBigInteger('users_id');
+            $table->string('nama_terapis');
             $table->string('anamnesa');
             $table->string('pemeriksaan');
             $table->string('diagnosa');
@@ -25,7 +26,7 @@ class CreateRekamMedisTable extends Migration
 
         Schema::table('rekam_medis', function (Blueprint $table) {
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
-            $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -38,7 +39,7 @@ class CreateRekamMedisTable extends Migration
     {
         Schema::table('rekam_medis', function (Blueprint $table) {
             $table->dropForeign('rekam_medis_pasien_id_foreign');
-            $table->dropForeign('rekam_medis_dokter_id_foreign');
+            $table->dropForeign('rekam_medis_users_id_foreign');
         });
 
         Schema::dropIfExists('rekam_medis');

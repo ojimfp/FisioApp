@@ -72,8 +72,8 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label>Nama Terapis</label>
-                                        <input class="form-control" type="text" name="id_terapis" value="{{ $rekam_medis->dokter->id }}" hidden>
-                                        <input class="form-control" type="text" name="nama_terapis" value="{{ $rekam_medis->dokter->nama_dokter }}" readonly>
+                                        <input class="form-control" type="text" name="id_terapis" value="{{ $rekam_medis->users->id }}" hidden>
+                                        <input class="form-control" type="text" name="nama_terapis" value="{{ $rekam_medis->users->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -188,7 +188,7 @@
                                             <div class="form-group">
                                                 <label>Catatan</label>
                                                 <textarea class="form-control"></textarea>
-                                                <input type="text" class="form-control" name="admin" value="{{ Auth::user()->id }}" hidden>
+                                                <input type="text" class="form-control" name="nama_admin" value="{{ Auth::user()->name }}" hidden>
                                             </div>
                                         </div>
                                     </div>

@@ -48,8 +48,12 @@
                                 <thead>
                                     <tr>
                                         <th>ID User</th>
+                                        <th>Nama</th>
                                         <th>Username</th>
                                         <th>Email</th>
+                                        <th>No. Telepon/HP</th>
+                                        <th>Pekerjaan</th>
+                                        <th>Gaji Pokok</th>
                                         <th>Roles</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
@@ -59,7 +63,11 @@
                                     <tr>
                                         <td>{{ sprintf('%04d', $user->id) }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->no_hp }}</td>
+                                        <td>{{ $user->pekerjaan }}</td>
+                                        <td>Rp {{ number_format($user->gaji_pokok) }}</td>
                                         <td>{{ implode($user->roles()->get()->pluck('name')->toArray()) }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">

@@ -40,12 +40,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Nama Terapis<span class="text-danger">*</span></label>
-                                        <select class="select" name="nama_dokter" required autocomplete="off">
-                                            @foreach($dokter as $d)
-                                            <option value="{{ $d->id }}" @if($d->id == $rekam_medis->dokter_id) selected @endif>{{ $d->nama_dokter }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label>Nama Terapis</label></br>
+                                        <input class="form-control" name="nama_terapis" value="{{ $rekam_medis->users->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

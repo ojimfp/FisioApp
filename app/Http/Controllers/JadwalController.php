@@ -9,6 +9,7 @@ use DateTime;
 use App\Jadwal;
 use App\Pasien;
 use App\Dokter;
+use App\User;
 
 class JadwalController extends Controller
 {
@@ -20,7 +21,7 @@ class JadwalController extends Controller
     public function index()
     {
         $pasien = Pasien::all();
-        $dokter = Dokter::all();
+        $users = User::all();
         // $jadwal = Jadwal::all();
         $jadwal_pg = Jadwal::all()->where('shift', '1');
         $jadwal_sg = Jadwal::all()->where('shift', '2');
@@ -28,13 +29,13 @@ class JadwalController extends Controller
 
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'List Jadwal Pasien',
+                'title'         => config('app.name') . ' - ' . 'List Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
             'jadwal_pg' => $jadwal_pg,
             'jadwal_sg' => $jadwal_sg,
             'pasien' => $pasien,
-            'dokter' => $dokter,
+            'users' => $users,
             'today' => $today
         ];
         return view('jadwal', $result);
@@ -44,16 +45,16 @@ class JadwalController extends Controller
     public function create()
     {
         $pasien = Pasien::all();
-        $dokter = Dokter::all();
+        $users = User::all()->where('pekerjaan', '=', 'Fisioterapis');
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Tambah Jadwal Pasien',
+                'title'         => config('app.name') . ' - ' . 'Tambah Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
             'pasien' => $pasien,
-            'dokter' => $dokter
+            'users' => $users
         ];
-        return view('tambah_jadwal',$result);
+        return view('tambah_jadwal', $result);
     }
 
     // Menyimpan data ke dalam table jadwal
@@ -63,7 +64,7 @@ class JadwalController extends Controller
         $jadwal = new Jadwal;
 
         $jadwal->pasien()->associate($request->pasien_id);
-        $jadwal->dokter()->associate($request->dokter_id);
+        $jadwal->users()->associate($request->users_id);
         $jadwal->tgl_tindakan = $request->tgl_tindakan;
         $jadwal->shift = $request->shift;
         $jadwal->jam_tindakan = $request->jam_tindakan;
@@ -73,22 +74,11 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     // Meng-edit data jadwal
     public function edit($id)
     {
         $jadwal = Jadwal::findOrFail($id);
-        $dokter = Dokter::all();
+        $users = User::all()->where('pekerjaan', '=', 'Fisioterapis');
         $pasien = Pasien::findOrFail($jadwal->pasien_id);
         $today = new DateTime('today');
         $tgl = new DateTime($pasien->tgl_lahir);
@@ -96,11 +86,11 @@ class JadwalController extends Controller
 
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Ubah Jadwal Pasien',
+                'title'         => config('app.name') . ' - ' . 'Ubah Jadwal Pasien',
                 'side_active'   => 'jadwal'
             ],
             'jadwal' => $jadwal,
-            'dokter' => $dokter,
+            'users' => $users,
             'pasien' => $pasien,
             'umur' => $umur
         ];
@@ -111,19 +101,9 @@ class JadwalController extends Controller
     // Update jadwal yg sudah di-edit
     public function update(Request $request, $id)
     {
-        // DB::table('jadwal')->where('id', $request->id)->update([
-        //     'pasien_id' => $request->pasien_id,
-        //     'dokter_id' => $request->dokter_id,
-        //     'tgl_tindakan' => $request->tgl_tindakan,
-        //     'shift' => $request->shift,
-        //     'jam_tindakan' => $request->jam_tindakan,
-        //     'status' => $request->status
-        // ]);
-
-        // return redirect()->route('jadwal.index');
         $jadwal = Jadwal::findOrFail($id);
 
-        $jadwal->dokter()->associate($request->nama_dokter);
+        $jadwal->users()->associate($request->nama_terapis);
         $jadwal->tgl_tindakan = $request->tgl_tindakan;
         $jadwal->shift = $request->shift;
         $jadwal->jam_tindakan = $request->jam_tindakan;
@@ -136,7 +116,9 @@ class JadwalController extends Controller
     //Menghapus data jadwal
     public function destroy($id)
     {
-        DB::table('jadwal')->where('id', $id)->delete();
+        $jadwal = Jadwal::findOrFail($id);
+
+        $jadwal->delete();
 
         return redirect()->route('jadwal.index');
     }
@@ -144,7 +126,7 @@ class JadwalController extends Controller
     public function getDataPasien(Request $request)
     {
         $id = $request->id;
-        $datapasien = DB::table('pasien')->where('id',$id)->get();
+        $datapasien = DB::table('pasien')->where('id', $id)->get();
 
         return response()->json([
             'datapasien' => $datapasien

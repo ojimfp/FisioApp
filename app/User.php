@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'no_hp', 'password', 'pekerjaan'
     ];
 
     /**
@@ -49,6 +49,16 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal');
+    }
+
+    public function rekamMedis()
+    {
+        return $this->hasMany('App\RekamMedis');
     }
 
     public function pembayaran()

@@ -23,10 +23,10 @@ class Pembayaran extends Model
         return $this->belongsToMany('App\Tindakan');
     }
 
-    public function dokter()
-    {
-        return $this->belongsTo('App\Dokter');
-    }
+    // public function dokter()
+    // {
+    //     return $this->belongsTo('App\Dokter');
+    // }
 
     public function users()
     {

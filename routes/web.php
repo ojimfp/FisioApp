@@ -46,6 +46,8 @@ Route::get('invoice/{id}/download', 'PembayaranController@invoicePDF')->name('in
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');
+Route::get('karyawan/search', 'UserController@searchKaryawan')->name('karyawan.search');
+Route::get('user/list', 'UserController@indexKaryawan')->name('karyawan.index');
 
 Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user.password');
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');

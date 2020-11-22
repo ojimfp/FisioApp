@@ -59,7 +59,7 @@
                                                     <td>{{ sprintf('%04d', $pg->id) }}</td>
                                                     <td>{{ implode($pg->pasien()->get()->pluck('nama')->toArray()) }}</td>
                                                     <td>{{ $today->diff(new DateTime(implode($pg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
-                                                    <td>{{ implode($pg->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
+                                                    <td>{{ $pg->users->name }}</td>
                                                     <td>{{ $pg->tgl_tindakan }}</td>
                                                     <td>{{ $pg->jam_tindakan }}</td>
                                                     <td>{{ $pg->status }}</td>
@@ -121,7 +121,7 @@
                                                     <td>{{ sprintf('%04d', $sg->id) }}</td>
                                                     <td>{{ implode($sg->pasien()->get()->pluck('nama')->toArray()) }}</td>
                                                     <td>{{ $today->diff(new DateTime(implode($sg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
-                                                    <td>{{ implode($sg->dokter()->get()->pluck('nama_dokter')->toArray()) }}</td>
+                                                    <td>{{ $sg->users->name }}</td>
                                                     <td>{{ $sg->tgl_tindakan }}</td>
                                                     <td>{{ $sg->jam_tindakan }}</td>
                                                     <td>{{ $sg->status }}</td>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
@@ -186,17 +186,30 @@
             });
         });
     </script>
-    <!-- Script modal konfirmasi hapus jadwal -->
+    <!-- Script modal konfirmasi hapus jadwal pagi -->
     <script type="text/javascript">
         function deleteData(id) {
             var id = id;
             var url = '{{ route("jadwal.destroy", ":id") }}';
             url = url.replace(':id', id);
-            $("#deleteForm").attr('action', url);
+            $("#deleteForm_pg").attr('action', url);
         }
 
         function formSubmit() {
-            $("#deleteForm").submit();
+            $("#deleteForm_pg").submit();
+        }
+    </script>
+    <!-- Script modal konfirmasi hapus jadwal siang -->
+    <script type="text/javascript">
+        function deleteData(id) {
+            var id = id;
+            var url = '{{ route("jadwal.destroy", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm_sg").attr('action', url);
+        }
+
+        function formSubmit() {
+            $("#deleteForm_sg").submit();
         }
     </script>
 </body>

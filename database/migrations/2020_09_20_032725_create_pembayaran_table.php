@@ -17,20 +17,21 @@ class CreatePembayaranTable extends Migration
             $table->id();
             $table->unsignedBigInteger('rekam_medis_id');
             $table->unsignedBigInteger('pasien_id');
-            $table->unsignedBigInteger('dokter_id');
+            $table->unsignedBigInteger('users_id');
             $table->string('tipe_pembayaran');
             $table->integer('subtotal');
             $table->integer('diskon_persen')->nullable();
             $table->integer('diskon_rupiah')->nullable();
             $table->integer('total_biaya');
-            $table->unsignedBigInteger('users_id');
+            $table->string('catatan')->nullable();
+            $table->string('nama_admin');
             $table->timestamps();
         });
 
         Schema::table('pembayaran', function (Blueprint $table) {
             $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
-            $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
+            // $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -45,7 +46,7 @@ class CreatePembayaranTable extends Migration
         Schema::table('pembayaran', function (Blueprint $table) {
             $table->dropForeign('pembayaran_rekam_medis_id_foreign');
             $table->dropForeign('pembayaran_pasien_id_foreign');
-            $table->dropForeign('pembayaran_dokter_id_foreign');
+            // $table->dropForeign('pembayaran_dokter_id_foreign');
             $table->dropForeign('pembayaran_users_id_foreign');
         });
 

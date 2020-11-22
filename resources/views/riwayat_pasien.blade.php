@@ -85,7 +85,7 @@
                                                 @foreach($rekam_medis as $rm)
                                                 <tr>
                                                     <td>{{ $rm->created_at->format('d/m/Y H:i') }}</td>
-                                                    <td>{{ $rm->dokter->nama_dokter }}</td>
+                                                    <td>{{ $rm->users->name }}</td>
                                                     <td>{{ $rm->anamnesa }}</td>
                                                     <td>{{ $rm->pemeriksaan }}</td>
                                                     <td>{{ $rm->diagnosa }}</td>
@@ -150,7 +150,7 @@
                                                     <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
                                                     <td>Rp {{ $bayar->total_biaya }}</td>
                                                     <td>{{ $bayar->tipe_pembayaran }}</td>
-                                                    <td>{{ $bayar->dokter->nama_dokter }}</td>
+                                                    <td>{{ $bayar->users->name }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

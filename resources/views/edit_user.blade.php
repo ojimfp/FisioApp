@@ -115,30 +115,55 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Username <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="username" value="{{ $user->name }}" required>
+                                        <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="name" value="{{ $user->name }}" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
-                                            </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Username <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="username" value="{{ $user->username }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>No.Telepon/HP <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="no_hp" value="{{ $user->no_hp }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Gaji Pokok</label>
+                                        <input class="form-control" type="text" name="gaji_pokok" value="{{ $user->gaji_pokok }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Pekerjaan</label>
+                                        <div class="radio">
+                                            <input type="radio" name="pekerjaan" value="Fisioterapis" @if($user->pekerjaan == 'Fisioterapis') checked @endif> Fisioterapis</label>
+                                            <!-- <label style="margin-right: 10px;">Fisioterapis</label> -->
+                                            <input type="radio" name="pekerjaan" value="Administrasi" @if($user->pekerjaan == 'Administrasi') checked @endif> Administrasi</label>
+                                            <!-- <label style="margin-right: 10px;">Administrasi</label> -->
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-12">Role</label>
-                                <div class="col-md-12">
-                                    @foreach($roles as $role)
-                                    <div class="radio">
-                                        <input type="radio" name="roles[]" value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
-                                        <label>{{ $role->name }}</label>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <div class="radio">
+                                            @foreach($roles as $role)
+                                            <input type="radio" name="roles[]" value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
+                                            <label style="margin-right: 10px;">{{ $role->name }}</label>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    @endforeach
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">

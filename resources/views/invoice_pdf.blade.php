@@ -88,7 +88,7 @@
                                     @foreach($pembayaran->tindakan as $tindakan)
                                     <tr>
                                         <td name="tindakan[]" hidden>{{ $tindakan->id }}</td>
-                                        <td>{{ $pembayaran->dokter->nama_dokter }}</td>
+                                        <td>{{ $pembayaran->users->name }}</td>
                                         <td>{{ $tindakan->kode_tindakan }}</td>
                                         <td>{{ $tindakan->nama_tindakan }}</td>
                                         <td class="text-right">Rp {{ number_format($tindakan->harga_jual) }}</td>
@@ -132,9 +132,9 @@
                                 </div>
                             </div>
                             <div class="invoice-info">
-                                <h5>Other information</h5>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero, eu finibus sapien interdum vel</p>
-                                <h5 class="text-center">-- Kasir: {{ $pembayaran->users->name }} --</h5>
+                                <h5>Catatan:</h5>
+                                <p class="text-muted">{{ $pembayaran->catatan }}</p></br>
+                                <h5 class="text-center">-- Kasir: {{ $pembayaran->nama_admin }} --</h5>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
 </html>
 <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         window.print();
     });
 </script>
