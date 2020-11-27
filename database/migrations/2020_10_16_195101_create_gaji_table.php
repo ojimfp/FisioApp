@@ -15,7 +15,7 @@ class CreateGajiTable extends Migration
     {
         Schema::create('gaji', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('dokter_id');
+            $table->unsignedBigInteger('users_id');
             $table->integer('hari_kerja');
             $table->integer('hari_masuk');
             $table->integer('gaji_bersih');
@@ -29,7 +29,12 @@ class CreateGajiTable extends Migration
             $table->integer('ins_minggu_lima')->nullable();
             $table->integer('bonus')->nullable();
             $table->integer('total_gaji');
+            $table->dateTime('bulan_gajian')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('gaji', function (Blueprint $table) {
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -40,6 +45,10 @@ class CreateGajiTable extends Migration
      */
     public function down()
     {
+        Schema::table('gaji', function (Blueprint $table) {
+            $table->dropForeign('gaji_users_id_foreign');
+        });
+
         Schema::dropIfExists('gaji');
     }
 }

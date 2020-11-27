@@ -57,11 +57,8 @@ Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.dat
 
 Route::resource('gaji', 'GajiController')->except(['show']);
 Route::get('gaji/search', 'GajiController@search')->name('gaji.search');
-Route::get('gaji/{id}', 'GajiController@indexIndividu')->name('gaji.index.ind');
-Route::get('gaji/{id}/edit-ind', 'GajiController@editIndividu')->name('gaji.edit.ind');
-Route::put('gaji/update-ind/{id}', 'GajiController@updateIndividu')->name('gaji.update.ind');
-Route::delete('gaji/delete-ind/{id}', 'GajiController@destroyIndividu')->name('gaji.destroy.ind');
 Route::get('slip-gaji/{id}', 'GajiController@slipGaji')->name('slip.gaji');
+Route::get('get/data/{id}', 'GajiController@getData')->name('getData');
 
 Auth::routes();
 

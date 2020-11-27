@@ -76,7 +76,6 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
-        // $pembayaran->users()->associate($request->admin);
         $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();

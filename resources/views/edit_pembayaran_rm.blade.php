@@ -187,7 +187,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Catatan</label>
-                                                <textarea class="form-control"></textarea>
+                                                <textarea class="form-control">{{ $pembayaran->catatan }}</textarea>
                                             </div>
                                         </div>
                                     </div>

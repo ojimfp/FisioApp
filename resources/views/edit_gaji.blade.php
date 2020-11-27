@@ -25,7 +25,7 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Tambah Gaji a.n. {{ $gaji->dokter->nama_dokter }}</h4>
+                        <h4 class="page-title">Edit Gaji a.n. {{ $gaji->users->name }}</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -41,7 +41,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="{{ $gaji->dokter->gaji_pokok }}" readonly>
+                                            <input class="form-control" id="gaji_pokok" type="text" name="gaji_pokok" value="{{ $gaji->users->gaji_pokok }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <label>Hari Kerja<span class="text-danger"> *</span></label>
+                                        <label>Hari Kerja <span class="text-danger">*</span></label>
                                         <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" value="{{ $gaji->hari_kerja }}" required autocomplete="off">
                                     </div>
                                 </div>
@@ -79,33 +79,13 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="{{ $gaji->ins_koor }}">
+                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="{{ $gaji->ins_koor }}" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Total Biaya Tindakan</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_tindakan" type="text" name="biaya_tindakan" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_tindakan" value="10" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif per Tindakan per Bulan</label>
                                         <div class="input-group">
@@ -118,27 +98,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Total Biaya Exercise</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_exe" type="text" name="biaya_exe" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_exe" value="20" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif per Exercise per Bulan</label>
                                         <div class="input-group">
@@ -151,33 +111,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Biaya Tindakan Minggu Pertama</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_minggu_satu" type="text" name="biaya_minggu_satu" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_satu" type="text" name="jml_karyawan_satu" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif Minggu Pertama</label>
                                         <div class="input-group">
@@ -188,33 +122,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Biaya Tindakan Minggu Kedua</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_minggu_dua" type="text" name="biaya_minggu_dua" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_dua" type="text" name="jml_karyawan_dua" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif Minggu Kedua</label>
                                         <div class="input-group">
@@ -225,33 +133,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Biaya Tindakan Minggu Ketiga</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_minggu_tiga" type="text" name="biaya_minggu_tiga" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_tiga" type="text" name="jml_karyawan_tiga" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif Minggu Ketiga</label>
                                         <div class="input-group">
@@ -262,33 +144,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Biaya Tindakan Minggu Keempat</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_minggu_empat" type="text" name="biaya_minggu_empat" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_empat" type="text" name="jml_karyawan_empat" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif Minggu Keempat</label>
                                         <div class="input-group">
@@ -299,33 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Biaya Tindakan Minggu Kelima</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp</span>
-                                            </div>
-                                            <input class="form-control" id="biaya_minggu_lima" type="text" name="biaya_minggu_lima" value="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
-                                        <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_lima" type="text" name="jml_karyawan_lima" value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Total Insentif Minggu Kelima</label>
                                         <div class="input-group">
@@ -376,77 +206,32 @@
     @include('_part.footer')
     <!-- <script>
         $(document).ready(function() {
-            var count = 1;
+            $('#users_id').on('load', function() {
+                var id = $(this).val();
+                var url = '{{ route("getData", ":id") }}';
+                url = url.replace(':id', id);
 
-            dynamic_field(count);
-
-            function dynamic_field(number) {
-                html = '<div class="row dynamic">';
-                html += '<div class="col-sm-4">\n' +
-                    '<div class="form-group">\n' +
-                    '<label>Biaya Tindakan Minggu ' + count + '</label>\n' +
-                    '<div class="input-group">\n' +
-                    '<div class="input-group-prepend">\n' +
-                    '<span class="input-group-text">Rp</span>\n' +
-                    '</div>\n' +
-                    '<input class="form-control" id="biaya_minggu-' + count + '" type="text" name="biaya_minggu" value="">\n' +
-                    '</div>\n' +
-                    '</div>\n' +
-                    '</div>';
-                html += '<div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">\n' +
-                    '<div class="input-group">\n' +
-                    '<label>Prosentase</label>\n' +
-                    '<input class="form-control" id="pros_minggu-' + count + '" type="text" name="pros_minggu" value="50" readonly>\n' +
-                    '<div class="input-group-append">\n' +
-                    '<span class="input-group-text">%</span>\n' +
-                    '</div>\n' +
-                    '</div>\n' +
-                    '</div>';
-                html += '<div class="col-sm-2">\n' +
-                    '<div class="form-group">\n' +
-                    '<label>Jml Krywan</label>\n' +
-                    '<input class="form-control" id="jml_karyawan-' + count + '" type="text" name="jml_karyawan" value="">\n' +
-                    '</div>\n' +
-                    '</div>';
-                html += '<div class="col-sm-4">\n' +
-                    '<div class="form-group">\n' +
-                    '<label>Total Insentif Minggu</label>\n' +
-                    '<div class="input-group">\n' +
-                    '<div class="input-group-prepend">\n' +
-                    '<span class="input-group-text">Rp</span>\n' +
-                    '</div>\n' +
-                    '<input class="form-control" id="ins_minggu-' + count + '" type="text" name="ins_minggu" value="">\n' +
-                    '</div>\n' +
-                    '</div>\n' +
-                    '</div>';
-
-                if (number > 1) {
-                    html += '   <div class="col-sm-12" style="margin-bottom: 10px">\n' +
-                        '<div class="text-right">\n' +
-                        '<button type="button" name="remove" class="btn btn-danger remove" id="">Hapus</button>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '</div>';
-                    $('.minggu').append(html);
-                } else {
-                    html += '   <div class="col-sm-12" style="margin-bottom: 10px">\n' +
-                        '<div class="text-right">\n' +
-                        '<button type="button" name="add" class="btn btn-success" id="add">Tambah</button>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '</div>';
-                    $('.minggu').html(html);
-                }
-            }
-
-            $(document).on('click', '#add', function() {
-                count++;
-                dynamic_field(count);
-            });
-
-            $(document).on('click', '.remove', function() {
-                count--;
-                $(this).closest('.dynamic').remove();
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response != null) {
+                            $('#biaya_tindakan').val(response['biaya_tindakan']);
+                            $('#biaya_exe').val(response['biaya_exe']);
+                            $('#tindakan_minggu_satu').val(response['tindakan_minggu_satu']);
+                            $('#jml_karyawan_satu').val(response['jml_karyawan_satu']);
+                            $('#tindakan_minggu_dua').val(response['tindakan_minggu_dua']);
+                            $('#jml_karyawan_dua').val(response['jml_karyawan_dua']);
+                            $('#tindakan_minggu_tiga').val(response['tindakan_minggu_tiga']);
+                            $('#jml_karyawan_tiga').val(response['jml_karyawan_tiga']);
+                            $('#tindakan_minggu_empat').val(response['tindakan_minggu_empat']);
+                            $('#jml_karyawan_empat').val(response['jml_karyawan_empat']);
+                            $('#tindakan_minggu_lima').val(response['tindakan_minggu_lima']);
+                            $('#jml_karyawan_lima').val(response['jml_karyawan_lima']);
+                        }
+                    }
+                });
             });
         });
     </script> -->

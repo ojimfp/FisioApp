@@ -116,31 +116,31 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name" value="{{ $user->name }}" required>
+                                        <input class="form-control" type="text" name="name" value="{{ $user->name }}" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Username <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="username" value="{{ $user->username }}" required>
+                                        <input class="form-control" type="text" name="username" value="{{ $user->username }}" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                                        <input type="email" class="form-control" name="email" value="{{ $user->email }}" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>No.Telepon/HP <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="no_hp" value="{{ $user->no_hp }}" required>
+                                        <input class="form-control" type="text" name="no_hp" value="{{ $user->no_hp }}" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Gaji Pokok</label>
-                                        <input class="form-control" type="text" name="gaji_pokok" value="{{ $user->gaji_pokok }}">
+                                        <input class="form-control" type="text" name="gaji_pokok" value="{{ $user->gaji_pokok }}" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

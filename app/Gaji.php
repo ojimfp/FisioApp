@@ -8,8 +8,8 @@ class Gaji extends Model
 {
     protected $table = 'gaji';
 
-    public function dokter()
+    public function users()
     {
-        return $this->belongsTo('App\Dokter');
+        return $this->belongsTo('App\User');
     }
 }

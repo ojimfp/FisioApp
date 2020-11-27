@@ -36,5 +36,5 @@ $(".hari").on("input", function() {
     var j = document.getElementById("bonus").value;
     j = parseInt(j);
 
-    document.getElementById("total_gaji").value = a + b + c + d + e + f + g + h + i + j;
+    document.getElementById("total_gaji").value = a + b + c + d + e + f + g + h + i + j || 0;
 });
