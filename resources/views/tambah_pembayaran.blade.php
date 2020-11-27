@@ -174,9 +174,9 @@
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <select class="select" name="tipe_pembayaran" required>
                                                             <option>-- Pilih tipe pembayaran --</option>
-                                                            <option>Tunai</option>
-                                                            <option>Debit</option>
-                                                            <option>Internet Banking</option>
+                                                            <option value="Tunai">Tunai</option>
+                                                            <option value="Debit">Debit</option>
+                                                            <option value="Internet Banking">Internet Banking</option>
                                                         </select>
                                                     </td>
                                                 </tr>

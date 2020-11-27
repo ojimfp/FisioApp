@@ -141,6 +141,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
 
@@ -162,6 +163,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
 
