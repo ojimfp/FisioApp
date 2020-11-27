@@ -76,6 +76,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        // $pembayaran->users()->associate($request->admin);
         $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
@@ -217,7 +218,10 @@ class PembayaranController extends Controller
         //     $start_date = $start_date->format('Y-m-d');
         // }
 
-        $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
+        // return $start_date . '& ' . $end_date;
+
+        $pembayaran = Pembayaran::whereBetween('created_at', [($start_date." 00:00:00"), ($end_date." 23:59:59")])->get();
+
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Pembayaran',
