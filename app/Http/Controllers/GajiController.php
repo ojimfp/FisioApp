@@ -101,15 +101,13 @@ class GajiController extends Controller
     public function edit($id)
     {
         $gaji = Gaji::findOrFail($id);
-        $users = User::all();
 
         $result = [
             'meta' => [
                 'title'         => config('app.name') . ' - ' . 'Edit Gaji Karyawan',
                 'side_active'   => 'gaji'
             ],
-            'gaji' => $gaji,
-            'users' => $users
+            'gaji' => $gaji
         ];
 
         return view('edit_gaji', $result);
