@@ -210,18 +210,18 @@ class GajiController extends Controller
     public function slipGaji($id)
     {
         $gaji = Gaji::findOrFail($id);
-        // $terbilang = new NumberFormatter('id_ID', NumberFormatter::SPELLOUT);
+        $terbilang = new NumberFormatter('id_ID', NumberFormatter::SPELLOUT);
 
-        // $result = [
-        //     'meta' => [
-        //         'title'         => config('app.name') . ' - ' . 'Slip Gaji',
-        //         'side_active'   => 'gaji'
-        //     ],
-        //     'gaji' => $gaji
-        //     //'terbilang' => $terbilang
-        // ];
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Slip Gaji',
+                'side_active'   => 'gaji'
+            ],
+            'gaji' => $gaji,
+            'terbilang' => $terbilang
+        ];
 
-        return view('slip_gaji', ['gaji' => $gaji]);
+        return view('slip_gaji', $result);
     }
 
     public function getData($id = 0)

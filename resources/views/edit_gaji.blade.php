@@ -50,7 +50,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Hari Kerja <span class="text-danger">*</span></label>
-                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" value="{{ $gaji->hari_kerja }}" required autocomplete="off">
+                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" value="{{ $gaji->hari_kerja }}" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
@@ -79,7 +79,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="{{ $gaji->ins_koor }}" required>
+                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" value="{{ $gaji->ins_koor }}" required onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="bonus" type="text" name="bonus" value="{{ $gaji->bonus }}" autocomplete="off">
+                                            <input class="form-control hari" id="bonus" type="text" name="bonus" value="{{ $gaji->bonus }}" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                         </div>
                                     </div>
                                 </div>

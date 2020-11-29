@@ -67,13 +67,13 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Hari Kerja<span class="text-danger"> *</span></label>
-                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" required autocomplete="off">
+                                        <input class="form-control hari" id="hari_kerja" type="text" name="hari_kerja" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Hari Masuk</label>
-                                        <input class="form-control hari" id="hari_masuk" type="text" name="hari_masuk">
+                                        <input class="form-control hari" id="hari_masuk" type="text" name="hari_masuk" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
@@ -83,7 +83,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="gaji_bersih" type="text" name="gaji_bersih">
+                                            <input class="form-control hari" id="gaji_bersih" type="text" name="gaji_bersih" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" required autocomplete="off">
+                                            <input class="form-control hari" id="ins_koor" type="text" name="ins_koor" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_tindakan" type="text" name="biaya_tindakan" value="">
+                                            <input class="form-control" id="biaya_tindakan" type="text" name="biaya_tindakan" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_tindakan" type="text" name="ins_tindakan" value="">
+                                            <input class="form-control hari" id="ins_tindakan" type="text" name="ins_tindakan" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="biaya_exe" type="text" name="biaya_exe" value="">
+                                            <input class="form-control" id="biaya_exe" type="text" name="biaya_exe" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_exe" type="text" name="ins_exe" value="">
+                                            <input class="form-control hari" id="ins_exe" type="text" name="ins_exe" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="tindakan_minggu_satu" type="text" name="tindakan_minggu_satu" value="">
+                                            <input class="form-control" id="tindakan_minggu_satu" type="text" name="tindakan_minggu_satu" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_satu" type="text" name="jml_karyawan_satu" value="">
+                                        <input class="form-control" id="jml_karyawan_satu" type="text" name="jml_karyawan_satu" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -201,7 +201,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_satu" type="text" name="ins_minggu_satu" value="">
+                                            <input class="form-control hari" id="ins_minggu_satu" type="text" name="ins_minggu_satu" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="tindakan_minggu_dua" type="text" name="tindakan_minggu_dua" value="">
+                                            <input class="form-control" id="tindakan_minggu_dua" type="text" name="tindakan_minggu_dua" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +228,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_dua" type="text" name="jml_karyawan_dua" value="">
+                                        <input class="form-control" id="jml_karyawan_dua" type="text" name="jml_karyawan_dua" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -238,7 +238,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_dua" type="text" name="ins_minggu_dua" value="">
+                                            <input class="form-control hari" id="ins_minggu_dua" type="text" name="ins_minggu_dua" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +249,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="tindakan_minggu_tiga" type="text" name="tindakan_minggu_tiga" value="">
+                                            <input class="form-control" id="tindakan_minggu_tiga" type="text" name="tindakan_minggu_tiga" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +265,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_tiga" type="text" name="jml_karyawan_tiga" value="">
+                                        <input class="form-control" id="jml_karyawan_tiga" type="text" name="jml_karyawan_tiga" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -275,7 +275,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_tiga" type="text" name="ins_minggu_tiga" value="">
+                                            <input class="form-control hari" id="ins_minggu_tiga" type="text" name="ins_minggu_tiga" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="tindakan_minggu_empat" type="text" name="tindakan_minggu_empat" value="">
+                                            <input class="form-control" id="tindakan_minggu_empat" type="text" name="tindakan_minggu_empat" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +302,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_empat" type="text" name="jml_karyawan_empat" value="">
+                                        <input class="form-control" id="jml_karyawan_empat" type="text" name="jml_karyawan_empat" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -312,7 +312,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_empat" type="text" name="ins_minggu_empat" value="">
+                                            <input class="form-control hari" id="ins_minggu_empat" type="text" name="ins_minggu_empat" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control" id="tindakan_minggu_lima" type="text" name="tindakan_minggu_lima" value="">
+                                            <input class="form-control" id="tindakan_minggu_lima" type="text" name="tindakan_minggu_lima" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -339,7 +339,7 @@
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Jml Krywan</label>
-                                        <input class="form-control" id="jml_karyawan_lima" type="text" name="jml_karyawan_lima" value="">
+                                        <input class="form-control" id="jml_karyawan_lima" type="text" name="jml_karyawan_lima" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -349,7 +349,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="ins_minggu_lima" type="text" name="ins_minggu_lima" value="">
+                                            <input class="form-control hari" id="ins_minggu_lima" type="text" name="ins_minggu_lima" value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -362,7 +362,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="bonus" type="text" name="bonus" required autocomplete="off">
+                                            <input class="form-control hari" id="bonus" type="text" name="bonus" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                         </div>
                                     </div>
                                 </div>
@@ -375,7 +375,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
-                                            <input class="form-control hari" id="total_gaji" type="text" name="total_gaji" value="">
+                                            <input class="form-control hari" id="total_gaji" type="text" name="total_gaji" value="" readonly>
                                         </div>
                                     </div>
                                 </div>

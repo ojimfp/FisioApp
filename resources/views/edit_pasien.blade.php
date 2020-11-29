@@ -37,7 +37,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama" value="{{ $p->nama }}" required>
+                                        <input class="form-control" type="text" name="nama" value="{{ $p->nama }}" required onkeypress="return event.charCode < 48 || event.charCode  >57">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -51,7 +51,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Kota <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="kota" value="{{ $p->kota }}" required autocomplete="off">
+                                                <input type="text" class="form-control" name="kota" value="{{ $p->kota }}" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57">
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tempat Lahir</label>
-                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}">
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}" onkeypress="return event.charCode < 48 || event.charCode  >57">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -115,7 +115,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>No. Telepon/HP <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}">
+                                            <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                             </div>
                                         </div>
                                     </div>
