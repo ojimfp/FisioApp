@@ -161,13 +161,17 @@ class GajiController extends Controller
 
         if ($keyword && $bulan && $role_name == 'admin') {
             $gaji = Gaji::where('users_id', 'LIKE', "%" . $keyword . "%")
+                ->whereMonth('bulan_gajian', $bulan)->where('users_id', Auth::user()->id)
                 ->orWhereHas('users', function ($q) use ($keyword) {
                     $q->where('name', 'LIKE', "%" . $keyword . "%");
-                })->whereMonth('bulan_gajian', $bulan)->where('users_id', Auth::user()->id)->get();
+                })->whereMonth('bulan_gajian', $bulan)->where('users_id', Auth::user()->id)
+                ->get();
         } else if ($keyword == null && $bulan && $role_name == 'admin') {
-            $gaji = Gaji::whereMonth('bulan_gajian', $bulan)->where('users_id', Auth::user()->id)->get();
+            $gaji = Gaji::whereMonth('bulan_gajian', $bulan)
+                ->where('users_id', Auth::user()->id)->get();
         } else if ($keyword && $bulan == null && $role_name == 'admin') {
             $gaji = Gaji::where('users_id', 'LIKE', "%" . $keyword . "%")
+                ->where('users_id', Auth::user()->id)
                 ->orWhereHas('users', function ($q) use ($keyword) {
                     $q->where('name', 'LIKE', "%" . $keyword . "%");
                 })->where('users_id', Auth::user()->id)->get();
@@ -177,6 +181,7 @@ class GajiController extends Controller
 
         if ($keyword && $bulan && $role_name != 'admin') {
             $gaji = Gaji::where('users_id', 'LIKE', "%" . $keyword . "%")
+                ->whereMonth('bulan_gajian', $bulan)
                 ->orWhereHas('users', function ($q) use ($keyword) {
                     $q->where('name', 'LIKE', "%" . $keyword . "%");
                 })->whereMonth('bulan_gajian', $bulan)->get();

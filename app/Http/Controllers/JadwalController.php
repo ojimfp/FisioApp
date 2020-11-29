@@ -69,6 +69,7 @@ class JadwalController extends Controller
         $jadwal->shift = $request->shift;
         $jadwal->jam_tindakan = $request->jam_tindakan;
         $jadwal->status = $request->status;
+        $jadwal->nama_admin = $request->nama_admin;
         $jadwal->save();
 
         return redirect()->route('jadwal.index');

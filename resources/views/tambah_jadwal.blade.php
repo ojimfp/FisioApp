@@ -128,6 +128,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" hidden>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nama_admin" value="{{ Auth::user()->name }}">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Simpan Jadwal</button>
                             </div>
