@@ -43,9 +43,9 @@
                                         <table class="table table-border table-striped custom-table datatable mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Nama Fisioterapis</th>
                                                     <th>Nama Pasien</th>
+                                                    <th>No. Regis. Pasien</th>
                                                     <th>Umur Pasien</th>
                                                     <th>Tanggal Tindakan</th>
                                                     <th>Jam Tindakan</th>
@@ -56,10 +56,10 @@
                                             <tbody>
                                                 @foreach($jadwal_pg as $pg)
                                                 <tr>
-                                                    <td>{{ sprintf('%04d', $pg->id) }}</td>
                                                     <td>{{ $pg->users->name }}</td>
-                                                    <td>{{ implode($pg->pasien()->get()->pluck('nama')->toArray()) }}</td>
-                                                    <td>{{ $today->diff(new DateTime(implode($pg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
+                                                    <td>{{ $pg->pasien->nama }}</td>
+                                                    <td>{{ $pg->pasien->id }}</td>
+                                                    <td>{{ $today->diff(new DateTime($pg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $pg->tgl_tindakan }}</td>
                                                     <td>{{ $pg->jam_tindakan }}</td>
                                                     <td>{{ $pg->status }}</td>
@@ -105,9 +105,9 @@
                                         <table class="table table-border table-striped custom-table datatable mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Nama Fisioterapis</th>
                                                     <th>Nama Pasien</th>
+                                                    <th>No. Regis. Pasien</th>
                                                     <th>Umur Pasien</th>
                                                     <th>Tanggal Tindakan</th>
                                                     <th>Jam Tindakan</th>
@@ -118,10 +118,10 @@
                                             <tbody>
                                                 @foreach($jadwal_sg as $sg)
                                                 <tr>
-                                                    <td>{{ sprintf('%04d', $sg->id) }}</td>
                                                     <td>{{ $sg->users->name }}</td>
-                                                    <td>{{ implode($sg->pasien()->get()->pluck('nama')->toArray()) }}</td>
-                                                    <td>{{ $today->diff(new DateTime(implode($sg->pasien()->get()->pluck('tgl_lahir')->toArray())))->y }} tahun</td>
+                                                    <td>{{ $sg->pasien->nama }}</td>
+                                                    <td>{{ $sg->pasien->id }}</td>
+                                                    <td>{{ $today->diff(new DateTime($sg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $sg->tgl_tindakan }}</td>
                                                     <td>{{ $sg->jam_tindakan }}</td>
                                                     <td>{{ $sg->status }}</td>

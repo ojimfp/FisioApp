@@ -19,9 +19,6 @@ class CreateTindakanTable extends Migration
             $table->string('nama_tindakan');
             $table->integer('harga_jual');
             $table->integer('komisi_tindakan');
-            $table->string('kategori_tindakan');
-            $table->string('status_member');
-            $table->string('status_aktif');
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

@@ -58,9 +58,8 @@
                                         <th>Kode Tindakan</th>
                                         <th>Nama Tindakan</th>
                                         <th>Harga Jual</th>
-                                        <th>Kategori</th>
-                                        <th>Member</th>
-                                        <th>Aktif</th>
+                                        <th>Komisi</th>
+                                        <th>Keterangan</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
@@ -69,10 +68,9 @@
                                     <tr>
                                         <td>{{ $t->kode_tindakan }}</td>
                                         <td>{{ $t->nama_tindakan }}</td>
-                                        <td>{{ $t->harga_jual }}</td>
-                                        <td>{{ $t->kategori_tindakan }}</td>
-                                        <td>{{ $t->status_member }}</td>
-                                        <td>{{ $t->status_aktif }}</td>
+                                        <td>Rp {{ number_format($t->harga_jual) }}</td>
+                                        <td>Rp {{ number_format($t->komisi_tindakan) }}</td>
+                                        <td>{{ $t->keterangan }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

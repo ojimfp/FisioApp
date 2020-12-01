@@ -37,7 +37,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Kode Tindakan <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" value="{{ $t->kode_tindakan}}">
+                                        <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" value="{{ $t->kode_tindakan}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -53,41 +53,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Harga Jual</label>
-                                        <input type="form_control" class="form-control" name="harga_jual" autocomplete="off"  value="{{ $t->harga_jual}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
+                                        <input type="form_control" class="form-control" name="harga_jual" autocomplete="off" value="{{ $t->harga_jual}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Komisi Tindakan</label>
-                                        <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off"  value="{{ $t->komisi_tindakan}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Kategori Tindakan<span class="text-danger">*</span></label>
-                                        <select class="select" name="kategori_tindakan" required autocomplete="off">
-                                            <option @if ($t->kategori_tindakan == 'Rendah') selected @endif>Rendah</option>
-                                            <option @if ($t->kategori_tindakan == 'Medium') selected @endif>Medium</option>
-                                            <option @if ($t->kategori_tindakan == 'Tinggi') selected @endif>Tinggi</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Status Member</label>
-                                        <select class="select" name="status_member" required autocomplete="off">
-                                            <option  @if ($t->status_member == 'Ya') selected @endif>Ya</option>
-                                            <option  @if ($t->status_member == 'Tidak') selected @endif>Tidak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Status Aktif</label>
-                                        <select class="select" name="status_aktif" required autocomplete="off">
-                                            <option  @if ($t->status_aktif == 'Ya') selected @endif>Ya</option>
-                                            <option  @if ($t->status_aktif == 'Tidak') selected @endif>Tidak</option>
-                                        </select>
+                                        <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off" value="{{ $t->komisi_tindakan}}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

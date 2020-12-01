@@ -35,7 +35,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Kode Tindakan <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" placeholder="Contoh : US 10x" >
+                                        <input class="form-control" type="text" name="kode_tindakan" required autocomplete="off" placeholder="Contoh : US 10x">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -60,34 +60,6 @@
                                         <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Kategori Tindakan<span class="text-danger">*</span></label>
-                                        <select class="select" name="kategori_tindakan" required autocomplete="off">
-                                            <option>Rendah</option>
-                                            <option>Medium</option>
-                                            <option>Tinggi</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Status Member</label>
-                                        <select class="select" name="status_member" required autocomplete="off">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Status Aktif</label>
-                                        <select class="select" name="status_aktif" required autocomplete="off">
-                                            <option>Ya</option>
-                                            <option>Tidak</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Keterangan</label>
@@ -104,8 +76,8 @@
             </div>
         </div>
     </div>
-     <!-- FOOTER -->
-     @include('_part.footer')
+    <!-- FOOTER -->
+    @include('_part.footer')
 
 </body>
 

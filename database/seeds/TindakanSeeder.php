@@ -16,28 +16,19 @@ class TindakanSeeder extends Seeder
             'kode_tindakan' => 'US1',
             'nama_tindakan' => 'Ultrasound (10 menit)',
             'harga_jual' => '50000',
-            'komisi_tindakan' => '0',
-            'kategori_tindakan' => 'Low',
-            'status_member' => 'Tidak',
-            'status_aktif' => 'Ya'
+            'komisi_tindakan' => '0'
         ]);
         Tindakan::create([
             'kode_tindakan' => 'MSG1',
             'nama_tindakan' => 'Massage 1 Lokal',
             'harga_jual' => '60000',
-            'komisi_tindakan' => '0',
-            'kategori_tindakan' => 'Low',
-            'status_member' => 'Tidak',
-            'status_aktif' => 'Ya'
+            'komisi_tindakan' => '0'
         ]);
         Tindakan::create([
             'kode_tindakan' => 'ES',
             'nama_tindakan' => 'Electrical Stimulation',
             'harga_jual' => '70000',
-            'komisi_tindakan' => '0',
-            'kategori_tindakan' => 'Low',
-            'status_member' => 'Tidak',
-            'status_aktif' => 'Ya'
+            'komisi_tindakan' => '0'
         ]);
     }
 }

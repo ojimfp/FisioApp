@@ -43,17 +43,15 @@
                                         <img src="{{ asset('assets/img/logo-dark.png') }}" class="inv-logo" alt="">
                                         <ul class="list-unstyled">
                                             <li>Klinik Fisioterapi Niniek Soetini, M.Fis</li>
-                                            <li>Jl. Mulyosari Timur no. 69,</li>
-                                            <li>RT 12/RW 01, Kalisari, Kec. Mulyorejo,</li>
-                                            <li>Surabaya</li>
+                                            <li>Jl. Mulyosari Timur no. 69, Surabaya</li>
+                                            <li>Tlp. 031 5936394, WA 082230495969</li>
                                         </ul>
                                     </div>
                                     <div class="col-6 col-sm-6 m-b-20">
                                         <div class="invoice-details">
                                             <h3 class="text-uppercase">Invoice {{ $pembayaran->id }}</h3>
                                             <ul class="list-unstyled">
-                                                <li>Tanggal: <span>{{ $pembayaran->created_at->format('d/m/Y') }}</span></li>
-                                                <!-- <li>Due date: <span>November 25, 2017</span></li> -->
+                                                <li>{{ $pembayaran->created_at->format('d/m/Y, H:i') }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -71,22 +69,6 @@
                                         </ul>
 
                                     </div>
-                                    <!-- <div class="col-sm-6 col-lg-6 m-b-20">
-                                        <div class="invoices-view">
-                                            <span class="text-muted">Payment Details:</span>
-                                            <ul class="list-unstyled invoice-payment-details">
-                                                <li>
-                                                    <h5>Total Due: <span class="text-right">$288.2</span></h5>
-                                                </li>
-                                                <li>Bank name: <span>Profit Bank Europe</span></li>
-                                                <li>Country: <span>United Kingdom</span></li>
-                                                <li>City: <span>London E1 8BF</span></li>
-                                                <li>Address: <span>3 Goodman Street</span></li>
-                                                <li>IBAN: <span>KFH37784028476740</span></li>
-                                                <li>SWIFT code: <span>BPT4E</span></li>
-                                            </ul>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
