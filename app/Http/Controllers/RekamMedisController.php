@@ -73,10 +73,18 @@ class RekamMedisController extends Controller
 
         $rekam_medis->pasien()->associate($request->id_pasien);
         $rekam_medis->users()->associate($request->id_user);
+
+        if ($request->aps_dokter == 'APS') {
+            $rekam_medis->aps_dokter = $request->aps_dokter;
+        } else if ($request->aps_dokter == 'Dokter') {
+            $rekam_medis->aps_dokter = $request->nama_dokter;
+        }
+
+        $rekam_medis->diagnosa_dokter = $request->diagnosa_dokter;
         $rekam_medis->nama_terapis = $request->nama_terapis;
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
-        $rekam_medis->diagnosa = $request->diagnosa;
+        $rekam_medis->diagnosa_terapis = $request->diagnosa_terapis;
         $rekam_medis->save();
 
         $rekam_medis->tindakan()->sync($request->tindakan);
@@ -93,7 +101,6 @@ class RekamMedisController extends Controller
     public function edit($id)
     {
         $rekam_medis = RekamMedis::findOrFail($id);
-        // $dokter = Dokter::all();
         $tindakan = Tindakan::all();
 
         $result = [
@@ -119,9 +126,16 @@ class RekamMedisController extends Controller
     {
         $rekam_medis = RekamMedis::findOrFail($id);
 
+        if ($request->aps_dokter == 'APS') {
+            $rekam_medis->aps_dokter = $request->aps_dokter;
+        } else if ($request->aps_dokter == 'Dokter') {
+            $rekam_medis->aps_dokter = $request->nama_dokter;
+        }
+
+        $rekam_medis->diagnosa_dokter = $request->diagnosa_dokter;
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
-        $rekam_medis->diagnosa = $request->diagnosa;
+        $rekam_medis->diagnosa_terapis = $request->diagnosa_terapis;
         $rekam_medis->tindakan()->sync($request->tindakan);
         $rekam_medis->update();
 

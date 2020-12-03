@@ -73,10 +73,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>Tanggal Terapi</th>
+                                                    <th>APS/Dokter</th>
+                                                    <th>Diagnosa Dokter</th>
                                                     <th>Nama Terapis</th>
                                                     <th>Anamnesa</th>
                                                     <th>Pemeriksaan</th>
-                                                    <th>Diagnosa</th>
+                                                    <th>Diagnosa Terapis</th>
                                                     <th>Tindakan</th>
                                                     <th class="text-right">Opsi</th>
                                                 </tr>
@@ -85,10 +87,12 @@
                                                 @foreach($rekam_medis as $rm)
                                                 <tr>
                                                     <td>{{ $rm->created_at->format('d/m/Y H:i') }}</td>
+                                                    <td>{{ $rm->aps_dokter }}</td>
+                                                    <td>{{ $rm->diagnosa_dokter }}</td>
                                                     <td>{{ $rm->users->name }}</td>
                                                     <td>{{ $rm->anamnesa }}</td>
                                                     <td>{{ $rm->pemeriksaan }}</td>
-                                                    <td>{{ $rm->diagnosa }}</td>
+                                                    <td>{{ $rm->diagnosa_terapis }}</td>
                                                     <td>{{ implode(', ', $rm->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">

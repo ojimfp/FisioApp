@@ -17,10 +17,12 @@ class CreateRekamMedisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('pasien_id');
             $table->unsignedBigInteger('users_id');
+            $table->string('aps_dokter');
+            $table->string('diagnosa_dokter');
             $table->string('nama_terapis');
             $table->string('anamnesa');
             $table->string('pemeriksaan');
-            $table->string('diagnosa');
+            $table->string('diagnosa_terapis');
             $table->timestamps();
         });
 

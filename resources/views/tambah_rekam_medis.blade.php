@@ -32,9 +32,29 @@
                         <form action="{{ route('rekam-medis.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <input class="form-control" name="id_pasien" value="{{ $pasien->id }}" hidden>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Dokter/APS <span class="text-danger">*</span></label></br>
+                                        <div class="form-check form-check-inline radio">
+                                            <input class="form-check-input" type="radio" name="aps_dokter" id="aps" value="APS" onchange="findSelected()">
+                                            <label class="form-check-label" for="aps">APS (Atas Permintaan Sendiri)</label>
+                                        </div>
+                                        <div class="form-check form-check-inline radio">
+                                            <input class="form-check-input" type="radio" name="aps_dokter" id="dokter" value="Dokter" onchange="findSelected()">
+                                            <label class="form-check-label" for="dokter" style="margin-right: 7px;">Dokter</label>
+                                            <input class="form-check-input" type="text" name="nama_dokter" id="nama_dokter" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Diagnosa Dokter <span class="text-danger">*</span></label></br>
+                                        <input class="form-control" name="diagnosa_dokter" value="" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -58,8 +78,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Diagnosa <span class="text-danger">*</span></label></br>
-                                        <textarea class="form-control" name="diagnosa" cols="88" rows="4"></textarea>
+                                        <label>Diagnosa Terapis <span class="text-danger">*</span></label></br>
+                                        <textarea class="form-control" name="diagnosa_terapis" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -85,6 +105,17 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
+    <script>
+        function findSelected() {
+            var result = document.querySelector('input[name="aps_dokter"]:checked').value;
+            if (result == "APS") {
+
+                document.getElementById("nama_dokter").setAttribute('disabled', true);
+            } else {
+                document.getElementById("nama_dokter").removeAttribute('disabled');
+            }
+        }
+    </script>
 </body>
 
 <!-- add-patient24:07-->
