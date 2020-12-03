@@ -35,7 +35,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="nama" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
+                                        <input class="form-control" type="text" name="nama" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57" placeholder="Harap diawal dengan huruf kapital">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -43,13 +43,13 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Alamat <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="alamat" required autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
+                                                <input type="text" class="form-control" name="alamat" required autocomplete="off" placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Kota <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="kota" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
+                                                <input type="text" class="form-control" name="kota" required autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57" placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Pekerjaan</label>
-                                                <input class="form-control" type="text" name="pekerjaan" autocomplete="off"  placeholder="Harap diawal dengan huruf kapital">
+                                                <input class="form-control" type="text" name="pekerjaan" autocomplete="off" placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                         {{-- <div class="col-sm-6">
@@ -98,14 +98,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tempat Lahir</label>
-                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57"  placeholder="Harap diawal dengan huruf kapital">
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" onkeypress="return event.charCode < 48 || event.charCode  >57" placeholder="Harap diawal dengan huruf kapital">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tanggal Lahir <span class="text-danger">*</span></label>
                                                 <div class="cal-icon">
-                                                    <input type="date" class="form-control" name="tgl_lahir" required autocomplete="off">
+                                                    <input type="text" class="form-control floating datetimepicker" name="tgl_lahir" required autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -155,8 +155,8 @@
             </div>
         </div>
     </div>
-        <!-- FOOTER -->
-        @include('_part.footer')
+    <!-- FOOTER -->
+    @include('_part.footer')
 
 </body>
 

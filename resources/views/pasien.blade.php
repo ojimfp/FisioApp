@@ -36,7 +36,7 @@
                         <div class="col-sm-6 col-md-10" style="float: left;">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Cari pasien</label>
-                                <input type="text" class="form-control floating" name="keyword">
+                                <input type="text" class="form-control floating" name="keyword" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-2" style="float: left;">
@@ -69,7 +69,7 @@
                                         <td>{{ sprintf('%04d', $p->id) }}</td>
                                         <td>{{ $p->nama }}</td>
                                         <td>{{ $p->alamat }}</td>
-                                        <td>{{ $p->tgl_lahir }}</td>
+                                        <td>{{ Carbon\Carbon::parse($p->tgl_lahir)->format('d/m/Y') }}</td>
                                         <td>{{ $p->no_telp }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">

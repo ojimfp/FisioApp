@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Facade\Ignition\Tabs\Tab;
 use App\Pasien;
+use Carbon\Carbon;
 
 class PasienController extends Controller
 {
@@ -44,19 +45,33 @@ class PasienController extends Controller
     // Menyimpan data ke dalam table pasien
     public function store(Request $request)
     {
-        DB::table('pasien')->insert([
-            'nama'              => $request->nama,
-            'alamat'            => $request->alamat,
-            'kota'              => $request->kota,
-            'jenis_kelamin'     => $request->jenis_kelamin,
-            'pekerjaan'         => $request->pekerjaan,
-            'tempat_lahir'      => $request->tempat_lahir,
-            'tgl_lahir'         => $request->tgl_lahir,
-            'no_telp'           => $request->no_telp,
-            'alergi_obat'       => $request->alergi_obat,
-            'masalah_kulit'     => $request->masalah_kulit,
-            'catatan'           => $request->catatan
-        ]);
+        // DB::table('pasien')->insert([
+        //     'nama'              => $request->nama,
+        //     'alamat'            => $request->alamat,
+        //     'kota'              => $request->kota,
+        //     'jenis_kelamin'     => $request->jenis_kelamin,
+        //     'pekerjaan'         => $request->pekerjaan,
+        //     'tempat_lahir'      => $request->tempat_lahir,
+        //     'tgl_lahir'         => $request->tgl_lahir,
+        //     'no_telp'           => $request->no_telp,
+        //     'alergi_obat'       => $request->alergi_obat,
+        //     'masalah_kulit'     => $request->masalah_kulit,
+        //     'catatan'           => $request->catatan
+        // ]);
+        $pasien = new Pasien;
+
+        $pasien->nama = $request->nama;
+        $pasien->alamat = $request->alamat;
+        $pasien->kota = $request->kota;
+        $pasien->jenis_kelamin = $request->jenis_kelamin;
+        $pasien->pekerjaan = $request->pekerjaan;
+        $pasien->tempat_lahir = $request->tempat_lahir;
+        $pasien->tgl_lahir = Carbon::createFromFormat('d/m/Y', $request->tgl_lahir)->format('Y-m-d');
+        $pasien->no_telp = $request->no_telp;
+        $pasien->alergi_obat = $request->alergi_obat;
+        $pasien->masalah_kulit = $request->masalah_kulit;
+        $pasien->catatan = $request->catatan;
+        $pasien->save();
 
         return redirect()->route('pasien.index');
     }
@@ -86,7 +101,7 @@ class PasienController extends Controller
         $pasien->jenis_kelamin      = $request->jenis_kelamin;
         $pasien->pekerjaan          = $request->pekerjaan;
         $pasien->tempat_lahir       = $request->tempat_lahir;
-        $pasien->tgl_lahir          = $request->tgl_lahir;
+        $pasien->tgl_lahir          = Carbon::createFromFormat('d/m/Y', $request->tgl_lahir)->format('Y-m-d');
         $pasien->no_telp            = $request->no_telp;
         $pasien->alergi_obat        = $request->alergi_obat;
         $pasien->masalah_kulit      = $request->masalah_kulit;
@@ -114,6 +129,8 @@ class PasienController extends Controller
                 ->where('id', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('nama', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('alamat', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('tgl_lahir', 'LIKE', "%" . $keyword . "%")
+                ->orWhere('no_telp', 'LIKE', "%" . $keyword . "%")
                 ->get();
             $result = [
                 'meta' => [
@@ -133,6 +150,6 @@ class PasienController extends Controller
             ];
         }
 
-        return view('pasien',$result);
+        return view('pasien', $result);
     }
 }

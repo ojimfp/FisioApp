@@ -62,13 +62,13 @@
                                             <div class="form-group">
                                                 <label class="display-block">Jenis Kelamin <span class="text-danger">*</span></label>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_pria" value="Pria"  @if ($p->jenis_kelamin == 'Pria') checked @endif>
+                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_pria" value="Pria" @if ($p->jenis_kelamin == 'Pria') checked @endif>
                                                     <label class="form-check-label" for="jns_pria">
                                                         Pria
                                                     </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_wanita" value="Wanita"  @if ($p->jenis_kelamin == 'Wanita') checked @endif>
+                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jns_wanita" value="Wanita" @if ($p->jenis_kelamin == 'Wanita') checked @endif>
                                                     <label class="form-check-label" for="jns_wanita">
                                                         Wanita
                                                     </label>
@@ -87,7 +87,7 @@
                                             </div> --}}
                                             <div class="form-group">
                                                 <label>Pekerjaan</label>
-                                            <input class="form-control" type="text" name="pekerjaan" autocomplete="off" value="{{ $p->pekerjaan}}" required>
+                                                <input class="form-control" type="text" name="pekerjaan" autocomplete="off" value="{{ $p->pekerjaan }}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -97,14 +97,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tempat Lahir</label>
-                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir}}" onkeypress="return event.charCode < 48 || event.charCode  >57">
+                                                <input type="text" class="form-control" name="tempat_lahir" autocomplete="off" required value="{{ $p->tempat_lahir }}" onkeypress="return event.charCode < 48 || event.charCode  >57">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tanggal Lahir <span class="text-danger">*</span></label>
                                                 <div class="cal-icon">
-                                                <input type="date" class="form-control" name="tgl_lahir" required autocomplete="off" value="{{ $p->tgl_lahir}}">
+                                                    <input type="text" class="form-control floating datetimepicker" name="tgl_lahir" value="{{ Carbon\Carbon::parse($p->tgl_lahir)->format('d/m/Y') }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +115,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>No. Telepon/HP <span class="text-danger">*</span></label>
-                                            <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
+                                                <input class="form-control" type="text" name="no_telp" required autocomplete="off" value="{{ $p->no_telp }}" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                             </div>
                                         </div>
                                     </div>
@@ -149,8 +149,8 @@
             </div>
         </div>
     </div>
-     <!-- FOOTER -->
-     @include('_part.footer')
+    <!-- FOOTER -->
+    @include('_part.footer')
 
 </body>
 
