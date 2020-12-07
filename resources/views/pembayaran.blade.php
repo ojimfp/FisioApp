@@ -7,10 +7,6 @@
 <head>
     @include('_part.meta')
     @include('_part.style')
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
@@ -28,40 +24,64 @@
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
                         <a href="{{ route('pembayaran.download') . '?start=' . $start_date . '&end=' . $end_date }}">Unduh PDF</a>
-                        <!-- <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white"><i class="fa fa-file-pdf-o fa-lg"></i> Unduh PDF</button>
-                            <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
-                        </div> -->
                     </div>
                 </div>
-                <div class="row filter-row">
-                    <form action="{{ route('pembayaran.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-4" style="float: left;">
-                            <div class="form-group form-focus">
-                                <label class="focus-label">Dari</label>
-                                <div class="cal-icon">
-                                    <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
+                <div class=" filter-row">
+                    <form action="{{ route('pembayaran.search') }}" class="row" method="GET">
+                        <div class="wrapper-filter col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label">Dari Tanggal</label>
+                                        <div class="cal-icon">
+                                            <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label">Sampai Tanggal</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control floating datetimepicker" type="text" name="end_date" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Dari<span class="text-danger">*</span></label>
+                                        <div class="time-icon">
+                                            <input type="text" name="start_time" class="form-control" id="datetimepicker3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sampai <span class="text-danger">*</span></label>
+                                        <div class="time-icon">
+                                            <input type="text" name="end_time" class="form-control" id="datetimepicker2">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-4" style="float: left;">
-                            <div class="form-group form-focus">
-                                <label class="focus-label">Sampai</label>
-                                <div class="cal-icon">
-                                    <input class="form-control floating datetimepicker" type="text" name="end_date" required>
-                                </div>
+                        <div class="wrapper-action col-6 row">
+                            <div class="col-6">
+                                <button class="btn btn-success submit-btn w-100">Cari Pembayaran</button>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4" style="float: left;">
-                            <button class="btn btn-success submit-btn">Cari Pembayaran</button>
+                            <div class="col-6">
+                                <a href="{{ route('pembayaran.index') }}" class="btn btn-success submit-btn w-100">Reset</a>
+                            </div>
                         </div>
                     </form>
-                    <form action="{{ route('pembayaran.index') }}">
+                    {{-- <form action="{{ route('pembayaran.index') }}">
                         <div class="col-sm-6 col-md-4" style="float: left;">
                             <button class="btn btn-success submit-btn">Reset</button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -143,6 +163,18 @@
             function formSubmit() {
                 $("#deleteForm").submit();
             }
+        </script>
+        <script>
+            $(function() {
+                $('#datetimepicker3').datetimepicker({
+                    // format: 'LT'
+                    format: 'HH:mm:00'
+                });
+                $('#datetimepicker2').datetimepicker({
+                    // format: 'LT'
+                    format: 'HH:mm:00'
+                });
+            });
         </script>
 </body>
 

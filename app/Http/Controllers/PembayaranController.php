@@ -215,14 +215,23 @@ class PembayaranController extends Controller
         // if ($request->start_date) {
         //     $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
         //     $start_date = $start_date->format('Y-m-d');
-        // }else{
+        // }else{()
         //     $start_date = new DateTime('today');
         //     $start_date = $start_date->format('Y-m-d');
         // }
 
         // return $start_date . '& ' . $end_date;
-
-        $pembayaran = Pembayaran::whereBetween('created_at', [($start_date." 00:00:00"), ($end_date." 23:59:59")])->get();
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
+        // if($time=="pagi"){
+        //     $start_date = $start_date." 00:00:00";
+        //     $end_date = $end_date." 12:00:00";
+        // }else{
+        //     $start_date = $start_date." 12:00:01";
+        //     $end_date = $end_date." 23:59:59";
+        // }
+        $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
+            ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
 
         $result = [
             'meta' => [

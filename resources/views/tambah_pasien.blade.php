@@ -119,24 +119,12 @@
                                                 <input class="form-control" type="tel" name="no_telp" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57" placeholder="08xxxxxxx">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Email <span class="text-danger">*</span></label>
-                                                <input class="form-control" type="email" name="email" required autocomplete="off">
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Alergi Obat</label>
                                         <textarea class="form-control" name="alergi_obat" autocomplete="off"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Masalah Kulit</label>
-                                        <textarea class="form-control" name="masalah_kulit" autocomplete="off"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
