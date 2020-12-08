@@ -168,8 +168,8 @@
         // });
         $(function() {
             $('#datetimepicker3').datetimepicker({
-                format: 'LT'
-
+                // format: 'LT'
+                format: 'HH:mm'
             });
         });
     </script>
