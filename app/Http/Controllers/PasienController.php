@@ -45,19 +45,6 @@ class PasienController extends Controller
     // Menyimpan data ke dalam table pasien
     public function store(Request $request)
     {
-        // DB::table('pasien')->insert([
-        //     'nama'              => $request->nama,
-        //     'alamat'            => $request->alamat,
-        //     'kota'              => $request->kota,
-        //     'jenis_kelamin'     => $request->jenis_kelamin,
-        //     'pekerjaan'         => $request->pekerjaan,
-        //     'tempat_lahir'      => $request->tempat_lahir,
-        //     'tgl_lahir'         => $request->tgl_lahir,
-        //     'no_telp'           => $request->no_telp,
-        //     'alergi_obat'       => $request->alergi_obat,
-        //     'masalah_kulit'     => $request->masalah_kulit,
-        //     'catatan'           => $request->catatan
-        // ]);
         $pasien = new Pasien;
 
         $pasien->nama = $request->nama;

@@ -24,6 +24,7 @@ Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 Route::resource('rekam-medis', 'RekamMedisController')->except(['index', 'show', 'create']);
 Route::get('rekam-medis/{id}', 'RekamMedisController@index')->name('rekam-medis.index');
 Route::get('rekam-medis/{id}/create', 'RekamMedisController@create')->name('rekam-medis.create');
+Route::post('rekam-medis/get-tindakan', 'RekamMedisController@getTindakan')->name('rekam-medis.getTindakan');
 
 Route::resource('dokter', 'DokterController')->except(['show']);
 Route::get('dokter/search', 'DokterController@search')->name('dokter.search');

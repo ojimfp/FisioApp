@@ -31,7 +31,7 @@
                     <div class="col-lg-8 offset-lg-2">
                         <form action="{{ route('rekam-medis.store') }}" method="POST">
                             @csrf
-                            <div class="row">
+                            <div class="row" id="dynamic_field">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <input class="form-control" name="id_pasien" value="{{ $pasien->id }}" hidden>
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Tindakan</label>
                                         @foreach($tindakan as $t)
                                         <div class="checkbox">
@@ -91,6 +91,14 @@
                                             <label>{{ $t->nama_tindakan }}</label>
                                         </div>
                                         @endforeach
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label>Tindakan <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_1">
+                                        <input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan_1" hidden>
+                                        <div class="m-t-10 text-right">
+                                            <button type="button" class="btn btn-success btn-sm" id="tambah">Tambah Tindakan</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -109,12 +117,88 @@
         function findSelected() {
             var result = document.querySelector('input[name="aps_dokter"]:checked').value;
             if (result == "APS") {
-
                 document.getElementById("nama_dokter").setAttribute('disabled', true);
             } else {
                 document.getElementById("nama_dokter").removeAttribute('disabled');
             }
         }
+    </script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('#tindakan').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{ route('rekam-medis.getTindakan') }}",
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            search: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                        }
+                    });
+                },
+                select: function(event, ui) {
+                    $('#tindakan').val(ui.item.label);
+                    $('#id_tindakan').val(ui.item.value);
+                    return false;
+                }
+            });
+        });
+    </script> -->
+    <script>
+        $(document).ready(function() {
+            // var url = "{{ url('add-remove-input-fields') }}";
+            var i = 1;
+            $('#tambah').click(function() {
+                i++;
+                $('#dynamic_field').append('<div class="col-md-12" id="col_' + i + '">\n' +
+                    '<div class="form-group">\n' +
+                    '<label>Tindakan <span class="text-danger">*</span></label>\n' +
+                    '<input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_' + i + '">\n' +
+                    '<input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan_' + i + '" hidden>\n' +
+                    '<div class="m-t-10 text-right">\n' +
+                    '<button type="button" class="btn btn-danger btn-sm hapus" id="' + i + '">Hapus Tindakan</button>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</div>');
+            });
+
+            $(document).on('click', '.tindakan', function(e) {
+                $(this).autocomplete({
+                    source: function(request, response) {
+                        $.ajax({
+                            url: "{{ route('rekam-medis.getTindakan') }}",
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                search: request.term
+                            },
+                            success: function(data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    select: function(event, ui) {
+                        $(this).val(ui.item.label);
+                        var str = this.id;
+                        var a = str.indexOf("_");
+                        var b = str.length;
+                        var number = str.substring(a + 1, b);
+                        $('#id_tindakan_' + number).val(ui.item.value);
+                        return false;
+                    }
+                });
+            });
+
+            $(document).on('click', '.hapus', function() {
+                var button_id = $(this).attr("id");
+                $('#col_' + button_id + '').remove();
+            });
+        });
     </script>
 </body>
 

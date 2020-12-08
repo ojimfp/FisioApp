@@ -87,7 +87,7 @@ class RekamMedisController extends Controller
         $rekam_medis->diagnosa_terapis = $request->diagnosa_terapis;
         $rekam_medis->save();
 
-        $rekam_medis->tindakan()->sync($request->tindakan);
+        $rekam_medis->tindakan()->sync($request->id_tindakan);
 
         return redirect()->route('rekam-medis.index', $pasien);
     }
@@ -155,5 +155,24 @@ class RekamMedisController extends Controller
         $rekam_medis->delete();
 
         return redirect()->route('rekam-medis.index', $rekam_medis->pasien->id);
+    }
+
+    public function getTindakan(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search == '') {
+            $tindakan = Tindakan::orderBy('nama_tindakan', 'asc')->select('id', 'nama_tindakan')->limit(5)->get();
+        } else {
+            $tindakan = Tindakan::orderBy('nama_tindakan', 'asc')->select('id', 'nama_tindakan')
+                ->where('nama_tindakan', 'LIKE', '%' . $search . '%')->limit(5)->get();
+        }
+
+        $response = array();
+        foreach ($tindakan as $t) {
+            $response[] = array("value" => $t->id, "label" => $t->nama_tindakan);
+        }
+
+        return response()->json($response);
     }
 }

@@ -145,12 +145,14 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Pekerjaan</label>
-                                        <div class="radio">
-                                            <input type="radio" name="pekerjaan" value="Fisioterapis" @if($user->pekerjaan == 'Fisioterapis') checked @endif> Fisioterapis</label>
-                                            <!-- <label style="margin-right: 10px;">Fisioterapis</label> -->
-                                            <input type="radio" name="pekerjaan" value="Administrasi" @if($user->pekerjaan == 'Administrasi') checked @endif> Administrasi</label>
-                                            <!-- <label style="margin-right: 10px;">Administrasi</label> -->
+                                        <label>Pekerjaan</label></br>
+                                        <div class="form-check form-check-inline radio">
+                                            <input class="form-check-input" type="radio" name="pekerjaan" id="fisioterapis" value="Fisioterapis" @if($user->pekerjaan == 'Fisioterapis') checked @endif>
+                                            <label class="form-check-label" for="fisioterapis">Fisioterapis</label>
+                                        </div>
+                                        <div class="form-check form-check-inline radio">
+                                            <input class="form-check-input" type="radio" name="pekerjaan" id="administrasi" value="Administrasi" @if($user->pekerjaan == 'Administrasi') checked @endif>
+                                            <label class="form-check-label" for="administrasi">Administrasi</label>
                                         </div>
                                     </div>
                                 </div>

@@ -101,13 +101,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-12">Pekerjaan</label>
+                            <label class="col-md-12 col-form-label text-md-left">Pekerjaan</label>
+
                             <div class="col-md-12">
-                                <div class="radio">
-                                    <input type="radio" name="pekerjaan" value="Fisioterapis">
-                                    <label style="margin-right: 10px;">Fisioterapis</label>
-                                    <input type="radio" name="pekerjaan" value="Administrasi">
-                                    <label>Administrasi</label>
+                                <div class="form-check form-check-inline radio">
+                                    <input class="form-check-input" type="radio" name="pekerjaan" id="fisioterapis" value="Fisioterapis">
+                                    <label class="form-check-label" for="fisioterapis">Fisioterapis</label>
+                                </div>
+                                <div class="form-check form-check-inline radio">
+                                    <input class="form-check-input" type="radio" name="pekerjaan" id="administrasi" value="Administrasi">
+                                    <label class="form-check-label" for="administrasi">Administrasi</label>
                                 </div>
                             </div>
                         </div>

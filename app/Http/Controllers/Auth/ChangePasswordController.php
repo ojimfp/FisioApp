@@ -27,7 +27,14 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        return view('auth.passwords.change');
+        $result = [
+            'meta' => [
+                'title'         => config('app.name') . ' - ' . 'Ganti Password',
+                'side_active'   => ''
+            ],
+        ];
+
+        return view('auth.passwords.change', $result);
     }
 
     /**
