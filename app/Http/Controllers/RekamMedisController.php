@@ -85,6 +85,7 @@ class RekamMedisController extends Controller
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
         $rekam_medis->diagnosa_terapis = $request->diagnosa_terapis;
+        $rekam_medis->catatan_tindakan = $request->catatan_tindakan;
         $rekam_medis->save();
 
         $rekam_medis->tindakan()->sync($request->id_tindakan);
@@ -136,7 +137,8 @@ class RekamMedisController extends Controller
         $rekam_medis->anamnesa = $request->anamnesa;
         $rekam_medis->pemeriksaan = $request->pemeriksaan;
         $rekam_medis->diagnosa_terapis = $request->diagnosa_terapis;
-        $rekam_medis->tindakan()->sync($request->tindakan);
+        $rekam_medis->catatan_tindakan = $request->catatan_tindakan;
+        $rekam_medis->tindakan()->sync($request->id_tindakan);
         $rekam_medis->update();
 
         return redirect()->route('rekam-medis.index', $rekam_medis->pasien->id);

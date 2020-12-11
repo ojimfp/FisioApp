@@ -82,7 +82,7 @@
                                         <textarea class="form-control" name="diagnosa_terapis" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" id="dynamic_col">
                                     <!-- <div class="form-group">
                                         <label>Tindakan</label>
                                         @foreach($tindakan as $t)
@@ -92,13 +92,20 @@
                                         </div>
                                         @endforeach
                                     </div> -->
-                                    <div class="form-group">
+                                    <?php $id_num = 1 ?>
+                                    <div class="form-group fg" id="fg_<?php echo $id_num ?>">
                                         <label>Tindakan <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_1">
-                                        <input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan_1" hidden>
-                                        <div class="m-t-10 text-right">
+                                        <input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_<?php echo $id_num ?>" required>
+                                        <input type="text" class="form-control" name="id_tindakan[]" id="idtindakan_<?php echo $id_num ?>" hidden>
+                                        <div class="m-t-10 text-right" id="button_<?php echo $id_num ?>">
                                             <button type="button" class="btn btn-success btn-sm" id="tambah">Tambah Tindakan</button>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Catatan Tindakan</label></br>
+                                        <textarea class="form-control" name="catatan_tindakan" cols="88" rows="4"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -123,42 +130,16 @@
             }
         }
     </script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('#tindakan').autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{ route('rekam-medis.getTindakan') }}",
-                        type: 'post',
-                        dataType: 'json',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            search: request.term
-                        },
-                        success: function(data) {
-                            response(data);
-                        }
-                    });
-                },
-                select: function(event, ui) {
-                    $('#tindakan').val(ui.item.label);
-                    $('#id_tindakan').val(ui.item.value);
-                    return false;
-                }
-            });
-        });
-    </script> -->
     <script>
         $(document).ready(function() {
-            // var url = "{{ url('add-remove-input-fields') }}";
             var i = 1;
+
             $('#tambah').click(function() {
                 i++;
-                $('#dynamic_field').append('<div class="col-md-12" id="col_' + i + '">\n' +
-                    '<div class="form-group">\n' +
+                $('#dynamic_col').append('<div class="form-group fg" id="fg_' + i + '">\n' +
                     '<label>Tindakan <span class="text-danger">*</span></label>\n' +
-                    '<input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_' + i + '">\n' +
-                    '<input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan_' + i + '" hidden>\n' +
+                    '<input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_' + i + '" required>\n' +
+                    '<input type="text" class="form-control" name="id_tindakan[]" id="idtindakan_' + i + '" hidden>\n' +
                     '<div class="m-t-10 text-right">\n' +
                     '<button type="button" class="btn btn-danger btn-sm hapus" id="' + i + '">Hapus Tindakan</button>\n' +
                     '</div>\n' +
@@ -188,7 +169,7 @@
                         var a = str.indexOf("_");
                         var b = str.length;
                         var number = str.substring(a + 1, b);
-                        $('#id_tindakan_' + number).val(ui.item.value);
+                        $('#idtindakan_' + number).val(ui.item.value);
                         return false;
                     }
                 });
@@ -196,7 +177,7 @@
 
             $(document).on('click', '.hapus', function() {
                 var button_id = $(this).attr("id");
-                $('#col_' + button_id + '').remove();
+                $('#fg_' + button_id + '').remove();
             });
         });
     </script>

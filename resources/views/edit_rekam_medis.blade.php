@@ -29,10 +29,10 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form action="{{ route('rekam-medis.update', $rekam_medis->id) }}" method="POST" id="dynamic_field">
+                        <form action="{{ route('rekam-medis.update', $rekam_medis->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="row">
+                            <div class="row" id="dynamic_field">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <input class="form-control" name="id_pasien" value="{{ $rekam_medis->pasien->id }}" hidden>
@@ -82,7 +82,11 @@
                                         <textarea class="form-control" name="diagnosa_terapis" id="" cols="88" rows="4">{{ $rekam_medis->diagnosa_terapis }}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12 dynamic">
+                                <?php $fg_id = 1 ?>
+                                <?php $t_id = 1 ?>
+                                <?php $idt_id = 1 ?>
+                                <?php $btn_id = 1 ?>
+                                <div class="col-md-12" id="dynamic_col">
                                     <!-- <div class="form-group">
                                         <label>Tindakan</label>
                                         @foreach($tindakan as $t)
@@ -92,16 +96,22 @@
                                         </div>
                                         @endforeach
                                     </div> -->
-                                    <!-- <div class="form-group">
-                                        @foreach($rekam_medis->tindakan as $t)
+                                    @foreach($rekam_medis->tindakan as $t)
+                                    <div class="form-group fg" id="fg_<?php echo $fg_id++ ?>">
                                         <label>Tindakan <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan" value="{{ $t->nama_tindakan }}">
-                                        <input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan" value="{{ $t->id }}" hidden>
-                                        <div class="m-t-10 text-right">
+                                        <input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_<?php echo $t_id++ ?>" value="{{ $t->nama_tindakan }}" required>
+                                        <input type="text" class="form-control" name="id_tindakan[]" id="idtindakan_<?php echo $idt_id++ ?>" value="{{ $t->id }}" hidden>
+                                        <div class="m-t-10 text-right button" id="button_<?php echo $btn_id++ ?>">
                                             <button type="button" class="btn btn-success btn-sm" id="tambah">Tambah Tindakan</button>
                                         </div>
-                                        @endforeach
-                                    </div> -->
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Catatan Tindakan</label></br>
+                                        <textarea class="form-control" name="catatan_tindakan" cols="88" rows="4">{{ $rekam_medis->catatan_tindakan }}</textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="m-t-20 text-center">
@@ -126,18 +136,24 @@
             }
         }
     </script>
-    <!-- <script>
-                $(document).ready(function() {
-            // var url = "{{ url('add-remove-input-fields') }}";
-            var i = 1;
+    <script>
+        $(document).ready(function() {
+            for (num = 2; num < 99; num++) {
+                button = '<div class="m-t-10 text-right button_' + num + '">\n' +
+                    '<button type="button" class="btn btn-danger btn-sm hapus" name="hapus" id="' + num + '">Hapus Tindakan</button>\n' +
+                    '</div>';
+                $('div#button_' + num + '').replaceWith(button);
+            }
+
+            var i = 5;
+
             $('#tambah').click(function() {
                 i++;
-                $('#dynamic_field').append('<div class="col-md-12" id="col_' + i + '">\n' +
-                    '<div class="form-group">\n' +
+                $('#dynamic_col').append('<div class="form-group fg" id="fg_' + i + '">\n' +
                     '<label>Tindakan <span class="text-danger">*</span></label>\n' +
-                    '<input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_' + i + '">\n' +
-                    '<input type="text" class="form-control" name="id_tindakan[]" id="id_tindakan_' + i + '" hidden>\n' +
-                    '<div class="m-t-10 text-right">\n' +
+                    '<input type="text" class="form-control tindakan" name="tindakan[]" id="tindakan_' + i + '" required>\n' +
+                    '<input type="text" class="form-control" name="id_tindakan[]" id="idtindakan_' + i + '" hidden>\n' +
+                    '<div class="m-t-10 text-right button_' + i + '">\n' +
                     '<button type="button" class="btn btn-danger btn-sm hapus" id="' + i + '">Hapus Tindakan</button>\n' +
                     '</div>\n' +
                     '</div>\n' +
@@ -166,7 +182,7 @@
                         var a = str.indexOf("_");
                         var b = str.length;
                         var number = str.substring(a + 1, b);
-                        $('#id_tindakan_' + number).val(ui.item.value);
+                        $('#idtindakan_' + number).val(ui.item.value);
                         return false;
                     }
                 });
@@ -174,60 +190,7 @@
 
             $(document).on('click', '.hapus', function() {
                 var button_id = $(this).attr("id");
-                $('#col' + button_id + '').remove();
-            });
-        });
-    </script> -->
-    <script>
-        $(document).ready(function() {
-
-            var count = 1;
-
-            dynamic_field(count);
-
-            function dynamic_field(number) {
-                html = '<div class="form-group kolom">\n' +
-                    '@foreach($rekam_medis->tindakan as $t)\n' +
-                    '<label>Tindakan <span class="text-danger">*</span></label>\n' +
-                    '<input type="text" class="form-control tindakan' + count++ + '" name="tindakan[]" value="{{ $t->nama_tindakan }}">\n' +
-                    '<input type="text" class="form-control" name="id_tindakan[]" value="{{ $t->id }}" hidden>\n' +
-                    '<div class="button m-t-10 text-right">\n' +
-                    '<button type="button" class="btn btn-success btn-sm" name="tambah" id="tambah">Tambah Tindakan</button>\n' +
-                    '</div>\n' +
-                    '@endforeach\n' +
-                    '</div>\n' +
-                    '</div>';
-                $('.dynamic').append(html);
-                if (number == 1) {
-                    button = '<div class="m-t-10 text-right">\n' +
-                        '<button type="button" class="btn btn-danger btn-sm hapus" name="hapus" id="' + count + '">Hapus Tindakan</button>\n' +
-                        '</div>';
-                    $("div.button").replaceWith(button);
-                    // html += '<div class="m-t-10 text-right">\n' +
-                    //     '<button type="button" class="btn btn-danger btn-sm hapus" name="hapus" id="">Hapus Tindakan</button>\n' +
-                    //     '</div>\n' +
-                    //     '</div>\n' +
-                    //     '</div>';
-                    // $('.dynamic').append(html);
-                }
-                // else {
-                //     html += '<div class="m-t-10 text-right">\n' +
-                //         '<button type="button" class="btn btn-success btn-sm" name="tambah" id="tambah">Tambah Tindakan</button>\n' +
-                //         '</div>\n' +
-                //         '</div>\n' +
-                //         '</div>';
-                //     $('.dynamic').html(html);
-                // }
-            }
-
-            $(document).on('click', '#tambah', function() {
-                count++;
-                dynamic_field(count);
-            });
-
-            $(document).on('click', '.hapus', function() {
-                count--;
-                $(this).closest(".kolom").remove();
+                $('#fg_' + button_id + '').remove();
             });
         });
     </script>

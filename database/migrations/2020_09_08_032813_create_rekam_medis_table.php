@@ -23,6 +23,7 @@ class CreateRekamMedisTable extends Migration
             $table->string('anamnesa');
             $table->string('pemeriksaan');
             $table->string('diagnosa_terapis');
+            $table->string('catatan_tindakan')->nullable();
             $table->timestamps();
         });
 

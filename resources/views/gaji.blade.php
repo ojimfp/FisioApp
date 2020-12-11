@@ -27,11 +27,11 @@
                     <div class="col-sm-4 col-5">
                         <h4 class="page-title">Gaji Karyawan</h4>
                     </div>
-                    @can('manage-users')
                     <div class="col-sm-8 col-7 text-right m-b-30">
+                        @can('manage-users')
                         <a href="{{ route('gaji.create') }}" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Masukkan Gaji</a>
+                        @endcan
                     </div>
-                    @endcan
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('gaji.search') }}" method="GET">
