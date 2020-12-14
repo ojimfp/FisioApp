@@ -13,7 +13,7 @@ $(".hari").on("input", function() {
         z = 0;
     }
 
-    document.getElementById("gaji_bersih").value = Math.round(x / y * z);
+    document.getElementById("gaji_bersih").value = Math.round(x / y * z) || 0;
 
     var a = document.getElementById("gaji_bersih").value;
     a = parseInt(a);

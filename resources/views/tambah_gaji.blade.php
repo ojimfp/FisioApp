@@ -37,7 +37,7 @@
                                     <div class="form-group">
                                         <label>Nama Karyawan <span class="text-danger">*</span></label>
                                         <select class="select" name="users_id" id="users_id" required>
-                                            <option>Select</option>
+                                            <option>Pilih Karyawan</option>
                                             @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                             @endforeach
@@ -55,13 +55,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="m-t-30">
-                                            <button type="button" class="btn btn-primary btn-lg" onclick="myFunction()">Hitung Gaji Bulan Lalu</button>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-sm-2">
@@ -113,12 +106,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_tindakan" value="10" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_tindakan" value="10" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,12 +141,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_exe" value="20" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_exe" value="20" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -179,12 +176,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -216,12 +215,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -253,12 +254,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -290,12 +293,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -327,12 +332,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2" style="text-align: right; padding-right: 12px;width: 240px">
-                                    <div class="input-group">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
                                         <label>Prosentase</label>
-                                        <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">%</span>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="pros_minggu" value="50" readonly>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
