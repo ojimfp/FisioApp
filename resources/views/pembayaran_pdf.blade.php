@@ -35,9 +35,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $no = 1;
+                            @endphp
                             @foreach($pembayaran as $bayar)
                             <tr>
-                                <td>{{ $bayar->id }}</td>
+                                <td>{{ $no }}</td>
                                 <td>{{ $bayar->created_at->format('d/m/Y H:i') }}</td>
                                 <td>{{ $bayar->pasien->nama }}</td>
                                 <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
@@ -45,6 +48,9 @@
                                 <td>{{ $bayar->tipe_pembayaran }}</td>
                                 <td>{{ $bayar->users->name }}</td>
                             </tr>
+                            @php
+                                $no++;
+                            @endphp
                             @endforeach
                         </tbody>
                     </table>
