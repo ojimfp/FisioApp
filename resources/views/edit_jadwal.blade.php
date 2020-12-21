@@ -17,6 +17,7 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
+        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -35,13 +36,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nama Pasien<span class="text-danger">*</span></label>
+                                        <label>Nama Pasien</label>
                                         <input class="form-control" type="text" name="nama" required value="{{ $jadwal->pasien->nama }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nama Terapis<span class="text-danger">*</span></label>
+                                        <label>Nama Terapis <span class="text-danger">*</span></label>
                                         <select class="select" name="nama_terapis" required autocomplete="off">
                                             @foreach($users as $user)
                                             <option value="{{ $user->id }}" @if($user->id == $jadwal->users_id) selected @endif>{{ $user->name }}</option>
@@ -53,7 +54,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tanggal Tindakan<span class="text-danger">*</span></label>
+                                        <label>Tanggal Tindakan <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
                                             <input type="text" name="tgl_tindakan" class="form-control datetimepicker" value="{{ $jadwal->tgl_tindakan }}">
                                         </div>
@@ -61,9 +62,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Jam Tindakan<span class="text-danger">*</span></label>
+                                        <label>Jam Tindakan <span class="text-danger">*</span></label>
                                         <div class="time-icon">
-                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3" name="jam_tindakan" value="{{ $jadwal->jam_tindakan }}">
+                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3" value="{{ $jadwal->jam_tindakan }}">
                                         </div>
                                     </div>
                                 </div>
@@ -101,12 +102,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Keterangan Status<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="ket_status" required value="">
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Simpan Perubahan Jadwal</button>
@@ -119,6 +114,23 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
+    <script>
+        $(function() {
+            $('#datetimepicker3').datetimepicker({
+                format: 'HH:mm',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down",
+                    previous: "fa fa-chevron-left",
+                    next: "fa fa-chevron-right",
+                    today: "fa fa-clock-o",
+                    clear: "fa fa-trash-o"
+                }
+            });
+        });
+    </script>
 </body>
 
 

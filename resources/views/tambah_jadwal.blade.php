@@ -17,6 +17,7 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
+        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -32,21 +33,16 @@
                         <form action="{{ route('jadwal.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Appointment ID <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" value="APT-0001" readonly="">
-                                    </div>
-                                </div> -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nama Pasien <span class="text-danger">*</span></label>
-                                        <select class="select nama-pasien" name="pasien_id" required autocomplete="off">
-                                            <option>Select</option>
+                                        <input type="text" class="form-control" list="pasien_list" name="nama_pasien" id="nama_pasien" required autocomplete="off">
+                                        <datalist id="pasien_list">
                                             @foreach($pasien as $p)
-                                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                            <option data-value="{{ $p->id }}">{{ $p->nama }}</option>
                                             @endforeach
-                                        </select>
+                                        </datalist>
+                                        <input type="hidden" name="pasien_id" id="nama_pasien-hidden">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -97,7 +93,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Shift<span class="text-danger">*</span></label>
+                                        <label>Shift <span class="text-danger">*</span></label>
                                         <select class="select" name="shift" required autocomplete="off">
                                             <option value="1">Pagi</option>
                                             <option value="2">Siang</option>
@@ -106,7 +102,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="display-block">Status Jadwal<span class="text-danger">*</span></label>
+                                        <label class="display-block">Status Jadwal <span class="text-danger">*</span></label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
                                             <label class="form-check-label" for="product_active">
@@ -149,28 +145,40 @@
 
     <script src="{{ asset('assets/js/additional/jadwal.js') }}"></script>
     <script>
-        // $('.datetimepicker').datetimepicker({
-        //     format: 'DD/MM/YYYY',
-        //     showTodayButton: true,
-        //     showClear: true,
-        //     toolbarPlacement: 'bottom',
-        //     sideBySide: true,
-        //     icons: {
-        //         time: "fa fa-clock-o",
-        //         date: "fa fa-calendar",
-        //         up: "fa fa-arrow-up",
-        //         down: "fa fa-arrow-down",
-        //         previous: "fa fa-chevron-left",
-        //         next: "fa fa-chevron-right",
-        //         today: "fa fa-clock-o",
-        //         clear: "fa fa-trash-o"
-        //     }
-        // });
         $(function() {
             $('#datetimepicker3').datetimepicker({
-                // format: 'LT'
-                format: 'HH:mm'
+                format: 'HH:mm',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down",
+                    previous: "fa fa-chevron-left",
+                    next: "fa fa-chevron-right",
+                    today: "fa fa-clock-o",
+                    clear: "fa fa-trash-o"
+                }
             });
+        });
+    </script>
+    <script>
+        document.querySelector('input[list]').addEventListener('input', function(e) {
+            var input = e.target,
+                list = input.getAttribute('list'),
+                options = document.querySelectorAll('#' + list + ' option'),
+                hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                inputValue = input.value;
+
+            hiddenInput.value = inputValue;
+
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+
+                if (option.innerText === inputValue) {
+                    hiddenInput.value = option.getAttribute('data-value');
+                    break;
+                }
+            }
         });
     </script>
 </body>
