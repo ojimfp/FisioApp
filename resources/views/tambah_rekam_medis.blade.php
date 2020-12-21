@@ -83,15 +83,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12" id="dynamic_col">
-                                    <!-- <div class="form-group">
-                                        <label>Tindakan</label>
-                                        @foreach($tindakan as $t)
-                                        <div class="checkbox">
-                                            <input type="checkbox" name="tindakan[]" value="{{ $t->id }}">
-                                            <label>{{ $t->nama_tindakan }}</label>
-                                        </div>
-                                        @endforeach
-                                    </div> -->
                                     <?php $id_num = 1 ?>
                                     <div class="form-group fg" id="fg_<?php echo $id_num ?>">
                                         <label>Tindakan <span class="text-danger">*</span></label>

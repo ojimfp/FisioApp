@@ -49,16 +49,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Dari<span class="text-danger">*</span></label>
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label">Dari Jam</label>
                                         <div class="time-icon">
                                             <input type="text" name="start_time" class="form-control" id="datetimepicker3">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Sampai <span class="text-danger">*</span></label>
+                                    <div class="form-group form-focus">
+                                        <label class="focus-label">Sampai Jam</label>
                                         <div class="time-icon">
                                             <input type="text" name="end_time" class="form-control" id="datetimepicker2">
                                         </div>
@@ -76,16 +76,15 @@
                         </div>
                     </form>
                     {{-- <form action="{{ route('pembayaran.index') }}">
-                        <div class="col-sm-6 col-md-4" style="float: left;">
-                            <button class="btn btn-success submit-btn">Reset</button>
-                        </div>
+                    <div class="col-sm-6 col-md-4" style="float: left;">
+                        <button class="btn btn-success submit-btn">Reset</button>
+                    </div>
                     </form> --}}
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-striped custom-table datatable mb-0">
+                            <table class="table table-striped custom-table mb-0" id="tabel-pembayaran">
                                 <thead>
                                     <tr>
                                         <th>No. Tagihan</th>
@@ -167,11 +166,9 @@
         <script>
             $(function() {
                 $('#datetimepicker3').datetimepicker({
-                    // format: 'LT'
                     format: 'HH:mm:00'
                 });
                 $('#datetimepicker2').datetimepicker({
-                    // format: 'LT'
                     format: 'HH:mm:00'
                 });
             });
