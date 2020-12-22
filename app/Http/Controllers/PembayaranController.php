@@ -29,9 +29,11 @@ class PembayaranController extends Controller
                 'title'         => config('app.name') . ' - ' . 'Riwayat Pembayaran',
                 'side_active'   => 'pembayaran'
             ],
-            'pembayaran' => $pembayaran,
-            'start_date' => '',
-            'end_date'  => ''
+            'pembayaran'    => $pembayaran,
+            'start_date'    => '',
+            'end_date'      => '',
+            'start_time'    => '00:00:00',
+            'end_time'      => '23:59:59'
         ];
 
         return view('pembayaran', $result);
@@ -200,36 +202,33 @@ class PembayaranController extends Controller
         return redirect()->route('rekam-medis.index', $pembayaran->pasien->id);
     }
 
+    private function getFormattedData($data) {
+        // STORE DATE
+        $end_date = \DateTime::createFromFormat('d/m/Y', $data->end_date);
+        $end_date = $end_date->format('Y-m-d');
+        $start_date = \DateTime::createFromFormat('d/m/Y', $data->start_date);
+        $start_date = $start_date->format('Y-m-d');
+
+        //STORE TIME
+        $start_time = $data->start_time;
+        $end_time = $data->end_time;
+
+        return Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
+            ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
+    }
+
     public function search(Request $request)
-    {   $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
+    {
+        // STORE DATE
+        $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
         $end_date = $end_date->format('Y-m-d');
         $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
         $start_date = $start_date->format('Y-m-d');
-        // if ($request->end_date) {
-        //     $end_date = \DateTime::createFromFormat('d/m/Y', $request->end_date);
-        //     $end_date = $end_date->format('Y-m-d');
-        // }else{
-        //     $end_date = new DateTime('today');
-        //     $end_date = $end_date->format('Y-m-d');
-        // }
-        // if ($request->start_date) {
-        //     $start_date = \DateTime::createFromFormat('d/m/Y', $request->start_date);
-        //     $start_date = $start_date->format('Y-m-d');
-        // }else{()
-        //     $start_date = new DateTime('today');
-        //     $start_date = $start_date->format('Y-m-d');
-        // }
 
-        // return $start_date . '& ' . $end_date;
+        //STORE TIME
         $start_time = $request->start_time;
         $end_time = $request->end_time;
-        // if($time=="pagi"){
-        //     $start_date = $start_date." 00:00:00";
-        //     $end_date = $end_date." 12:00:00";
-        // }else{
-        //     $start_date = $start_date." 12:00:01";
-        //     $end_date = $end_date." 23:59:59";
-        // }
+
         $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
             ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
 
@@ -240,18 +239,24 @@ class PembayaranController extends Controller
             ],
             'pembayaran' => $pembayaran,
             'start_date'         => $start_date,
-            'end_date'           => $end_date
+            'end_date'           => $end_date,
+            'start_time'         => $start_time,
+            'end_time'           => $end_time
         ];
 
         return view('pembayaran', $result);
     }
-    public static function download(Request $request)
+
+    public static function print(Request $request)
     {
-        $start_date = $request->start ? $request->start : '';
-        $end_date = $request->end ? $request->end : '';
+        $start_date = $request->start_date ? $request->start_date : '';
+        $end_date = $request->end_date ? $request->end_date : '';
+        $start_time = $request->start_time ? $request->start_time : '00:00:00';
+        $end_time = $request->end_time ? $request->end_time : '23:59:59';
 
         if ($start_date && $end_date) {
-            $pembayaran = Pembayaran::whereBetween('created_at', [$start_date, $end_date])->get();
+            $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
+                ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
         } else {
             $pembayaran = Pembayaran::all();
         }
@@ -265,7 +270,31 @@ class PembayaranController extends Controller
         // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
     }
+    public static function download(Request $request)
+    {
+        $start_date = $request->start_date ? $request->start_date : '';
+        $end_date = $request->end_date ? $request->end_date : '';
+        $start_time = $request->start_time ? $request->start_time : '00:00:00';
+        $end_time = $request->end_time ? $request->end_time : '23:59:59';
 
+        if ($start_date && $end_date) {
+            $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
+                ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
+            $filename = 'Pembayaran '. $start_date . '-' . $end_date .'.pdf';
+        } else {
+            $pembayaran = Pembayaran::all();
+            $filename = 'Catatan Pembayaran.pdf';
+        }
+
+        // return view('pembayaran_pdf', ['pembayaran' => $pembayaran]);
+        $pdf = PDF::loadview('pembayaran_down',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
+        // return $pdf->stream();
+        return $pdf->download($filename);
+
+        // $pdf = SnappyPdf::loadview('pembayaran_print', ['pembayaran' => $pembayaran]);
+        // return $pdf->download('pembayaran.pdf');
+        // return view('pembayaran', $result);
+    }
     public function invoice($id)
     {
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);

@@ -23,7 +23,8 @@
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
-                        <a href="{{ route('pembayaran.download') . '?start=' . $start_date . '&end=' . $end_date }}">Unduh PDF</a>
+                        <button class="btn btn-white btn-lg"><a href="{{ route('pembayaran.download') . '?start_date=' . $start_date . '&end_date=' . $end_date  . '&start_time=' . $start_time . '&end_time=' . $end_time }}">PDF</a></button>
+                        <button class="btn btn-white"><a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}"><i class="fa fa-print fa-lg"></i> Print</a></button>
                     </div>
                 </div>
                 <div class=" filter-row">
@@ -98,9 +99,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
                                     @foreach($pembayaran as $bayar)
                                     <tr>
-                                        <td>{{ $bayar->id }}</td>
+                                        <td>{{ $no }}</td>
                                         <td>{{ $bayar->created_at->format('d/m/Y H:i') }}</td>
                                         <td>{{ $bayar->pasien->nama }}</td>
                                         <td>{{ implode(', ', $bayar->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
@@ -121,6 +125,9 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @php
+                                        $no++;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>
