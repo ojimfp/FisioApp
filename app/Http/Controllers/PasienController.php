@@ -51,12 +51,9 @@ class PasienController extends Controller
         $pasien->alamat = $request->alamat;
         $pasien->kota = $request->kota;
         $pasien->jenis_kelamin = $request->jenis_kelamin;
-        $pasien->pekerjaan = $request->pekerjaan;
-        $pasien->tempat_lahir = $request->tempat_lahir;
         $pasien->tgl_lahir = Carbon::createFromFormat('d/m/Y', $request->tgl_lahir)->format('Y-m-d');
         $pasien->no_telp = $request->no_telp;
         $pasien->alergi_obat = $request->alergi_obat;
-        $pasien->masalah_kulit = $request->masalah_kulit;
         $pasien->catatan = $request->catatan;
         $pasien->save();
 
@@ -86,12 +83,9 @@ class PasienController extends Controller
         $pasien->alamat             = $request->alamat;
         $pasien->kota               = $request->kota;
         $pasien->jenis_kelamin      = $request->jenis_kelamin;
-        $pasien->pekerjaan          = $request->pekerjaan;
-        $pasien->tempat_lahir       = $request->tempat_lahir;
         $pasien->tgl_lahir          = Carbon::createFromFormat('d/m/Y', $request->tgl_lahir)->format('Y-m-d');
         $pasien->no_telp            = $request->no_telp;
         $pasien->alergi_obat        = $request->alergi_obat;
-        $pasien->masalah_kulit      = $request->masalah_kulit;
         $pasien->catatan            = $request->catatan;
         $pasien->update();
 
@@ -128,6 +122,7 @@ class PasienController extends Controller
             ];
         } else {
             $pasien = DB::table('pasien')->get();
+
             $result = [
                 'meta' => [
                     'title'         => config('app.name') . ' - ' . 'List Pasien',

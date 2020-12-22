@@ -17,8 +17,6 @@ class PasienSeeder extends Seeder
             'alamat' => 'Jl. Ramen no. 9',
             'kota' => 'Konoha',
             'jenis_kelamin' => 'Pria',
-            'pekerjaan' => 'Shinobi',
-            'tempat_lahir' => 'Konoha',
             'tgl_lahir' => '1973-09-11',
             'no_telp' => '081234567890'
         ]);
@@ -27,8 +25,6 @@ class PasienSeeder extends Seeder
             'alamat' => 'Jl. Kucing no. 2',
             'kota' => 'Surabaya',
             'jenis_kelamin' => 'Wanita',
-            'pekerjaan' => 'Kucing',
-            'tempat_lahir' => 'Surabaya',
             'tgl_lahir' => '2015-05-20',
             'no_telp' => '089876543210'
         ]);

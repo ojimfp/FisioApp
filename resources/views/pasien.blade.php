@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-border table-striped custom-table mb-0" id="tabel-pasien">
+                            <table class="table table-border table-striped custom-table datatable mb-0" id="tabel-pasien">
                                 <thead>
                                     <tr>
                                         <th>No. Registrasi</th>
