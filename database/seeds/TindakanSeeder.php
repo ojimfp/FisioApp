@@ -269,5 +269,181 @@ class TindakanSeeder extends Seeder
             'harga_jual' => '150000',
             'komisi_tindakan' => '0'
         ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSG11',
+            'nama_tindakan' => 'Head Massage',
+            'harga_jual' => '135000',
+            'komisi_tindakan' => '0'
+        ]);
+
+        //MASSAGE BABY
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB1',
+            'nama_tindakan' => 'Massage Baby 0-6 Bulan',
+            'harga_jual' => '60000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB2',
+            'nama_tindakan' => 'Massage Baby 6-1 tahun',
+            'harga_jual' => '65000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB3',
+            'nama_tindakan' => 'Massage Baby 1-2 tahun',
+            'harga_jual' => '70000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB4',
+            'nama_tindakan' => 'Massage Baby 2-3 tahun',
+            'harga_jual' => '75000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB5',
+            'nama_tindakan' => 'Massage Baby 3-4 tahun',
+            'harga_jual' => '80000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB6',
+            'nama_tindakan' => 'Massage Baby 4-5 tahun',
+            'harga_jual' => '85000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB7',
+            'nama_tindakan' => 'Massage Baby 5-6 tahun',
+            'harga_jual' => '90000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB7FULL',
+            'nama_tindakan' => 'Massage Baby 5-6 tahun (Full)',
+            'harga_jual' => '130000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB8',
+            'nama_tindakan' => 'Massage Baby 6-7 tahun',
+            'harga_jual' => '95000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB8FULL',
+            'nama_tindakan' => 'Massage Baby 6-7 tahun (Full)',
+            'harga_jual' => '135000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB9',
+            'nama_tindakan' => 'Massage Baby 7-8 tahun',
+            'harga_jual' => '100000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB9FULL',
+            'nama_tindakan' => 'Massage Baby 7-8 tahun (Full)',
+            'harga_jual' => '140000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB10',
+            'nama_tindakan' => 'Massage Baby 8-9 tahun',
+            'harga_jual' => '105000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB10FULL',
+            'nama_tindakan' => 'Massage Baby 8-9 tahun (Full)',
+            'harga_jual' => '145000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB11',
+            'nama_tindakan' => 'Massage Baby 9-10 tahun',
+            'harga_jual' => '110000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'MSGBB11FULL',
+            'nama_tindakan' => 'Massage Baby 9-10 tahun (Full)',
+            'harga_jual' => '150000',
+            'komisi_tindakan' => '0'
+        ]);
+
+        //SWD
+        Tindakan::create([
+            'kode_tindakan' => 'SWD1',
+            'nama_tindakan' => 'SWD 15 Menit',
+            'harga_jual' => '70000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD2',
+            'nama_tindakan' => 'SWD 20 Menit',
+            'harga_jual' => '85000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD3',
+            'nama_tindakan' => 'SWD 25 Menit',
+            'harga_jual' => '100000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD4',
+            'nama_tindakan' => 'SWD 30 Menit',
+            'harga_jual' => '115000',
+            'komisi_tindakan' => '0'
+        ]);
+
+        //SINUSITIS
+        Tindakan::create([
+            'kode_tindakan' => 'SWDSINUS1',
+            'nama_tindakan' => 'SWD Sinus 15 Menit',
+            'harga_jual' => '70000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWDSINUS2',
+            'nama_tindakan' => 'SWD Sinus 30 Menit',
+            'harga_jual' => '130000',
+            'komisi_tindakan' => '0'
+        ]);
+
+        //SWT
+        Tindakan::create([
+            'kode_tindakan' => 'SWT1',
+            'nama_tindakan' => 'SWT Lokal 1',
+            'harga_jual' => '70000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD2',
+            'nama_tindakan' => 'SWT Lokal 2',
+            'harga_jual' => '85000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD3',
+            'nama_tindakan' => 'SWT Lokal 3',
+            'harga_jual' => '100000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD4',
+            'nama_tindakan' => 'SWD Lokal 4',
+            'harga_jual' => '115000',
+            'komisi_tindakan' => '0'
+        ]);
+        Tindakan::create([
+            'kode_tindakan' => 'SWD5',
+            'nama_tindakan' => 'SWD Lokal 5',
+            'harga_jual' => '130000',
+            'komisi_tindakan' => '0'
+        ]);
     }
 }
