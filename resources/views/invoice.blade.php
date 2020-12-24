@@ -66,6 +66,7 @@
                                             <li>{{ $pembayaran->pasien->alamat }}</li>
                                             <li>{{ $pembayaran->pasien->kota }}</li>
                                             <li>{{ $pembayaran->pasien->no_telp }}</li>
+                                            <li>{{ $pembayaran->users->name }}</li>
                                         </ul>
 
                                     </div>
@@ -74,9 +75,7 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th hidden>#</th>
-                                                <th>NAMA TERAPIS</th>
-                                                <th>KODE TINDAKAN</th>
+                                                <th hidden>ID TINDAKAN</th>
                                                 <th>NAMA TINDAKAN</th>
                                                 <th class="text-right">BIAYA</th>
                                             </tr>
@@ -85,8 +84,6 @@
                                             @foreach($pembayaran->tindakan as $tindakan)
                                             <tr>
                                                 <td name="tindakan[]" hidden>{{ $tindakan->id }}</td>
-                                                <td>{{ $pembayaran->users->name }}</td>
-                                                <td>{{ $tindakan->kode_tindakan }}</td>
                                                 <td>{{ $tindakan->nama_tindakan }}</td>
                                                 <td class="text-right">Rp {{ number_format($tindakan->harga_jual) }}</td>
                                             </tr>

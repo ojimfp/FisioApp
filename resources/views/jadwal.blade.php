@@ -4,6 +4,8 @@
 
 <!-- appointments23:19-->
 
+<?php header("refresh: 10"); ?>
+
 <head>
     @include('_part.meta')
     @include('_part.style')
@@ -31,7 +33,7 @@
                     </div>
                 </div>
                 <div class="profile-tabs">
-                    <ul class="nav nav-tabs nav-tabs-bottom">
+                    <ul class="nav nav-tabs nav-tabs-bottom" id="myTab">
                         <li class="nav-item"><a class="nav-link active" href="#pagi" data-toggle="tab">Pagi</a></li>
                         <li class="nav-item"><a class="nav-link" href="#siang" data-toggle="tab">Siang</a></li>
                     </ul>
@@ -57,8 +59,8 @@
                                                 @foreach($jadwal_pg as $pg)
                                                 <tr>
                                                     <td>{{ $pg->users->name }}</td>
-                                                    <td>{{ $pg->pasien->nama }}</td>
-                                                    <td>{{ $pg->pasien->id }}</td>
+                                                    <td><a href="{{ route('rekam-medis.index', $pg->pasien->id) }}">{{ $pg->pasien->nama }}</a></td>
+                                                    <td>{{ sprintf('%04d', $pg->pasien->id) }}</td>
                                                     <td>{{ $today->diff(new DateTime($pg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $pg->tgl_tindakan }}</td>
                                                     <td>{{ $pg->jam_tindakan }}</td>
@@ -119,8 +121,8 @@
                                                 @foreach($jadwal_sg as $sg)
                                                 <tr>
                                                     <td>{{ $sg->users->name }}</td>
-                                                    <td>{{ $sg->pasien->nama }}</td>
-                                                    <td>{{ $sg->pasien->id }}</td>
+                                                    <td><a href="{{ route('rekam-medis.index', $sg->pasien->id) }}">{{ $sg->pasien->nama }}</a></td>
+                                                    <td>{{ sprintf('%04d', $sg->pasien->id) }}</td>
                                                     <td>{{ $today->diff(new DateTime($sg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $sg->tgl_tindakan }}</td>
                                                     <td>{{ $sg->jam_tindakan }}</td>
@@ -165,17 +167,20 @@
             </div>
         </div>
     </div>
-    <div class="sidebar-overlay" data-reff=""></div>
-    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- FOOTER -->
+    @include('_part.footer')
+
+    <script>
+        $(document).ready(function() {
+            $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>
     <script>
         $(function() {
             $('#datetimepicker3').datetimepicker({

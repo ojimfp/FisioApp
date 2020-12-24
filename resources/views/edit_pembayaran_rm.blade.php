@@ -92,29 +92,25 @@
                                             <thead>
                                                 <tr>
                                                     <th hidden>ID Tindakan</th>
-                                                    <th class="col-sm-1">Kode Tindakan</th>
-                                                    <th class="col-md-8">Nama Tindakan</th>
-                                                    <th class="col-sm-3">Biaya</th>
+                                                    <th class="col-xs-3">Nama Tindakan</th>
+                                                    <th style="width:250px;">Biaya</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($pembayaran->tindakan as $tindakan)
-                                                <tr name="harga">
+                                                @foreach($rekam_medis->tindakan as $tindakan)
+                                                <tr>
                                                     <td hidden>
-                                                        <input class=" form-control" type="text" name="tindakan[]" style="min-width:150px" value="{{ $tindakan->id }}" hidden>
+                                                        <input class="form-control" type="text" name="tindakan[]" value="{{ $tindakan->id }}" readonly>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->kode_tindakan }}" readonly>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control" type="text" style="min-width:150px" value="{{ $tindakan->nama_tindakan }}" readonly>
+                                                        <input class="form-control" type="text" style="min-width: 150px" value="{{ $tindakan->nama_tindakan }}" readonly>
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input class="form-control text-right harga" type="text" id="harga" name="harga" value="{{ $tindakan->harga_jual }}" style="width:50px; padding-right: 16px" readonly>
+                                                            <input class="form-control text-right harga" type="text" style="width:50px" id="harga" name="harga" value="{{ $tindakan->harga_jual }}" readonly>
                                                         </div>
                                                     </td>
                                                 </tr>

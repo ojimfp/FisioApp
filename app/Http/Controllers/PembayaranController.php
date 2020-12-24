@@ -78,7 +78,6 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
-        // $pembayaran->users()->associate($request->admin);
         $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
@@ -202,7 +201,8 @@ class PembayaranController extends Controller
         return redirect()->route('rekam-medis.index', $pembayaran->pasien->id);
     }
 
-    private function getFormattedData($data) {
+    private function getFormattedData($data)
+    {
         // STORE DATE
         $end_date = \DateTime::createFromFormat('d/m/Y', $data->end_date);
         $end_date = $end_date->format('Y-m-d');
@@ -214,7 +214,7 @@ class PembayaranController extends Controller
         $end_time = $data->end_time;
 
         return Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
-            ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
+            ->whereBetween(DB::RAW('TIME(updated_at)'), [$start_time, $end_time])->get();
     }
 
     public function search(Request $request)
@@ -230,7 +230,7 @@ class PembayaranController extends Controller
         $end_time = $request->end_time;
 
         $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
-            ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
+            ->whereBetween(DB::RAW('TIME(updated_at)'), [$start_time, $end_time])->get();
 
         $result = [
             'meta' => [
@@ -256,7 +256,7 @@ class PembayaranController extends Controller
 
         if ($start_date && $end_date) {
             $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
-                ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
+                ->whereBetween(DB::RAW('TIME(updated_at)'), [$start_time, $end_time])->get();
         } else {
             $pembayaran = Pembayaran::all();
         }
@@ -279,15 +279,15 @@ class PembayaranController extends Controller
 
         if ($start_date && $end_date) {
             $pembayaran = Pembayaran::whereBetween(DB::RAW('DATE(updated_at)'), [$start_date, $end_date])
-                ->whereBetween(DB::RAW('TIME(updated_at)'),[$start_time, $end_time])->get();
-            $filename = 'Pembayaran '. $start_date . '-' . $end_date .'.pdf';
+                ->whereBetween(DB::RAW('TIME(updated_at)'), [$start_time, $end_time])->get();
+            $filename = 'Pembayaran ' . $start_date . '-' . $end_date . '.pdf';
         } else {
             $pembayaran = Pembayaran::all();
             $filename = 'Catatan Pembayaran.pdf';
         }
 
         // return view('pembayaran_pdf', ['pembayaran' => $pembayaran]);
-        $pdf = PDF::loadview('pembayaran_down',  ['pembayaran' => $pembayaran])->setPaper('A4','landscape');
+        $pdf = PDF::loadview('pembayaran_down',  ['pembayaran' => $pembayaran])->setPaper('A4', 'landscape');
         // return $pdf->stream();
         return $pdf->download($filename);
 
@@ -322,5 +322,4 @@ class PembayaranController extends Controller
         // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
     }
-
 }

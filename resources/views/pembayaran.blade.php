@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-striped custom-table mb-0" id="tabel-pembayaran">
+                            <table class="table table-striped custom-table datatable mb-0" id="tabel-pembayaran">
                                 <thead>
                                     <tr>
                                         <th>No. Tagihan</th>
@@ -100,7 +100,7 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $no = 1;
+                                    $no = 1;
                                     @endphp
                                     @foreach($pembayaran as $bayar)
                                     <tr>
@@ -126,7 +126,7 @@
                                         </td>
                                     </tr>
                                     @php
-                                        $no++;
+                                    $no++;
                                     @endphp
                                     @endforeach
                                 </tbody>

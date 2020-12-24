@@ -22,7 +22,6 @@ class JadwalController extends Controller
     {
         $pasien = Pasien::all();
         $users = User::all();
-        // $jadwal = Jadwal::all();
         $jadwal_pg = Jadwal::all()->where('shift', '1');
         $jadwal_sg = Jadwal::all()->where('shift', '2');
         $today = new DateTime('today');

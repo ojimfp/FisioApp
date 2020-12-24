@@ -89,7 +89,7 @@ class GajiController extends Controller
         $gaji->bulan_gajian = $request->bulan_gajian;
         $gaji->save();
 
-        return redirect()->route('gaji.index');
+        return redirect()->route('slip.gaji', $gaji->id);
     }
 
     /**
