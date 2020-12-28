@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use NumberFormatter;
+use PDF;
 
 class GajiController extends Controller
 {
@@ -262,5 +263,39 @@ class GajiController extends Controller
         echo json_encode($data);
 
         exit;
+    }
+
+    private function getGaji($id)
+    {
+    }
+
+    public static function printGaji($id)
+    {
+        $gaji = Gaji::findOrFail($id);
+        $terbilang = new NumberFormatter('id_ID', NumberFormatter::SPELLOUT);
+
+        $result = [
+            'gaji' => $gaji,
+            'terbilang' => $terbilang
+        ];
+
+        return view('slip_gaji_pdf', $result);
+    }
+
+    public static function downloadGaji($id)
+    {
+        $gaji = Gaji::findOrFail($id);
+        $terbilang = new NumberFormatter('id_ID', NumberFormatter::SPELLOUT);
+
+        $filename = 'SlipGaji_0' . $id . '.pdf';
+
+        $result = [
+            'gaji' => $gaji,
+            'terbilang' => $terbilang
+        ];
+
+        $pdf = PDF::loadview('slip_gaji_pdf',  $result)->setPaper('A4', 'potrait');
+        // return $pdf->stream();
+        return $pdf->download($filename);
     }
 }

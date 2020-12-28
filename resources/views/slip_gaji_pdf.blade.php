@@ -6,40 +6,22 @@
 
 <head>
     @include('_part.meta')
-    @include('_part.style')
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
-</head>
-
-<!-- <head>
-    @include('_part.meta')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-</head> -->
+</head>
 
 <body>
-    <div class="main-wrapper">
+    {{-- <div class="main-wrapper"> --}}
         <!-- HEADER -->
-        @include('_part.header')
+        {{-- @include('_part.header') --}}
         <!-- END HEADER -->
         <!-- SIDEBAR -->
-        @include('_part.sidebar')
+        {{-- @include('_part.sidebar') --}}
         <!-- END SIDEBAR -->
-        <div class="page-wrapper">
+        {{-- <div class="page-wrapper"> --}}
             <div class="content">
-                <div class="row">
-                    <div class="col-sm-5 col-4">
-                        <h4 class="page-title">Slip Gaji</h4>
-                    </div>
-                    <div class="col-sm-7 col-8 text-right m-b-30">
-                        <button class="btn btn-white btn-lg"><a href="{{ route('slip.download', $gaji->id)  }}">PDF</a></button>
-                        <button class="btn btn-white"><a href="{{ route('slip.print', $gaji->id) }}"><i class="fa fa-print fa-lg"></i> Print</a></button>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card-box">
@@ -130,13 +112,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {{-- </div>
+    </div> --}}
     <!-- FOOTER -->
-    @include('_part.footer')
 </body>
 
 
 <!-- salary-view23:28-->
 
 </html>
+<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        window.print();
+    });
+</script>

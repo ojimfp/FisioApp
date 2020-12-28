@@ -322,4 +322,20 @@ class PembayaranController extends Controller
         // return $pdf->download('invoice.pdf');
         // return view('invoice', $result);
     }
+
+    public static function printInvoice($id)
+    {
+        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
+    }
+
+    public static function downloadInvoice($id)
+    {
+        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
+        $filename = 'Invoice_' . $id . '.pdf';
+
+        $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4', 'potrait');
+        // return $pdf->stream();
+        return $pdf->download($filename);
+    }
 }

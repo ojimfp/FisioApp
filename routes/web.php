@@ -44,7 +44,8 @@ Route::get('pembayaran/search', 'PembayaranController@search')->name('pembayaran
 Route::get('pembayaran/download', 'PembayaranController@download')->name('pembayaran.download');
 Route::get('pembayaran/print', 'PembayaranController@print')->name('pembayaran.print');
 Route::get('invoice/{id}', 'PembayaranController@invoice')->name('invoice');
-Route::get('invoice/{id}/download', 'PembayaranController@invoicePDF')->name('invoice.download');
+Route::get('invoice/{id}/print', 'PembayaranController@printInvoice')->name('invoice.print');
+Route::get('invoice/{id}/download', 'PembayaranController@downloadInvoice')->name('invoice.download');
 
 Route::resource('user', 'UserController')->except(['create', 'store', 'show'])->middleware('can:manage-users');
 Route::get('user/search', 'UserController@search')->name('user.search');
@@ -61,6 +62,8 @@ Route::resource('gaji', 'GajiController')->except(['show']);
 Route::get('gaji/search', 'GajiController@search')->name('gaji.search');
 Route::get('slip-gaji/{id}', 'GajiController@slipGaji')->name('slip.gaji');
 Route::get('get/data/{id}', 'GajiController@getData')->name('getData');
+Route::get('slip-gaji/print/{id}', 'GajiController@printGaji')->name('slip.print');
+Route::get('slip-gaji/download/{id}', 'GajiController@downloadGaji')->name('slip.download');
 
 Auth::routes();
 
