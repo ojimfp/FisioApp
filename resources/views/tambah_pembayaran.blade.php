@@ -176,6 +176,33 @@
                                                         </select>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="text-right">Hari Besar? <span class="text-danger">*</span></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="form-check form-check-inline radio">
+                                                                <input class="form-check-input input" type="radio" name="hari_besar" id="ya" value="Ya" onclick="yesNoCheck()" required>
+                                                                <label class="form-check-label" for="ya">Ya</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline radio">
+                                                                <input class="form-check-input input" type="radio" name="hari_besar" id="tidak" value="Tidak" onclick="yesNoCheck()" required>
+                                                                <label class="form-check-label" for="tidak">Tidak</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="jml_krywn" style="display: none">
+                                                    <td class="text-right">Jumlah Karyawan di Hari Besar <span class="text-danger">*</span></td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <input class="form-control text-right input" id="krywn_hari_besar" name="krywn_hari_besar" type="text" autocomplete="off">
+                                                    </td>
+                                                </tr>
+                                                <tr hidden>
+                                                    <td class="text-right">Total Hari Besar</td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <input class="form-control text-right input" id="total_hari_besar" name="total_hari_besar" type="text" autocomplete="off" readonly>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -203,7 +230,19 @@
     <!-- FOOTER -->
     @include('_part.footer')
 
+    <!-- penghitungan pembayaran -->
     <script src="{{ asset('assets/js/pembayaran.js') }}"></script>
+
+    <!-- show/hide input jumlah karyawan di hari besar -->
+    <script>
+        function yesNoCheck() {
+            if (document.getElementById("ya").checked) {
+                document.getElementById("jml_krywn").style.display = 'table-row';
+            } else {
+                document.getElementById("jml_krywn").style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 

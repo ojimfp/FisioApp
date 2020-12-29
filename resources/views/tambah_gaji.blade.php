@@ -364,6 +364,19 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label>Total Insentif Tindakan Hari Besar</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp</span>
+                                            </div>
+                                            <input class="form-control hari" id="ins_hari_besar" type="text" name="ins_hari_besar" readonly autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label>Bonus Insentif <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -438,6 +451,7 @@
                         $('#tindakan_minggu_lima').val(response['tindakan_minggu_lima']);
                         $('#jml_karyawan_lima').val(response['jml_karyawan_lima']);
                         $('#ins_minggu_lima').val(parseInt(document.getElementById("tindakan_minggu_lima").value * 0.5 / document.getElementById("jml_karyawan_lima").value) || 0);
+                        $('#ins_hari_besar').val(response['ins_hari_besar']);
                     }
                 }
             });

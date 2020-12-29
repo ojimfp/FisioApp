@@ -84,6 +84,7 @@ class GajiController extends Controller
         $gaji->ins_minggu_tiga = $request->ins_minggu_tiga;
         $gaji->ins_minggu_empat = $request->ins_minggu_empat;
         $gaji->ins_minggu_lima = $request->ins_minggu_lima;
+        $gaji->ins_hari_besar = $request->ins_hari_besar;
         $gaji->bonus = $request->bonus;
         $gaji->total_gaji = $request->total_gaji;
         $gaji->bulan_gajian = $request->bulan_gajian;
@@ -127,6 +128,7 @@ class GajiController extends Controller
         $gaji->hari_kerja = $request->hari_kerja;
         $gaji->gaji_bersih = $request->gaji_bersih;
         $gaji->ins_koor = $request->ins_koor;
+        $gaji->ins_hari_besar = $request->ins_hari_besar;
         $gaji->bonus = $request->bonus;
         $gaji->total_gaji = $request->total_gaji;
 
@@ -257,7 +259,8 @@ class GajiController extends Controller
             'tindakan_minggu_lima' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
                 ->sum('total_biaya'),
             'jml_karyawan_lima' => Pembayaran::whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
-                ->count('users_id')
+                ->count('users_id'),
+            'ins_hari_besar' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->sum('hari_besar')
         );
         echo json_encode($data);
 

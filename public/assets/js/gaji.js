@@ -33,8 +33,10 @@ $(".hari").on("input", function() {
     h = parseInt(h);
     var i = document.getElementById("ins_minggu_lima").value;
     i = parseInt(i);
-    var j = document.getElementById("bonus").value;
+    var j = document.getElementById("ins_hari_besar").value;
     j = parseInt(j);
+    var k = document.getElementById("bonus").value;
+    k = parseInt(k);
 
-    document.getElementById("total_gaji").value = a + b + c + d + e + f + g + h + i + j || 0;
+    document.getElementById("total_gaji").value = Math.round((a + b + c + d + e + f + g + h + i + j + k) / 1000) * 1000 || 0;
 });

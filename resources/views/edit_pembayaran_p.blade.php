@@ -13,7 +13,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body onload="yesNoCheck()">
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
@@ -97,7 +97,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($rekam_medis->tindakan as $tindakan)
+                                                @foreach($pembayaran->tindakan as $tindakan)
                                                 <tr>
                                                     <td hidden>
                                                         <input class="form-control" type="text" name="tindakan[]" value="{{ $tindakan->id }}" readonly>
@@ -133,21 +133,21 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon (Rp)</td>
+                                                    <td class="text-right">Diskon (Rp) <span class="text-danger">*</span></td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Rp</span>
                                                             </div>
-                                                            <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" value="{{ $pembayaran->diskon_rupiah }}">
+                                                            <input class="form-control text-right input" id="diskon_rupiah" name="diskon_rupiah" type="text" autocomplete="off" value="{{ $pembayaran->diskon_rupiah }}" required>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">Diskon (%)</td>
+                                                    <td class="text-right">Diskon (%) <span class="text-danger">*</span></td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
                                                         <div class="input-group">
-                                                            <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" value="{{ $pembayaran->diskon_persen }}">
+                                                            <input class="form-control text-right input" id="diskon_persen" name="diskon_persen" type="text" autocomplete="off" value="{{ $pembayaran->diskon_persen }}" required>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">%</span>
                                                             </div>
@@ -173,6 +173,33 @@
                                                             <option {{ $pembayaran->tipe_pembayaran == 'Debit' ? 'selected' : '' }}>Debit</option>
                                                             <option {{ $pembayaran->tipe_pembayaran == 'Internet Banking' ? 'selected' : '' }}>Internet Banking</option>
                                                         </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">Hari Besar? <span class="text-danger">*</span></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="form-check form-check-inline radio">
+                                                                <input class="form-check-input input" type="radio" name="hari_besar" id="ya" value="Ya" onclick="yesNoCheck()" required @if($pembayaran->hari_besar > 0) checked @endif>
+                                                                <label class="form-check-label" for="ya">Ya</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline radio">
+                                                                <input class="form-check-input input" type="radio" name="hari_besar" id="tidak" value="Tidak" onclick="yesNoCheck()" required @if($pembayaran->hari_besar == 0) checked @endif>
+                                                                <label class="form-check-label" for="tidak">Tidak</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="jml_krywn" style="display: none">
+                                                    <td class="text-right">Jumlah Karyawan di Hari Besar <span class="text-danger">*</span></td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <input class="form-control text-right input" id="krywn_hari_besar" name="krywn_hari_besar" type="text" autocomplete="off" required>
+                                                    </td>
+                                                </tr>
+                                                <tr hidden>
+                                                    <td class="text-right">Total Hari Besar</td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <input class="form-control text-right input" id="total_hari_besar" name="total_hari_besar" type="text" value="{{ $pembayaran->hari_besar }}" autocomplete="off" readonly>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -202,7 +229,19 @@
     <!-- FOOTER -->
     @include('_part.footer')
 
+    <!-- penghitungan pembayaran -->
     <script src="{{ asset('assets/js/pembayaran.js') }}"></script>
+
+    <!-- show/hide input jumlah karyawan di hari besar -->
+    <script>
+        function yesNoCheck() {
+            if (document.getElementById("ya").checked) {
+                document.getElementById("jml_krywn").style.display = 'table-row';
+            } else {
+                document.getElementById("jml_krywn").style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 

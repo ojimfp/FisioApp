@@ -66,8 +66,6 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $pasien = Pasien::findOrFail($request->id_pasien);
-
         $pembayaran = new Pembayaran;
 
         $pembayaran->rekam_medis()->associate($request->id_rekam_medis);
@@ -78,6 +76,14 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+
+        // if ($request->hari_besar === 'Ya') {
+        //     $pembayaran->hari_besar = $request->total_hari_besar_ya;
+        // } else if ($request->hari_besar === 'Tidak') {
+        //     $pembayaran->hari_besar = $request->total_hari_besar_tidak;
+        // }
+
+        $pembayaran->hari_besar = $request->total_hari_besar;
         $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
@@ -142,6 +148,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->hari_besar = $request->total_hari_besar;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
@@ -164,6 +171,7 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
+        $pembayaran->hari_besar = $request->total_hari_besar;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();

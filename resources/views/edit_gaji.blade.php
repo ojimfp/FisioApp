@@ -170,6 +170,19 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label>Total Insentif Tindakan Hari Besar</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp</span>
+                                            </div>
+                                            <input class="form-control hari" id="ins_hari_besar" type="text" name="ins_hari_besar" value="{{ $gaji->ins_hari_besar }}" readonly autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label>Bonus Insentif <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">

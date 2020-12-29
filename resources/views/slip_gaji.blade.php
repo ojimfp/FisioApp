@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <h4 class="m-b-10"><strong>Insentif per Hari Minggu</strong></h4>
+                                        <h4 class="m-b-10"><strong>Insentif per Hari Minggu dan Hari Besar</strong></h4>
                                         <table class="m-b-10 table table-bordered">
                                             <tbody>
                                                 <tr>
@@ -108,6 +108,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Insentif Hari Minggu Kelima</strong> <span class="float-right"><strong>Rp {{ number_format($gaji->ins_minggu_lima) }}</strong></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Insentif Hari Besar</strong> <span class="float-right"><strong>Rp {{ number_format($gaji->ins_hari_besar) }}</strong></span></td>
                                                 </tr>
                                             </tbody>
                                         </table>

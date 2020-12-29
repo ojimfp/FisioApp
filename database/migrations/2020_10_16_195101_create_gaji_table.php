@@ -27,6 +27,7 @@ class CreateGajiTable extends Migration
             $table->integer('ins_minggu_tiga')->nullable();
             $table->integer('ins_minggu_empat')->nullable();
             $table->integer('ins_minggu_lima')->nullable();
+            $table->integer('ins_hari_besar')->nullable();
             $table->integer('bonus')->nullable();
             $table->integer('total_gaji');
             $table->dateTime('bulan_gajian')->nullable();
