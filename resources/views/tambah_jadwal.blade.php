@@ -100,29 +100,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="display-block">Status Jadwal <span class="text-danger">*</span></label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" checked>
-                                            <label class="form-check-label" for="product_active">
-                                                Active
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive">
-                                            <label class="form-check-label" for="product_inactive">
-                                                Inactive
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_lainnya" value="Lainnya">
-                                            <label class="form-check-label" for="product_lainnya">
-                                                Lainnya
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row" hidden>
                                 <div class="col-md-12">

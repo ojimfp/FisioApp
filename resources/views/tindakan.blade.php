@@ -33,19 +33,17 @@
                 <h9 class="text-danger">cari berdasarkan kode/nama tindakan</h9>
                 <div class="row filter-row">
                     <form action="{{ route('tindakan.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-10" style="float: left;">
+                        <div class="col-sm-6 col-md-5 col-lg-6 col-xl-6" style="float: left">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Cari tindakan</label>
                                 <input type="text" class="form-control floating" name="keyword">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-2" style="float: left;">
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 m-b-20" style="float: left">
                             <button class="btn btn-success submit-btn">Cari Tindakan</button>
                         </div>
-                    </form>
-                    <form action="{{ route('tindakan.index') }}">
-                        <div class="col-sm-4 col-md-4" style="float: right;">
-                            <button class="btn btn-success submit-btn">Reset</button>
+                        <div class="col-sm-4 col-md-1 col-lg-2 col-xl-2 m-b-10" style="float: left">
+                            <a href="{{ route('tindakan.index') }}" class="btn btn-success submit-btn">Reset</a>
                         </div>
                     </form>
                 </div>
@@ -57,8 +55,7 @@
                                     <tr>
                                         <th>Kode Tindakan</th>
                                         <th>Nama Tindakan</th>
-                                        <th>Harga Jual</th>
-                                        <th>Komisi</th>
+                                        <th>Harga Tindakan</th>
                                         <th>Keterangan</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
@@ -69,7 +66,6 @@
                                         <td>{{ $t->kode_tindakan }}</td>
                                         <td>{{ $t->nama_tindakan }}</td>
                                         <td>Rp {{ number_format($t->harga_jual) }}</td>
-                                        <td>Rp {{ number_format($t->komisi_tindakan) }}</td>
                                         <td>{{ $t->keterangan }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
@@ -99,8 +95,8 @@
                             <img src="{{ asset('assets/img/sent.png') }}" alt="" width="50" height="46">
                             <h3>Apakah Anda yakin ingin menghapus tindakan ini?</h3>
                             <div class="m-t-20">
-                                <button class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Delete</button>
+                                <button class="btn btn-white" data-dismiss="modal">Tidak</button>
+                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
                             </div>
                         </div>
                     </form>

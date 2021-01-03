@@ -30,14 +30,14 @@
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('user.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-12 col-12">
+                        <div class="col-sm-6 col-md-10 col-lg-10 col-xl-10" style="float: left">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Cari user</label>
                                 <input type="text" class="form-control floating" name="keyword">
-                                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-1 col-12">
-                                    <button class="btn btn-success submit-btn">Cari User</button>
-                                </div>
                             </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2 col-xl-2" style="float: left">
+                            <button class="btn btn-success submit-btn">Cari User</button>
                         </div>
                     </form>
                 </div>

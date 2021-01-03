@@ -76,13 +76,6 @@ class PembayaranController extends Controller
         $pembayaran->diskon_rupiah = $request->diskon_rupiah;
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
-
-        // if ($request->hari_besar === 'Ya') {
-        //     $pembayaran->hari_besar = $request->total_hari_besar_ya;
-        // } else if ($request->hari_besar === 'Tidak') {
-        //     $pembayaran->hari_besar = $request->total_hari_besar_tidak;
-        // }
-
         $pembayaran->hari_besar = $request->total_hari_besar;
         $pembayaran->nama_admin = $request->nama_admin;
         $pembayaran->catatan = $request->catatan;

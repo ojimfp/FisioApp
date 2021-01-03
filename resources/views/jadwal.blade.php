@@ -4,7 +4,7 @@
 
 <!-- appointments23:19-->
 
-<?php header("refresh: 10"); ?>
+<?php header("refresh: 60"); ?>
 
 <head>
     @include('_part.meta')
@@ -19,6 +19,7 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
+        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -51,7 +52,6 @@
                                                     <th>Umur Pasien</th>
                                                     <th>Tanggal Tindakan</th>
                                                     <th>Jam Tindakan</th>
-                                                    <th>Status</th>
                                                     <th class="text-right">Opsi</th>
                                                 </tr>
                                             </thead>
@@ -64,13 +64,12 @@
                                                     <td>{{ $today->diff(new DateTime($pg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $pg->tgl_tindakan }}</td>
                                                     <td>{{ $pg->jam_tindakan }}</td>
-                                                    <td>{{ $pg->status }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $pg->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $pg->id }}')" data-target="#delete_pg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteDataPagi('{{ $pg->id }}')" data-target="#delete_pg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -93,7 +92,7 @@
                                             <h3>Apakah Anda yakin ingin menghapus jadwal ini?</h3>
                                             <div class="m-t-20">
                                                 <button class="btn btn-white" data-dismiss="modal">Tidak</button>
-                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmitPagi()">Hapus</button>
                                             </div>
                                         </div>
                                     </form>
@@ -113,7 +112,6 @@
                                                     <th>Umur Pasien</th>
                                                     <th>Tanggal Tindakan</th>
                                                     <th>Jam Tindakan</th>
-                                                    <th>Status</th>
                                                     <th class="text-right">Opsi</th>
                                                 </tr>
                                             </thead>
@@ -126,13 +124,12 @@
                                                     <td>{{ $today->diff(new DateTime($sg->pasien->tgl_lahir))->y }} tahun</td>
                                                     <td>{{ $sg->tgl_tindakan }}</td>
                                                     <td>{{ $sg->jam_tindakan }}</td>
-                                                    <td>{{ $sg->status }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="{{ route('jadwal.edit', ['jadwal' => $sg->id]) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $sg->id }}')" data-target="#delete_sg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
+                                                                <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteDataSiang('{{ $sg->id }}')" data-target="#delete_sg"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -155,7 +152,7 @@
                                             <h3>Apakah Anda yakin ingin menghapus jadwal ini?</h3>
                                             <div class="m-t-20">
                                                 <button class="btn btn-white" data-dismiss="modal">Tidak</button>
-                                                <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                                                <button type="submit" class="btn btn-danger" onclick="formSubmitSiang()">Hapus</button>
                                             </div>
                                         </div>
                                     </form>
@@ -193,27 +190,27 @@
     </script>
     <!-- Script modal konfirmasi hapus jadwal pagi -->
     <script type="text/javascript">
-        function deleteData(id) {
+        function deleteDataPagi(id) {
             var id = id;
             var url = '{{ route("jadwal.destroy", ":id") }}';
             url = url.replace(':id', id);
             $("#deleteForm_pg").attr('action', url);
         }
 
-        function formSubmit() {
+        function formSubmitPagi() {
             $("#deleteForm_pg").submit();
         }
     </script>
     <!-- Script modal konfirmasi hapus jadwal siang -->
     <script type="text/javascript">
-        function deleteData(id) {
+        function deleteDataSiang(id) {
             var id = id;
             var url = '{{ route("jadwal.destroy", ":id") }}';
             url = url.replace(':id', id);
             $("#deleteForm_sg").attr('action', url);
         }
 
-        function formSubmit() {
+        function formSubmitSiang() {
             $("#deleteForm_sg").submit();
         }
     </script>

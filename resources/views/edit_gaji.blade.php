@@ -217,7 +217,12 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
-    <!-- <script>
+
+    <!-- penghitungan total gaji -->
+    <script src="{{ asset('assets/js/gaji.js') }}"></script>
+
+    <!-- penghitungan tiap input dalam penggajian -->
+    <script>
         $(document).ready(function() {
             $('#users_id').on('load', function() {
                 var id = $(this).val();
@@ -242,13 +247,13 @@
                             $('#jml_karyawan_empat').val(response['jml_karyawan_empat']);
                             $('#tindakan_minggu_lima').val(response['tindakan_minggu_lima']);
                             $('#jml_karyawan_lima').val(response['jml_karyawan_lima']);
+                            $('#ins_hari_besar').val(response['ins_hari_besar']);
                         }
                     }
                 });
             });
         });
-    </script> -->
-    <script src="{{ asset('assets/js/gaji.js') }}"></script>
+    </script>
 </body>
 
 

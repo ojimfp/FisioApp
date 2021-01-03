@@ -23,64 +23,52 @@
                         <h4 class="page-title">Riwayat Pembayaran</h4>
                     </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
-                        <button class="btn btn-white btn-lg"><a href="{{ route('pembayaran.download') . '?start_date=' . $start_date . '&end_date=' . $end_date  . '&start_time=' . $start_time . '&end_time=' . $end_time }}">PDF</a></button>
-                        <button class="btn btn-white"><a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}"><i class="fa fa-print fa-lg"></i> Print</a></button>
+                        <!-- <button class="btn btn-white btn-lg"><a href="{{ route('pembayaran.download') . '?start_date=' . $start_date . '&end_date=' . $end_date  . '&start_time=' . $start_time . '&end_time=' . $end_time }}">PDF</a></button> -->
+                        <!-- <button class="btn btn-white"><a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}"></a></button> -->
+                        <a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}" class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</a>
                     </div>
                 </div>
                 <div class=" filter-row">
-                    <form action="{{ route('pembayaran.search') }}" class="row" method="GET">
-                        <div class="wrapper-filter col-6">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group form-focus">
-                                        <label class="focus-label">Dari Tanggal</label>
-                                        <div class="cal-icon">
-                                            <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group form-focus">
-                                        <label class="focus-label">Sampai Tanggal</label>
-                                        <div class="cal-icon">
-                                            <input class="form-control floating datetimepicker" type="text" name="end_date" required>
-                                        </div>
+                    <form action="{{ route('pembayaran.search') }}" method="GET">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Dari Tanggal</label>
+                                    <div class="cal-icon">
+                                        <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group form-focus">
-                                        <label class="focus-label">Dari Jam</label>
-                                        <div class="time-icon">
-                                            <input type="text" name="start_time" class="form-control" id="datetimepicker3">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group form-focus">
-                                        <label class="focus-label">Sampai Jam</label>
-                                        <div class="time-icon">
-                                            <input type="text" name="end_time" class="form-control" id="datetimepicker2">
-                                        </div>
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Sampai Tanggal</label>
+                                    <div class="cal-icon">
+                                        <input class="form-control floating datetimepicker" type="text" name="end_date" required>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="wrapper-action col-6 row">
-                            <div class="col-6">
-                                <button class="btn btn-success submit-btn w-100">Cari Pembayaran</button>
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Dari Jam</label>
+                                    <div class="time-icon">
+                                        <input type="text" name="start_time" class="form-control" id="datetimepicker3">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <a href="{{ route('pembayaran.index') }}" class="btn btn-success submit-btn w-100">Reset</a>
+                            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Sampai Jam</label>
+                                    <div class="time-icon">
+                                        <input type="text" name="end_time" class="form-control" id="datetimepicker2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 m-b-20" style="float: left">
+                                <button class="btn btn-success submit-btn" style="display: inline-block; margin-right: 20px">Cari Pembayaran</button>
+                                <a href="{{ route('pembayaran.index') }}" class="btn btn-success submit-btn" style="display: inline-block; margin-right: 20px">Reset</a>
                             </div>
                         </div>
                     </form>
-                    {{-- <form action="{{ route('pembayaran.index') }}">
-                    <div class="col-sm-6 col-md-4" style="float: left;">
-                        <button class="btn btn-success submit-btn">Reset</button>
-                    </div>
-                    </form> --}}
                 </div>
                 <div class="row">
                     <div class="col-md-12">

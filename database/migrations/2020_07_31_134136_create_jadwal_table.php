@@ -20,7 +20,6 @@ class CreateJadwalTable extends Migration
             $table->string('tgl_tindakan');
             $table->unsignedBigInteger('shift');
             $table->string('jam_tindakan');
-            $table->string('status');
             $table->string('nama_admin');
             $table->timestamps();
         });

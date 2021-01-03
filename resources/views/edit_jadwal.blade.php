@@ -79,29 +79,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="display-block">Status Jadwal <span class="text-danger">*</span></label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_active" value="Active" @if ($jadwal->status == 'Active') checked @endif>
-                                            <label class="form-check-label" for="product_active">
-                                                Active
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_inactive" value="Inactive" @if ($jadwal->status == 'Inactive') checked @endif>
-                                            <label class="form-check-label" for="product_inactive">
-                                                Inactive
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="product_lainnya" value="Lainnya" @if ($jadwal->status == 'Lainnya') checked @endif>
-                                            <label class="form-check-label" for="product_lainnya">
-                                                Lainnya
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Simpan Perubahan Jadwal</button>
