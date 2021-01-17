@@ -32,11 +32,12 @@
                                 <th>Total Biaya</th>
                                 <th>Tipe Pembayaran</th>
                                 <th>Nama Terapis</th>
+                                <th>Catatan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
-                                $no = 1;
+                            $no = 1;
                             @endphp
                             @foreach($pembayaran as $bayar)
                             <tr>
@@ -47,9 +48,10 @@
                                 <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                 <td>{{ $bayar->tipe_pembayaran }}</td>
                                 <td>{{ $bayar->users->name }}</td>
+                                <td>{{ $bayar->catatan }}</td>
                             </tr>
                             @php
-                                $no++;
+                            $no++;
                             @endphp
                             @endforeach
                         </tbody>
@@ -66,8 +68,7 @@
 </html>
 <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         window.print();
     });
 </script>
-

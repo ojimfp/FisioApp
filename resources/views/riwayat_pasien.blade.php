@@ -80,6 +80,7 @@
                                                     <th>Pemeriksaan</th>
                                                     <th>Diagnosa Terapis</th>
                                                     <th>Tindakan</th>
+                                                    <th>Catatan Tindakan</th>
                                                     <th class="text-right">Opsi</th>
                                                 </tr>
                                             </thead>
@@ -94,6 +95,7 @@
                                                     <td>{{ $rm->pemeriksaan }}</td>
                                                     <td>{{ $rm->diagnosa_terapis }}</td>
                                                     <td>{{ implode(', ', $rm->tindakan()->get()->pluck('nama_tindakan')->toArray()) }}</td>
+                                                    <td>{{ $rm->catatan }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -143,6 +145,7 @@
                                                     <th>Total Biaya</th>
                                                     <th>Tipe Pembayaran</th>
                                                     <th>Nama Terapis</th>
+                                                    <th>Catatan</th>
                                                     <th class="text-right">Opsi</th>
                                                 </tr>
                                             </thead>
@@ -155,6 +158,7 @@
                                                     <td>Rp {{ $bayar->total_biaya }}</td>
                                                     <td>{{ $bayar->tipe_pembayaran }}</td>
                                                     <td>{{ $bayar->users->name }}</td>
+                                                    <td>{{ $bayar->catatan }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

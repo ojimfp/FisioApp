@@ -87,15 +87,6 @@
                                 <?php $idt_id = 1 ?>
                                 <?php $btn_id = 1 ?>
                                 <div class="col-md-12" id="dynamic_col">
-                                    <!-- <div class="form-group">
-                                        <label>Tindakan</label>
-                                        @foreach($tindakan as $t)
-                                        <div class="checkbox">
-                                            <input type="checkbox" name="tindakan[]" value="{{ $t->id }}" @if($rekam_medis->tindakan->pluck('id')->contains($t->id)) checked @endif>
-                                            <label>{{ $t->nama_tindakan }}</label>
-                                        </div>
-                                        @endforeach
-                                    </div> -->
                                     @foreach($rekam_medis->tindakan as $t)
                                     <div class="form-group fg" id="fg_<?php echo $fg_id++ ?>">
                                         <label>Tindakan <span class="text-danger">*</span></label>

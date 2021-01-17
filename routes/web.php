@@ -18,6 +18,8 @@ Route::get('/', function () {
     return redirect()->route('pasien.index');
 });
 
+Route::get('print/test', 'PrintController@test')->name('print.test');
+
 Route::resource('pasien', 'PasienController')->except(['show']);
 Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 
@@ -56,6 +58,7 @@ Route::get('change-password', 'Auth\ChangePasswordController@index')->name('user
 Route::post('change-password', 'Auth\ChangePasswordController@store')->name('password.change');
 
 Route::resource('jadwal', 'JadwalController')->except(['show']);
+Route::get('jadwal/search', 'JadwalController@search')->name('jadwal.search');
 Route::get('get-datapasien', 'JadwalController@getDataPasien')->name('jadwal.datapasien');
 
 Route::resource('gaji', 'GajiController')->except(['show']);

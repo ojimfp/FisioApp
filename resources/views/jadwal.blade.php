@@ -33,6 +33,38 @@
                         <a href="{{ route('jadwal.create') }}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Tambah Jadwal</a>
                     </div>
                 </div>
+                <div class="row filter-row">
+                    <form action="{{ route('jadwal.search') }}" method="GET">
+                        <div class="col-sm-6 col-md-5 col-lg-6 col-xl-6" style="float: left">
+                            <div class="form-group form-focus">
+                                <label class="focus-label">Cari terapis</label>
+                                <input type="text" class="form-control floating" name="keyword" autocomplete="off">
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Dari Tanggal</label>
+                                    <div class="cal-icon">
+                                        <input class="form-control floating datetimepicker" type="text" name="start_date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="form-group form-focus">
+                                    <label class="focus-label">Sampai Tanggal</label>
+                                    <div class="cal-icon">
+                                        <input class="form-control floating datetimepicker" type="text" name="end_date">
+                                    </div>
+                                </div>
+                            </div> -->
+                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 m-b-20" style="float: left">
+                            <button class="btn btn-success submit-btn">Cari Terapis</button>
+                        </div>
+                        <div class="col-sm-4 col-md-1 col-lg-2 col-xl-2 m-b-10" style="float: left">
+                            <a href="{{ route('jadwal.index') }}" class="btn btn-success submit-btn">Reset</a>
+                        </div>
+                    </form>
+                </div>
                 <div class="profile-tabs">
                     <ul class="nav nav-tabs nav-tabs-bottom" id="myTab">
                         <li class="nav-item"><a class="nav-link active" href="#pagi" data-toggle="tab">Pagi</a></li>

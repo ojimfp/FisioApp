@@ -17,6 +17,7 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
+        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -191,7 +192,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr id="jml_krywn" style="display: none">
+                                                <tr id="jml_krywn" hidden>
                                                     <td class="text-right">Jumlah Karyawan di Hari Besar <span class="text-danger">*</span></td>
                                                     <td style="text-align: right; padding-right: 12px; width: 240px">
                                                         <input class="form-control text-right input" id="krywn_hari_besar" name="krywn_hari_besar" type="text" autocomplete="off">
@@ -218,7 +219,6 @@
                                 </div>
                             </div>
                             <div class="text-center m-t-20">
-                                <!-- <button class="btn btn-grey submit-btn m-r-10">Save & Send</button> -->
                                 <button class="btn btn-primary submit-btn">Bayar</button>
                             </div>
                         </form>
@@ -237,9 +237,11 @@
     <script>
         function yesNoCheck() {
             if (document.getElementById("ya").checked) {
-                document.getElementById("jml_krywn").style.display = 'table-row';
+                document.getElementById("jml_krywn").hidden = false;
+                document.getElementById("krywn_hari_besar").required = true;
             } else {
-                document.getElementById("jml_krywn").style.display = 'none';
+                document.getElementById("krywn_hari_besar").required = false;
+                document.getElementById("jml_krywn").hidden = true;
             }
         }
     </script>

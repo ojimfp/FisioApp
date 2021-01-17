@@ -41,11 +41,11 @@
                                     <div class="form-group">
                                         <label>Dokter/APS <span class="text-danger">*</span></label></br>
                                         <div class="form-check form-check-inline radio">
-                                            <input class="form-check-input" type="radio" name="aps_dokter" id="aps" value="APS" onchange="findSelected()">
+                                            <input class="form-check-input" type="radio" name="aps_dokter" id="aps" value="APS" onchange="findSelected()" required>
                                             <label class="form-check-label" for="aps">APS (Atas Permintaan Sendiri)</label>
                                         </div>
                                         <div class="form-check form-check-inline radio">
-                                            <input class="form-check-input" type="radio" name="aps_dokter" id="dokter" value="Dokter" onchange="findSelected()">
+                                            <input class="form-check-input" type="radio" name="aps_dokter" id="dokter" value="Dokter" onchange="findSelected()" required>
                                             <label class="form-check-label" for="dokter" style="margin-right: 7px;">Dokter</label>
                                             <input class="form-check-input" type="text" name="nama_dokter" id="nama_dokter" value="">
                                         </div>
@@ -116,8 +116,10 @@
             var result = document.querySelector('input[name="aps_dokter"]:checked').value;
             if (result == "APS") {
                 document.getElementById("nama_dokter").setAttribute('disabled', true);
+                document.getElementById("nama_dokter").required = false;
             } else {
                 document.getElementById("nama_dokter").removeAttribute('disabled');
+                document.getElementById("nama_dokter").required = true;
             }
         }
     </script>

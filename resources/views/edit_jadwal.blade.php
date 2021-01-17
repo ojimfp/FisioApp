@@ -36,8 +36,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nama Pasien</label>
-                                        <input class="form-control" type="text" name="nama" required value="{{ $jadwal->pasien->nama }}" readonly>
+                                        <label>Nama Pasien <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" list="pasien_list" name="nama_pasien" id="nama_pasien" value="{{ $jadwal->pasien->nama }}" required autocomplete="off">
+                                        <datalist id="pasien_list">
+                                            @foreach($pasien as $p)
+                                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                            @endforeach
+                                        </datalist>
+                                        <input type="hidden" name="pasien_id" id="nama_pasien-hidden" value="{{ $jadwal->pasien->id }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -56,7 +62,7 @@
                                     <div class="form-group">
                                         <label>Tanggal Tindakan <span class="text-danger">*</span></label>
                                         <div class="cal-icon">
-                                            <input type="text" name="tgl_tindakan" class="form-control datetimepicker" value="{{ $jadwal->tgl_tindakan }}">
+                                            <input type="text" name="tgl_tindakan" class="form-control datetimepicker" value="{{ $jadwal->tgl_tindakan }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +70,7 @@
                                     <div class="form-group">
                                         <label>Jam Tindakan <span class="text-danger">*</span></label>
                                         <div class="time-icon">
-                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3" value="{{ $jadwal->jam_tindakan }}">
+                                            <input type="text" name="jam_tindakan" class="form-control" id="datetimepicker3" value="{{ $jadwal->jam_tindakan }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +97,8 @@
     </div>
     <!-- FOOTER -->
     @include('_part.footer')
+
+    <!-- UI input jam -->
     <script>
         $(function() {
             $('#datetimepicker3').datetimepicker({
@@ -104,8 +112,24 @@
                     next: "fa fa-chevron-right",
                     today: "fa fa-clock-o",
                     clear: "fa fa-trash-o"
-                }
+                },
+                stepping: 5
             });
+        });
+    </script>
+
+    <!-- autocomplete pasien -->
+    <script>
+        document.querySelector('#nama_pasien').addEventListener('input', function(e) {
+            var input = e.target,
+                list = input.getAttribute('list'),
+                options = document.querySelectorAll('#' + list + ' option[value="' + input.value + '"]'),
+                hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden');
+
+            if (options.length > 0) {
+                hiddenInput.value = input.value;
+                input.value = options[0].innerText;
+            }
         });
     </script>
 </body>

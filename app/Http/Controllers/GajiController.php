@@ -233,32 +233,44 @@ class GajiController extends Controller
             'data' => User::findOrFail($id),
             'gaji_pokok' => User::where('id', $id)->first()->gaji_pokok,
             'hari_masuk' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->count('users_id'),
+            // 'biaya_tindakan' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
+            //     ->whereHas('tindakan', function ($q) {
+            //         $q->where('nama_tindakan', 'NOT LIKE', '%Exercise Full%');
+            //     })->sum('total_biaya'),
             'biaya_tindakan' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-                ->whereHas('tindakan', function ($q) {
-                    $q->where('nama_tindakan', 'NOT LIKE', '%Exercise%');
-                })->sum('total_biaya'),
+            ->whereRaw('')->select(DB::raw('SUM(total_biaya)')),
             'biaya_exe' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('nama_tindakan', 'LIKE', '%Exercise%');
+                    $q->where('nama_tindakan', 'LIKE', '%Exercise Full%');
                 })->sum('total_biaya'),
             'tindakan_minggu_satu' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('first sunday of previous month'))
-                ->sum('total_biaya'),
+                ->whereHas('tindakan', function ($q) {
+                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                })->sum('total_biaya'),
             'jml_karyawan_satu' => Pembayaran::whereDay('created_at', Carbon::parse('first sunday of previous month'))
                 ->count('users_id'),
             'tindakan_minggu_dua' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('second sunday of previous month'))
-                ->sum('total_biaya'),
+                ->whereHas('tindakan', function ($q) {
+                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                })->sum('total_biaya'),
             'jml_karyawan_dua' => Pembayaran::whereDay('created_at', Carbon::parse('second sunday of previous month'))
                 ->count('users_id'),
             'tindakan_minggu_tiga' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('third sunday of previous month'))
-                ->sum('total_biaya'),
+                ->whereHas('tindakan', function ($q) {
+                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                })->sum('total_biaya'),
             'jml_karyawan_tiga' => Pembayaran::whereDay('created_at', Carbon::parse('third sunday of previous month'))
                 ->count('users_id'),
             'tindakan_minggu_empat' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
-                ->sum('total_biaya'),
+                ->whereHas('tindakan', function ($q) {
+                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                })->sum('total_biaya'),
             'jml_karyawan_empat' => Pembayaran::whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
                 ->count('users_id'),
             'tindakan_minggu_lima' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
-                ->sum('total_biaya'),
+                ->whereHas('tindakan', function ($q) {
+                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                })->sum('total_biaya'),
             'jml_karyawan_lima' => Pembayaran::whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
                 ->count('users_id'),
             'ins_hari_besar' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->sum('hari_besar')
@@ -266,10 +278,6 @@ class GajiController extends Controller
         echo json_encode($data);
 
         exit;
-    }
-
-    private function getGaji($id)
-    {
     }
 
     public static function printGaji($id)

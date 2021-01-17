@@ -20,7 +20,7 @@ class TindakanController extends Controller
 
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'List Tindakan',
+                'title'         => config('app.name') . ' - ' . 'List Tindakan',
                 'side_active'   => 'tindakan'
             ],
             'tindakan' => $tindakan
@@ -33,11 +33,11 @@ class TindakanController extends Controller
     {
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Tambah List Tindakan',
+                'title'         => config('app.name') . ' - ' . 'Tambah List Tindakan',
                 'side_active'   => 'tindakan'
             ]
         ];
-        return view('tambah_tindakan',$result);
+        return view('tambah_tindakan', $result);
     }
 
     public function store(Request $request)
@@ -46,10 +46,6 @@ class TindakanController extends Controller
             'kode_tindakan' => $request->kode_tindakan,
             'nama_tindakan' => $request->nama_tindakan,
             'harga_jual' => $request->harga_jual,
-            'komisi_tindakan' => $request->komisi_tindakan,
-            'kategori_tindakan' => $request->kategori_tindakan,
-            'status_member' => $request->status_member,
-            'status_aktif' => $request->status_aktif,
             'keterangan' => $request->keterangan
         ]);
         return redirect()->route('tindakan.index');
@@ -77,7 +73,7 @@ class TindakanController extends Controller
         $tindakan = DB::table('tindakan')->where('id', $id)->get();
         $result = [
             'meta' => [
-                'title'         => config('app.name').' - '.'Ubah Tindakan',
+                'title'         => config('app.name') . ' - ' . 'Ubah Tindakan',
                 'side_active'   => 'tindakan'
             ],
             'tindakan' => $tindakan
@@ -99,10 +95,6 @@ class TindakanController extends Controller
         $tindakan->kode_tindakan    = $request->kode_tindakan;
         $tindakan->nama_tindakan    = $request->nama_tindakan;
         $tindakan->harga_jual       = $request->harga_jual;
-        $tindakan->komisi_tindakan  = $request->komisi_tindakan;
-        $tindakan->kategori_tindakan = $request->kategori_tindakan;
-        $tindakan->status_member    =  $request->status_member;
-        $tindakan->status_aktif     = $request->status_aktif;
         $tindakan->keterangan       = $request->keterangan;
         $tindakan->update();
 
@@ -134,8 +126,8 @@ class TindakanController extends Controller
                 ->get();
             $result = [
                 'meta' => [
-                'title'         => config('app.name').' - '.'List Tindakan',
-                'side_active'   => 'tindakan'
+                    'title'         => config('app.name') . ' - ' . 'List Tindakan',
+                    'side_active'   => 'tindakan'
                 ],
                 'tindakan' => $tindakan
             ];
@@ -143,8 +135,8 @@ class TindakanController extends Controller
             $tindakan = DB::table('tindakan')->get();
             $result = [
                 'meta' => [
-                'title'         => config('app.name').' - '.'List Tindakan',
-                'side_active'   => 'tindakan'
+                    'title'         => config('app.name') . ' - ' . 'List Tindakan',
+                    'side_active'   => 'tindakan'
                 ],
                 'tindakan' => $tindakan
             ];

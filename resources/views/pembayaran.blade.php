@@ -28,14 +28,14 @@
                         <a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}" class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</a>
                     </div>
                 </div>
-                <div class=" filter-row">
+                <div class="row filter-row">
                     <form action="{{ route('pembayaran.search') }}" method="GET">
                         <div class="row">
                             <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group form-focus">
                                     <label class="focus-label">Dari Tanggal</label>
                                     <div class="cal-icon">
-                                        <input id="datepicker_start" class="form-control floating datetimepicker" type="text" name="start_date" required>
+                                        <input class="form-control floating datetimepicker" type="text" name="start_date" required>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +83,7 @@
                                         <th>Total Biaya</th>
                                         <th>Tipe Pembayaran</th>
                                         <th>Nama Terapis</th>
+                                        <th>Catatan</th>
                                         <th class="text-right">Opsi</th>
                                     </tr>
                                 </thead>
@@ -99,6 +100,7 @@
                                         <td>Rp {{ number_format($bayar->total_biaya) }}</td>
                                         <td>{{ $bayar->tipe_pembayaran }}</td>
                                         <td>{{ $bayar->users->name }}</td>
+                                        <td>{{ $bayar->catatan }}</td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -161,10 +163,32 @@
         <script>
             $(function() {
                 $('#datetimepicker3').datetimepicker({
-                    format: 'HH:mm:00'
+                    format: 'HH:mm',
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-arrow-up",
+                        down: "fa fa-arrow-down",
+                        previous: "fa fa-chevron-left",
+                        next: "fa fa-chevron-right",
+                        today: "fa fa-clock-o",
+                        clear: "fa fa-trash-o"
+                    },
+                    stepping: 5
                 });
                 $('#datetimepicker2').datetimepicker({
-                    format: 'HH:mm:00'
+                    format: 'HH:mm',
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-arrow-up",
+                        down: "fa fa-arrow-down",
+                        previous: "fa fa-chevron-left",
+                        next: "fa fa-chevron-right",
+                        today: "fa fa-clock-o",
+                        clear: "fa fa-trash-o"
+                    },
+                    stepping: 5
                 });
             });
         </script>

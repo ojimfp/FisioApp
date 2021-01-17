@@ -142,7 +142,6 @@ class UserController extends Controller
         if ($request->has('keyword')) {
             $users = User::where('name', 'LIKE', "%" . $keyword . "%")
                 ->orWhere('id', 'LIKE', "%" . $keyword . "%")
-                ->orWhere('email', 'LIKE', "%" . $keyword . "%")
                 ->get();
         } else {
             $users = User::all();

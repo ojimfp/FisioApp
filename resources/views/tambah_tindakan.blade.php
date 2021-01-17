@@ -17,6 +17,7 @@
     <div class="main-wrapper">
         <!-- HEADER -->
         @include('_part.header')
+        <!-- END HEADER -->
         <!-- SIDEBAR -->
         @include('_part.sidebar')
         <!-- END SIDEBAR -->
@@ -42,22 +43,16 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Tindakan</label>
-                                                <input type="text" class="form-control" name="nama_tindakan" autocomplete="off" placeholder="Harap diawal dengan huruf kapital">
+                                                <label>Nama Tindakan <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="nama_tindakan" required autocomplete="off" placeholder="Harap diawali dengan huruf kapital">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Harga Jual</label>
-                                        <input type="form_control" class="form-control" name="harga_jual" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Komisi Tindakan</label>
-                                        <input class="form-control" type="text" name="komisi_tindakan" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
+                                        <label>Harga Tindakan <span class="text-danger">*</span></label>
+                                        <input type="form_control" class="form-control" name="harga_jual" required autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

@@ -35,13 +35,13 @@
                 </div>
                 <div class="row filter-row">
                     <form action="{{ route('gaji.search') }}" method="GET">
-                        <div class="col-sm-6 col-md-5 col-lg-3 col-xl-5" style="float: left;">
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4" style="float: left;">
                             <div class="form-group form-focus">
-                                <label class="focus-label">Nama/ID Karyawan</label>
+                                <label class="focus-label">Cari nama/ID karyawan</label>
                                 <input type="text" class="form-control floating" name="keyword" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-4" style="float: left;">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3" style="float: left;">
                             <div class="form-group">
                                 <select class="select" name="bulan_gajian">
                                     <option value="">Pilih Bulan</option>
@@ -60,8 +60,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3" style="float: left;">
+                        <div class="col-sm-6 col-md-3 col-lg-4 col-xl-3 m-b-20" style="float: left; margin-right: 15px">
                             <button class="btn btn-success submit-btn">Cari Gaji</button>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-2 col-xl-1 m-b-10" style="float: left;">
+                            <a href="{{ route('gaji.index') }}" class="btn btn-success submit-btn">Reset</a>
                         </div>
                     </form>
                 </div>
