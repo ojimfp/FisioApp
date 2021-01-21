@@ -25,7 +25,7 @@
                     <div class="col-sm-7 col-8 text-right m-b-30">
                         <!-- <button class="btn btn-white btn-lg"><a href="{{ route('pembayaran.download') . '?start_date=' . $start_date . '&end_date=' . $end_date  . '&start_time=' . $start_time . '&end_time=' . $end_time }}">PDF</a></button> -->
                         <!-- <button class="btn btn-white"><a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}"></a></button> -->
-                        <a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end=' . $end_date }}" class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</a>
+                        <a href="{{ route('pembayaran.print') . '?start_date=' . $start_date . '&end_date=' . $end_date . '&start_time=' . $start_time . '&end_time=' . $end_time }}" class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</a>
                     </div>
                 </div>
                 <div class="row filter-row">
