@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Gaji;
-use App\Dokter;
 use App\Pembayaran;
 use App\User;
+use App\Tindakan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use DateTime;
 use NumberFormatter;
 use PDF;
+use Symfony\Component\Console\Input\Input;
 
 class GajiController extends Controller
 {
@@ -231,48 +232,65 @@ class GajiController extends Controller
     {
         $data = array(
             'data' => User::findOrFail($id),
+            'pekerjaan' => User::where('id', $id)->first()->pekerjaan,
             'gaji_pokok' => User::where('id', $id)->first()->gaji_pokok,
-            'hari_masuk' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->count('users_id'),
-            // 'biaya_tindakan' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-            //     ->whereHas('tindakan', function ($q) {
-            //         $q->where('nama_tindakan', 'NOT LIKE', '%Exercise Full%');
-            //     })->sum('total_biaya'),
-            'biaya_tindakan' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-            ->whereRaw('')->select(DB::raw('SUM(total_biaya)')),
-            'biaya_exe' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
-                ->whereHas('tindakan', function ($q) {
-                    $q->where('nama_tindakan', 'LIKE', '%Exercise Full%');
-                })->sum('total_biaya'),
+
+            'hari_masuk_terapis' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
+                ->distinct()->count(DB::raw('DATE(created_at)')),
+            'hari_masuk_admin' => Pembayaran::where('admin_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())
+                ->distinct()->count(DB::raw('DATE(created_at)')),
+
+            'biaya_tindakan' => Tindakan::where('nama_tindakan', 'NOT LIKE', '%Exercise Full%')
+                ->where(function ($q) {
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
+                })
+                ->whereHas('pembayaran', function ($q) use ($id) {
+                    $q->where('users_id', $id)->whereMonth('pembayaran.created_at', Carbon::now()->subMonth());
+                })->sum('harga_jual'),
+
+            'biaya_exe' => Tindakan::where('nama_tindakan', 'LIKE', '%Exercise Full%')
+                ->where(function ($q) {
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
+                })
+                ->whereHas('pembayaran', function ($q) use ($id) {
+                    $q->where('users_id', $id)->whereMonth('pembayaran.created_at', Carbon::now()->subMonth());
+                })->sum('harga_jual'),
+
             'tindakan_minggu_satu' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('first sunday of previous month'))
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
                 })->sum('total_biaya'),
             'jml_karyawan_satu' => Pembayaran::whereDay('created_at', Carbon::parse('first sunday of previous month'))
                 ->count('users_id'),
+
             'tindakan_minggu_dua' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('second sunday of previous month'))
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
                 })->sum('total_biaya'),
             'jml_karyawan_dua' => Pembayaran::whereDay('created_at', Carbon::parse('second sunday of previous month'))
                 ->count('users_id'),
+
             'tindakan_minggu_tiga' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('third sunday of previous month'))
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
                 })->sum('total_biaya'),
             'jml_karyawan_tiga' => Pembayaran::whereDay('created_at', Carbon::parse('third sunday of previous month'))
                 ->count('users_id'),
+
             'tindakan_minggu_empat' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
                 })->sum('total_biaya'),
             'jml_karyawan_empat' => Pembayaran::whereDay('created_at', Carbon::parse('fourth sunday of previous month'))
                 ->count('users_id'),
+
             'tindakan_minggu_lima' => Pembayaran::where('users_id', $id)->whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
                 ->whereHas('tindakan', function ($q) {
-                    $q->where('keterangan', 'NOT LIKE', '%Properti%');
+                    $q->whereNull('keterangan')->orWhereNotNull('keterangan')->whereNotIn('keterangan', ['Properti', 'properti', 'Property', 'property']);
                 })->sum('total_biaya'),
             'jml_karyawan_lima' => Pembayaran::whereDay('created_at', Carbon::parse('fifth sunday of previous month'))
                 ->count('users_id'),
+
             'ins_hari_besar' => Pembayaran::where('users_id', $id)->whereMonth('created_at', Carbon::now()->subMonth())->sum('hari_besar')
         );
         echo json_encode($data);

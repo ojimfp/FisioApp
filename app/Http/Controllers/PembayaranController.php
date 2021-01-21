@@ -77,7 +77,7 @@ class PembayaranController extends Controller
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->hari_besar = $request->total_hari_besar;
-        $pembayaran->nama_admin = $request->nama_admin;
+        $pembayaran->admin()->associate($request->id_admin);
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
 

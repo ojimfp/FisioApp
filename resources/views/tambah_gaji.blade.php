@@ -44,6 +44,11 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-sm-6" hidden>
+                                    <div class="form-group">
+                                        <input class="form-control" id="pekerjaan" type="text" name="pekerjaan">
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Gaji Pokok</label>
@@ -430,8 +435,13 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response != null) {
+                        $('#pekerjaan').val(response['pekerjaan']);
                         $('#gaji_pokok').val(response['gaji_pokok']);
-                        $('#hari_masuk').val(response['hari_masuk']);
+                        if (document.getElementById("pekerjaan").value == 'Fisioterapis') {
+                            $('#hari_masuk').val(response['hari_masuk_terapis']);
+                        } else if (document.getElementById("pekerjaan").value == 'Administrasi') {
+                            $('#hari_masuk').val(response['hari_masuk_admin']);
+                        }
                         $('#biaya_tindakan').val(response['biaya_tindakan']);
                         $('#ins_tindakan').val(parseInt(document.getElementById("biaya_tindakan").value) * 0.1);
                         $('#biaya_exe').val(response['biaya_exe']);

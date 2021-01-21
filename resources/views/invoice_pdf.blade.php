@@ -113,7 +113,7 @@
                             <div class="invoice-info">
                                 <h5>Catatan:</h5>
                                 <p class="text-muted">{{ $pembayaran->catatan }}</p></br>
-                                <h5 class="text-center">-- Kasir: {{ $pembayaran->nama_admin }} --</h5>
+                                <h5 class="text-center">-- Kasir: {{ $pembayaran->admin->name }} --</h5>
                             </div>
                         </div>
                     </div>

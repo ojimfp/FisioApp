@@ -25,7 +25,7 @@ class CreatePembayaranTable extends Migration
             $table->string('tipe_pembayaran');
             $table->integer('hari_besar');
             $table->string('catatan')->nullable();
-            $table->string('nama_admin');
+            $table->unsignedBigInteger('admin_id');
             $table->timestamps();
         });
 
@@ -33,6 +33,7 @@ class CreatePembayaranTable extends Migration
             $table->foreign('rekam_medis_id')->references('id')->on('rekam_medis')->onDelete('cascade');
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -47,6 +48,7 @@ class CreatePembayaranTable extends Migration
             $table->dropForeign('pembayaran_rekam_medis_id_foreign');
             $table->dropForeign('pembayaran_pasien_id_foreign');
             $table->dropForeign('pembayaran_users_id_foreign');
+            $table->dropForeign('pembayaran_admin_id_foreign');
         });
 
         Schema::dropIfExists('pembayaran');

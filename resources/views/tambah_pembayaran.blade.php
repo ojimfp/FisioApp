@@ -212,7 +212,7 @@
                                             <div class="form-group">
                                                 <label>Catatan</label>
                                                 <textarea class="form-control" name="catatan"></textarea>
-                                                <input type="text" class="form-control" name="nama_admin" value="{{ Auth::user()->name }}" hidden>
+                                                <input type="text" class="form-control" name="id_admin" value="{{ Auth::user()->id }}" hidden>
                                             </div>
                                         </div>
                                     </div>

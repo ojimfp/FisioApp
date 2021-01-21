@@ -36,7 +36,7 @@
                         <div class="col-sm-6 col-md-5 col-lg-6 col-xl-6" style="float: left">
                             <div class="form-group form-focus">
                                 <label class="focus-label">Cari tindakan</label>
-                                <input type="text" class="form-control floating" name="keyword">
+                                <input type="text" class="form-control floating" name="keyword" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 m-b-20" style="float: left">
