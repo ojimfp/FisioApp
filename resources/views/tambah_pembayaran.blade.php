@@ -169,7 +169,7 @@
                                                 <tr>
                                                     <td class="text-right">Tipe Pembayaran <span class="text-danger">*</span></td>
                                                     <td style="text-align: right; padding-right: 12px;width: 240px">
-                                                        <select class="select" name="tipe_pembayaran" required>
+                                                        <select class="select" id="tipe_pembayaran" name="tipe_pembayaran" onchange="setTipePembayaran()" required>
                                                             <option>-- Pilih tipe pembayaran --</option>
                                                             <option value="Tunai">Tunai</option>
                                                             <option value="Debit">Debit</option>
@@ -202,6 +202,28 @@
                                                     <td class="text-right">Total Hari Besar</td>
                                                     <td style="text-align: right; padding-right: 12px; width: 240px">
                                                         <input class="form-control text-right input" id="total_hari_besar" name="total_hari_besar" type="text" autocomplete="off" readonly>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right" id="pembayaran">Tunai <span class="text-danger">*</span></td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input class="form-control text-right input" id="jml_bayar" name="jml_bayar" type="text" autocomplete="off" required>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">Kembali</td>
+                                                    <td style="text-align: right; padding-right: 12px; width: 240px">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Rp</span>
+                                                            </div>
+                                                            <input class="form-control text-right input" id="kembali" name="kembali" type="text" autocomplete="off" readonly>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -242,6 +264,22 @@
             } else {
                 document.getElementById("krywn_hari_besar").required = false;
                 document.getElementById("jml_krywn").hidden = true;
+            }
+        }
+    </script>
+
+    <!-- mengubah label jumlah uang yg dibayarkan pasien (tunai/non-tunai) -->
+    <script>
+        function setTipePembayaran() {
+            var tipe = document.getElementById('tipe_pembayaran');
+            var selectedOption = tipe.options[tipe.selectedIndex];
+            var tipeValue = selectedOption.getAttribute('value');
+            var pembayaran = document.getElementById('pembayaran');
+
+            if (tipeValue == "Tunai") {
+                pembayaran.innerHTML = 'Tunai <span class="text-danger">*</span>';
+            } else {
+                pembayaran.innerHTML = 'Non-Tunai <span class="text-danger">*</span>';
             }
         }
     </script>

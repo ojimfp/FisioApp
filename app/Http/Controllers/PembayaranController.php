@@ -77,6 +77,8 @@ class PembayaranController extends Controller
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->hari_besar = $request->total_hari_besar;
+        $pembayaran->jml_bayar = $request->jml_bayar;
+        $pembayaran->kembali = $request->kembali;
         $pembayaran->admin()->associate($request->id_admin);
         $pembayaran->catatan = $request->catatan;
         $pembayaran->save();
@@ -142,6 +144,8 @@ class PembayaranController extends Controller
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->hari_besar = $request->total_hari_besar;
+        $pembayaran->jml_bayar = $request->jml_bayar;
+        $pembayaran->kembali = $request->kembali;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
@@ -165,6 +169,8 @@ class PembayaranController extends Controller
         $pembayaran->total_biaya = $request->grand_total;
         $pembayaran->tipe_pembayaran = $request->tipe_pembayaran;
         $pembayaran->hari_besar = $request->total_hari_besar;
+        $pembayaran->jml_bayar = $request->jml_bayar;
+        $pembayaran->kembali = $request->kembali;
         $pembayaran->catatan = $request->catatan;
         $pembayaran->tindakan()->sync($request->tindakan);
         $pembayaran->update();
@@ -301,7 +307,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
         $result = [
             'meta' => [
-                'title'         => config('app.name') . ' - ' . 'Invoice',
+                'title'         => config('app.name') . ' - ' . 'Nota',
                 'side_active'   => 'pembayaran'
             ],
             'pembayaran' => $pembayaran
@@ -310,24 +316,10 @@ class PembayaranController extends Controller
         return view('invoice', $result);
     }
 
-    public static function invoicePDF($id)
-    {
-        $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
-        // $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        // $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4','potrait');
-        // return $pdf->stream();
-        // return $pdf->download('invoice_pdf');
-
-        // $pdf = SnappyPdf::loadview('invoice_pdf', ['pembayaran' => $pembayaran]);
-        // return $pdf->download('invoice.pdf');
-        // return view('invoice', $result);
-    }
-
     public static function printInvoice($id)
     {
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
-        return view('invoice_pdf', ['pembayaran' => $pembayaran]);
+        return view('invoice_print', ['pembayaran' => $pembayaran]);
     }
 
     public static function downloadInvoice($id)
@@ -335,7 +327,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::with('tindakan')->findOrFail($id);
         $filename = 'Invoice_' . $id . '.pdf';
 
-        $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran])->setPaper('A4', 'potrait');
+        $pdf = PDF::loadview('invoice_pdf',  ['pembayaran' => $pembayaran]);
         // return $pdf->stream();
         return $pdf->download($filename);
     }

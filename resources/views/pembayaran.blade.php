@@ -106,10 +106,10 @@
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" href="{{ route('pembayaran.edit.p', $bayar->id) }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> View</a>
-                                                    <a class="dropdown-item" href="{{ route('invoice.download', $bayar->id) }}"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
+                                                    <a class="dropdown-item" href="{{ route('invoice', $bayar->id) }}"><i class="fa fa-eye m-r-5"></i> Lihat Nota</a>
+                                                    <a class="dropdown-item" href="{{ route('invoice.download', $bayar->id) }}"><i class="fa fa-file-pdf-o m-r-5"></i> Unduh Nota</a>
                                                     @can('manage-users')
-                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_inv"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $bayar->id }}')" data-target="#delete_inv"><i class="fa fa-trash-o m-r-5"></i> Hapus</a>
                                                     @endcan
                                                 </div>
                                             </div>

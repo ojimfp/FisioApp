@@ -24,6 +24,8 @@ class CreatePembayaranTable extends Migration
             $table->integer('total_biaya');
             $table->string('tipe_pembayaran');
             $table->integer('hari_besar');
+            $table->integer('jml_bayar');
+            $table->integer('kembali');
             $table->string('catatan')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();

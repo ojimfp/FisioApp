@@ -18,8 +18,6 @@ Route::get('/', function () {
     return redirect()->route('pasien.index');
 });
 
-Route::get('print/test', 'PrintController@test')->name('print.test');
-
 Route::resource('pasien', 'PasienController')->except(['show']);
 Route::get('pasien/search', 'PasienController@search')->name('pasien.search');
 

@@ -16,7 +16,7 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-5 col-4">
-                <h4 class="page-title" style="font-size: 20px;">Invoice</h4>
+                <h4 class="page-title" style="font-size: 20px;">Nota</h4>
             </div>
         </div>
         <div class="row">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-6 col-sm-6 m-b-20">
                                 <div class="invoice-details">
-                                    <h3 class="text-uppercase">Invoice {{ $pembayaran->id }}</h3>
+                                    <h3 class="text-uppercase">Nota {{ $pembayaran->id }}</h3>
                                     <ul class="list-unstyled">
                                         <li>{{ $pembayaran->created_at->format('d/m/Y, H:i') }}</li>
                                     </ul>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6 col-lg-6 m-b-20">
-                                <h5>Invoice untuk:</h5>
+                                <h5>Nota untuk:</h5>
                                 <ul class="list-unstyled">
                                     <li>
                                         <h5><strong>{{ $pembayaran->pasien->nama }}</strong></h5>
@@ -61,7 +61,7 @@
                                 <thead>
                                     <tr>
                                         <th hidden>ID TINDAKAN</th>
-                                        <th>NAMA TINDAKAN</th>
+                                        <th>TINDAKAN</th>
                                         <th class="text-right">BIAYA</th>
                                     </tr>
                                 </thead>
@@ -104,6 +104,24 @@
                                                             <h5>Rp {{ number_format($pembayaran->total_biaya) }}</h5>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <th>Tipe Pembayaran:</th>
+                                                        <td class="text-right">
+                                                            <h5 id="tipe_pembayaran">{{ $pembayaran->tipe_pembayaran }}</h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th id="jml_bayar">Tunai:</th>
+                                                        <td class="text-right">
+                                                            <h5>Rp {{ number_format($pembayaran->jml_bayar) }}</h5>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Kembali:</th>
+                                                        <td class="text-right">
+                                                            <h5>Rp {{ number_format($pembayaran->kembali) }}</h5>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -122,14 +140,22 @@
         </div>
     </div>
 </body>
+<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
 
+<!-- mengubah label jumlah pembayaran -->
+<script>
+    if (document.getElementById('tipe_pembayaran').innerHTML == 'Tunai') {
+        document.getElementById('jml_bayar').innerHTML = 'Tunai:';
+    } else {
+        document.getElementById('jml_bayar').innerHTML = 'Non-Tunai:';
+    }
+</script>
+<!-- <script>
+    $(document).ready(function() {
+        window.print();
+    });
+</script> -->
 
 <!-- invoice-view24:07-->
 
 </html>
-<script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        window.print();
-    });
-</script>

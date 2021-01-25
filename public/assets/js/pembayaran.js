@@ -34,4 +34,9 @@ $(".input").on("input", function() {
     } else if (document.getElementById("tidak").checked) {
         document.getElementById("total_hari_besar").value = 0;
     }
+
+    // menghitung kembalian
+    var uangBayar = document.getElementById("jml_bayar").value;
+    uangBayar = parseInt(uangBayar);
+    document.getElementById("kembali").value = uangBayar - grandTotal || 0;
 });
